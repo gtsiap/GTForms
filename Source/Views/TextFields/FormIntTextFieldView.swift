@@ -1,13 +1,3 @@
-//
-//  FormIntTextFieldView.swift
-//  GTForms
-//
-//  Created by Giorgos Tsiapaliokas on 15/12/15.
-//  Copyright © 2015 Giorgos Tsiapaliokas. All rights reserved.
-//
-
-import UIKit
-
 // Copyright (c) 2015 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@mykolab.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
