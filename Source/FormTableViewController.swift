@@ -41,7 +41,7 @@ public class FormTableViewController: UITableViewController {
         
         let cellRow = self.formSections[indexPath.section].rows[indexPath.row]
         
-        if let staticForm = cellRow.formView as? StaticForm {
+        if let staticForm = cellRow.form as? StaticForm {
             cell = tableView.dequeueReusableCellWithIdentifier("ReadOnlyCell", forIndexPath: indexPath)
             cell.textLabel?.text = staticForm.text
             cell.detailTextLabel?.text = staticForm.detailText
@@ -49,6 +49,10 @@ public class FormTableViewController: UITableViewController {
             let formCell = tableView
                 .dequeueReusableCellWithIdentifier("formCell", forIndexPath: indexPath)
                 as! FormTableViewCell
+            
+            if let formViewableCell = cellRow.form as? FormViewableType {
+                formViewableCell.viewController = self
+            }
             
             formCell.formRow = cellRow
             cell = formCell
@@ -69,7 +73,7 @@ public class FormTableViewController: UITableViewController {
         let cellRow = self.formSections[indexPath.section].rows[indexPath.row]
         
         if let
-            _ = cellRow.formView as? StaticForm,
+            _ = cellRow.form as? StaticForm,
             _ = cellRow.didSelectRow
         {
             return true

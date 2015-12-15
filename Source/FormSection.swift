@@ -37,13 +37,14 @@ public class FormSection {
     /**
         Adds a new row to the section from a FormViewable
      
-        - parameter formView: the FormViewable from which the new
+        - parameter form: the form from which the new
                               row will be created
         - NOTE: This is just a convenient method
      */
-    public func addRow(formView: FormViewableType) -> FormRow {
-        let row = FormRow(formView: formView)
+    public func addRow(form: FormableType) -> FormRow {
+        let row = FormRow(form: form)
         self.rows.append(row)
         return row
     }
+    
 }

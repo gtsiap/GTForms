@@ -21,4 +21,52 @@
 /**
     - NOTE: All the formViews must comfort to this protocol
 */
-public protocol FormViewableType {}
+public protocol FormableType {}
+
+/**
+ - NOTE: If your form has custom UI then you must comform
+         to this protocol. Otherwise FormTableViewController
+         won't add your view in the UI
+ */
+public protocol FormViewableType: class, FormableType {
+    func formView() -> UIView
+    var viewController: UIViewController? { get set }
+}
+
+extension FormViewableType {
+    /**
+        If the validation fails you can use this method
+        in order to inform the user about it.
+     
+        - param error: The error that will be displayed to the user
+        - NOTE: You don't have to show the errors manually
+        FormTableViewController will do it for you.
+        This method can be used before its time
+        for the FormTableViewController to check
+        the forms for validation errors.
+        For example you may have a form which accepts
+        only Ints and the user will try to add a double
+        this action will FormTableViewController's check,
+        so in this case you could use if you want the
+        showValidationError prematurely
+     */
+    public func showValidationError(error: String) {
+        let alertVC = UIAlertController(
+            title: "Validation Error",
+            message: error,
+            preferredStyle: .Alert
+        )
+                
+        let okAction = UIAlertAction(title: "Ok", style: .Default)
+        { alertAction in
+            alertVC.dismissViewControllerAnimated(true, completion: nil)
+        }
+                print(self.viewController)
+        alertVC.addAction(okAction)
+        self.viewController?.presentViewController(
+            alertVC,
+            animated: true,
+            completion: nil
+        )
+    }
+}

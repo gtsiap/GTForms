@@ -19,7 +19,7 @@ public struct ResultFormViewError: ErrorType {
 /**
     This is the base class for all the read-write forms
 */
-public class BaseResultFormView<T: AnyObject>: UIView {
+public class BaseResultFormView<T>: FormViewableType {
     /**
         The Result of the form
      */
@@ -29,7 +29,7 @@ public class BaseResultFormView<T: AnyObject>: UIView {
         This closure is being called when the result
         gets changed
      */
-    public var didUpdateResult: ((result: AnyObject?) -> ())?
+    public var didUpdateResult: ((result: T?) -> ())?
     
     /**
         If true then this formView is required and **FormTableViewController**
@@ -37,23 +37,27 @@ public class BaseResultFormView<T: AnyObject>: UIView {
      */
     public var required: Bool = true
     
-    public init() {
-        super.init(frame: CGRectZero)
-        self.translatesAutoresizingMaskIntoConstraints = false
+    /**
+        - returns: The UIView of the form
+     */
+    public func formView() -> UIView {
+        fatalError("Missing implementation: \(self.dynamicType)")
     }
+    
+    /**
+        The viewController of the form
+     */
+    public weak var viewController: UIViewController?
+    
+    public init() {}
     
     /**
         In this method you must add your validation code.
         Most of the forms need some kind of validation.
-        Subclass should call this implementation in the **start**
-        of their implementation
-     - throws: FormViewError
+        - NOTE: This implementation of the method has no effect
+        - throws: FormViewError
      */
-    public func validate() throws {
-        guard let _ = self.result
-            where self.required
-        else { throw ResultFormViewError(message: "Missing form \(self.dynamicType)") }
-    }
+    public func validate() throws {}
     
     /**
         The subclasses must use this method in order to update
@@ -65,5 +69,3 @@ public class BaseResultFormView<T: AnyObject>: UIView {
     }
     
 }
-
-extension BaseResultFormView: FormViewableType {}

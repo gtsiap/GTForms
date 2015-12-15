@@ -22,9 +22,9 @@ import UIKit
 
 public class FormRow {
     /**
-        The FormViewableType of this row
+        The form of this row
      */
-    public let formView: FormViewableType
+    public let form: FormableType
     
     /**
         This closure is being called when the row
@@ -48,8 +48,8 @@ public class FormRow {
     /**
         The formViewableType which it will be used in this row
      */
-    public init(formView: FormViewableType) {
-        self.formView = formView
+    public init(form: FormableType) {
+        self.form = form
     }
     
 }

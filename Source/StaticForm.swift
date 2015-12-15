@@ -11,7 +11,7 @@ import UIKit
 /**
     This class is used for read only forms.
 */
-public struct StaticForm: FormViewableType {
+public struct StaticForm: FormableType {
     let text: String
     let detailText: String?
     
