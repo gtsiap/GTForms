@@ -21,26 +21,29 @@
 import UIKit
 import SnapKit
 
-class Switcher: ControlLabelView  {
+class ActionSheetPicker: ControlLabelView  {
     
-    private lazy private(set) var switcher: UISwitch = {
-        let switcher = UISwitch()
+    var valueDidChange: ((String) -> ())?
+    var items = [String]()
+    weak var viewController: UIViewController?
+    
+    private lazy var button: UIButton = {
+        let button = UIButton(type: .System)
         
-        switcher.addTarget(
+        button.setTitle("Choose", forState: .Normal)
+        button.addTarget(
             self,
-            action: "switchValueDidChange",
-            forControlEvents: .ValueChanged
+            action: "didTapButton",
+            forControlEvents: .TouchUpInside
         )
-                
-        return switcher
+        
+        return button
     }()
-    
-    var valueDidChange: ((Bool) -> ())?
     
     override init() {
         super.init()
         
-        self.control = self.switcher
+        self.control = self.button
         
         configureView() { (label, control) in
             
@@ -64,24 +67,44 @@ class Switcher: ControlLabelView  {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc private func switchValueDidChange() {
-        self.valueDidChange?(self.switcher.enabled)
+    @objc private func didTapButton() {
+        let alert = UIAlertController(
+            title: "Please Choose one",
+            message: nil,
+            preferredStyle: .ActionSheet
+        )
+        
+        for it in self.items {
+            let action = UIAlertAction(title: it, style: .Default) { action in
+                guard let title = action.title else { return }
+                self.button.setTitle(title, forState: .Normal)
+                self.valueDidChange?(title)
+            }
+            alert.addAction(action)
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        self.viewController?.presentViewController(alert, animated: true, completion: nil)
     }
 }
 
-
-public class FormSwitchView: BaseResultFormView<Bool> {
-
+public class FormActionSheetPickerView: BaseResultFormView<String> {
+    
     private let title: String
-    private let switcher = Switcher()
-
-    public init(title: String) {
+    private let picker = ActionSheetPicker()
+    
+    public override weak var viewController: UIViewController? {
+        didSet { self.picker.viewController = self.viewController }
+    }
+    
+    public init(title: String, items: [String]) {
         self.title = title
         super.init()
         
-        self.switcher.controlLabel.text = title
+        self.picker.controlLabel.text = title
+        self.picker.items = items
         
-        self.switcher.valueDidChange = { result in
+        self.picker.valueDidChange = { result in
             self.updateResult(result)
         }
     }
@@ -89,7 +112,7 @@ public class FormSwitchView: BaseResultFormView<Bool> {
     public override func validate() throws {}
     
     public override func formView() -> UIView {
-        return self.switcher
+        return self.picker
     }
     
 }

@@ -59,6 +59,7 @@ class FormsVC: FormTableViewController {
         createStringForms()
         createInfomationForms()
         createMiscForms()
+        createPickers()
     }
 
     private func createDoubleForms() {
@@ -143,6 +144,20 @@ class FormsVC: FormTableViewController {
         
         let section = FormSection()
         section.addRow(emailForm)
+        
+        self.formSections.append(section)
+    }
+    
+    private func createPickers() {
+        let actionSheetPickerForm = FormActionSheetPickerView(
+            title: "Choose a number",
+            items: [
+                "one", "two", "three"
+            ]
+        )
+        
+        let section = FormSection()
+        section.addRow(actionSheetPickerForm)
         
         self.formSections.append(section)
     }
