@@ -80,7 +80,6 @@
 		4502828F1C1ED61C00600956 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				45EA8CAA1C20035D00FD0F8C /* TextFields */,
 				45EA8CA91C20032100FD0F8C /* Views */,
 				45EA8C941C1FFF4A00FD0F8C /* Cells */,
 				450282941C1ED63400600956 /* Info.plist */,
@@ -106,6 +105,7 @@
 		45EA8CA91C20032100FD0F8C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				45EA8CAA1C20035D00FD0F8C /* TextFields */,
 				45EA8CAB1C2003A900FD0F8C /* ControlLabelView.swift */,
 			);
 			path = Views;
@@ -122,8 +122,7 @@
 				454D114A1C204332003AC112 /* BaseStringTextFieldView.swift */,
 				454D114C1C20460E003AC112 /* FormPhoneTextFieldView.swift */,
 			);
-			name = TextFields;
-			path = Views/TextFields;
+			path = TextFields;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
