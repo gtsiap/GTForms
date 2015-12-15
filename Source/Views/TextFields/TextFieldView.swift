@@ -98,5 +98,8 @@ extension TextFieldView: UITextFieldDelegate {
         
         return textWillChange(text: string)
     }
-    
+ 
+    func textFieldDidEndEditing(textField: UITextField) {
+        self.didPressReturnButton?()
+    }
 }

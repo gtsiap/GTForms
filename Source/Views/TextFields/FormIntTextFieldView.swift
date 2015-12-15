@@ -1,3 +1,13 @@
+//
+//  FormIntTextFieldView.swift
+//  GTForms
+//
+//  Created by Giorgos Tsiapaliokas on 15/12/15.
+//  Copyright © 2015 Giorgos Tsiapaliokas. All rights reserved.
+//
+
+import UIKit
+
 // Copyright (c) 2015 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@mykolab.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,10 +30,10 @@
 
 import UIKit
 
-public class FormDoubleTextFieldView: BaseResultFormView<Double> {
- 
-    public var maximumValue: Double?
-    public var minimumValue: Double?
+public class FormIntTextFieldView: BaseResultFormView<Int> {
+    
+    public var maximumValue: Int?
+    public var minimumValue: Int?
     
     private let textFieldView = TextFieldView()
     private var candidateText = ""
@@ -35,29 +45,16 @@ public class FormDoubleTextFieldView: BaseResultFormView<Double> {
         
         self.textFieldView.controlLabel.text = title
         self.textFieldView.textField.placeholder = placeHolder
-        self.textFieldView.textField.keyboardType = .DecimalPad
+        self.textFieldView.textField.keyboardType = .NumberPad
         self.textFieldView.translatesAutoresizingMaskIntoConstraints = false
         
         self.textFieldView.textDidChange = { text in
-            guard let result = Double(text) else { return }
+            guard let result = Int(text) else { return }
             self.updateResult(result)
         }
         
-        self.textFieldView.didPressReturnButton = {
-        
-            do {
-                try self.validationRulesForLimits()
-            } catch let error {
-                guard let
-                    err = error as? ResultFormViewError
-                    else { return }
-                
-                self.showValidationError(err.message)
-            }
-        }
-        
         self.textFieldView.textWillChange = { text in
-
+            
             self.candidateText = text
             
             do {
@@ -66,15 +63,28 @@ public class FormDoubleTextFieldView: BaseResultFormView<Double> {
                 guard let
                     err = error as? ResultFormViewError
                 else { return false }
-
+                
                 self.showValidationError(err.message)
                 return false
             }
             
             return true
         }
+        
+        self.textFieldView.didPressReturnButton = {
+            
+            do {
+                try self.validationRulesForLimits()
+            } catch let error {
+                guard let
+                    err = error as? ResultFormViewError
+                else { return }
+                
+                self.showValidationError(err.message)
+            }
+        }
     }
- 
+    
     public override func validate() throws {
         try validationRulesForTextEditing()
         try validationRulesForLimits()
@@ -90,17 +100,8 @@ public class FormDoubleTextFieldView: BaseResultFormView<Double> {
             return
         }
         
-        if let
-            textFieldText = self.textFieldView.textField.text
-            where self.candidateText == "." &&
-                !textFieldText.isEmpty &&
-                !textFieldText.containsString(".")
-        {
-            return
-        }
-        
         guard let
-            _ = Double(self.candidateText)
+            _ = Int(self.candidateText)
         else {
             throw ResultFormViewError(
                 message: "Only Decimal numbers are allowed"
@@ -130,6 +131,6 @@ public class FormDoubleTextFieldView: BaseResultFormView<Double> {
         }
     }
     
-  
+
 }
 
