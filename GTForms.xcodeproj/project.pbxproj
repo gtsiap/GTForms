@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		450282951C1ED63400600956 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 450282941C1ED63400600956 /* Info.plist */; };
 		450282B51C1EDC3F00600956 /* FormSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450282B41C1EDC3F00600956 /* FormSection.swift */; };
 		450282B71C1EDD6700600956 /* FormViewableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450282B61C1EDD6700600956 /* FormViewableType.swift */; };
 		450282B91C1EDEAF00600956 /* FormRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450282B81C1EDEAF00600956 /* FormRow.swift */; };
@@ -17,6 +16,9 @@
 		45EA8C931C1FFEFF00FD0F8C /* FormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8C921C1FFEFF00FD0F8C /* FormTableViewController.swift */; };
 		45EA8C961C1FFF6B00FD0F8C /* FormTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8C951C1FFF6B00FD0F8C /* FormTableViewCell.swift */; };
 		45EA8C981C1FFFC700FD0F8C /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45EA8C971C1FFFC700FD0F8C /* SnapKit.framework */; };
+		45EA8CAC1C2003A900FD0F8C /* ControlLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8CAB1C2003A900FD0F8C /* ControlLabelView.swift */; };
+		45EA8CAE1C2006AF00FD0F8C /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8CAD1C2006AF00FD0F8C /* TextFieldView.swift */; };
+		45EA8CB01C200AAC00FD0F8C /* FormDoubleTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8CAF1C200AAC00FD0F8C /* FormDoubleTextFieldView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,9 @@
 		45EA8C921C1FFEFF00FD0F8C /* FormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewController.swift; sourceTree = "<group>"; };
 		45EA8C951C1FFF6B00FD0F8C /* FormTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewCell.swift; sourceTree = "<group>"; };
 		45EA8C971C1FFFC700FD0F8C /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		45EA8CAB1C2003A900FD0F8C /* ControlLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlLabelView.swift; sourceTree = "<group>"; };
+		45EA8CAD1C2006AF00FD0F8C /* TextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
+		45EA8CAF1C200AAC00FD0F8C /* FormDoubleTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormDoubleTextFieldView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +70,8 @@
 		4502828F1C1ED61C00600956 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				45EA8CAA1C20035D00FD0F8C /* TextFields */,
+				45EA8CA91C20032100FD0F8C /* Views */,
 				45EA8C941C1FFF4A00FD0F8C /* Cells */,
 				450282941C1ED63400600956 /* Info.plist */,
 				450282901C1ED61C00600956 /* GTForms.h */,
@@ -84,6 +91,24 @@
 				45EA8C951C1FFF6B00FD0F8C /* FormTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		45EA8CA91C20032100FD0F8C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				45EA8CAB1C2003A900FD0F8C /* ControlLabelView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		45EA8CAA1C20035D00FD0F8C /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				45EA8CAD1C2006AF00FD0F8C /* TextFieldView.swift */,
+				45EA8CAF1C200AAC00FD0F8C /* FormDoubleTextFieldView.swift */,
+			);
+			name = TextFields;
+			path = Views/TextFields;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,7 +179,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				450282951C1ED63400600956 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,8 +194,11 @@
 				450282B91C1EDEAF00600956 /* FormRow.swift in Sources */,
 				450282B71C1EDD6700600956 /* FormViewableType.swift in Sources */,
 				45EA8C911C1FFCA000FD0F8C /* StaticForm.swift in Sources */,
+				45EA8CAC1C2003A900FD0F8C /* ControlLabelView.swift in Sources */,
 				450282B51C1EDC3F00600956 /* FormSection.swift in Sources */,
+				45EA8CB01C200AAC00FD0F8C /* FormDoubleTextFieldView.swift in Sources */,
 				45EA8C961C1FFF6B00FD0F8C /* FormTableViewCell.swift in Sources */,
+				45EA8CAE1C2006AF00FD0F8C /* TextFieldView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
