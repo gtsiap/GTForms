@@ -19,19 +19,19 @@
 // THE SOFTWARE.
 
 import UIKit
+import GTForms
 
-class ViewController: UIViewController {
+class MainTableViewController: FormTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let section = FormSection()
+        section.addRow(StaticForm(text: "Forms")).didSelectRow = {
+            self.performSegueWithIdentifier("showForms", sender: self)
+        }
+        
+        self.formSections.append(section)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
+    
 }
-

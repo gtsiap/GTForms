@@ -7,14 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		450282921C1ED61C00600956 /* GTForms.h in Headers */ = {isa = PBXBuildFile; fileRef = 450282901C1ED61C00600956 /* GTForms.h */; };
 		450282951C1ED63400600956 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 450282941C1ED63400600956 /* Info.plist */; };
+		450282B51C1EDC3F00600956 /* FormSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450282B41C1EDC3F00600956 /* FormSection.swift */; };
+		450282B71C1EDD6700600956 /* FormViewableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450282B61C1EDD6700600956 /* FormViewableType.swift */; };
+		450282B91C1EDEAF00600956 /* FormRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450282B81C1EDEAF00600956 /* FormRow.swift */; };
+		45EA8C8C1C1FF85500FD0F8C /* GTForms.h in Headers */ = {isa = PBXBuildFile; fileRef = 450282901C1ED61C00600956 /* GTForms.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		45EA8C8F1C1FFC5C00FD0F8C /* BaseResultFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8C8E1C1FFC5C00FD0F8C /* BaseResultFormView.swift */; };
+		45EA8C911C1FFCA000FD0F8C /* StaticForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8C901C1FFCA000FD0F8C /* StaticForm.swift */; };
+		45EA8C931C1FFEFF00FD0F8C /* FormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8C921C1FFEFF00FD0F8C /* FormTableViewController.swift */; };
+		45EA8C961C1FFF6B00FD0F8C /* FormTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8C951C1FFF6B00FD0F8C /* FormTableViewCell.swift */; };
+		45EA8C981C1FFFC700FD0F8C /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45EA8C971C1FFFC700FD0F8C /* SnapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		450282841C1ED4D000600956 /* GTForms.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTForms.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		450282901C1ED61C00600956 /* GTForms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTForms.h; sourceTree = "<group>"; };
 		450282941C1ED63400600956 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		450282B41C1EDC3F00600956 /* FormSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSection.swift; sourceTree = "<group>"; };
+		450282B61C1EDD6700600956 /* FormViewableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormViewableType.swift; sourceTree = "<group>"; };
+		450282B81C1EDEAF00600956 /* FormRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormRow.swift; sourceTree = "<group>"; };
+		45EA8C8E1C1FFC5C00FD0F8C /* BaseResultFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseResultFormView.swift; sourceTree = "<group>"; };
+		45EA8C901C1FFCA000FD0F8C /* StaticForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticForm.swift; sourceTree = "<group>"; };
+		45EA8C921C1FFEFF00FD0F8C /* FormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewController.swift; sourceTree = "<group>"; };
+		45EA8C951C1FFF6B00FD0F8C /* FormTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewCell.swift; sourceTree = "<group>"; };
+		45EA8C971C1FFFC700FD0F8C /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -22,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45EA8C981C1FFFC700FD0F8C /* SnapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -31,6 +48,7 @@
 		4502827A1C1ED4D000600956 = {
 			isa = PBXGroup;
 			children = (
+				45EA8C971C1FFFC700FD0F8C /* SnapKit.framework */,
 				4502828F1C1ED61C00600956 /* Source */,
 				450282851C1ED4D000600956 /* Products */,
 			);
@@ -47,10 +65,25 @@
 		4502828F1C1ED61C00600956 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				45EA8C941C1FFF4A00FD0F8C /* Cells */,
 				450282941C1ED63400600956 /* Info.plist */,
 				450282901C1ED61C00600956 /* GTForms.h */,
+				450282B41C1EDC3F00600956 /* FormSection.swift */,
+				450282B61C1EDD6700600956 /* FormViewableType.swift */,
+				450282B81C1EDEAF00600956 /* FormRow.swift */,
+				45EA8C8E1C1FFC5C00FD0F8C /* BaseResultFormView.swift */,
+				45EA8C901C1FFCA000FD0F8C /* StaticForm.swift */,
+				45EA8C921C1FFEFF00FD0F8C /* FormTableViewController.swift */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		45EA8C941C1FFF4A00FD0F8C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				45EA8C951C1FFF6B00FD0F8C /* FormTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -60,7 +93,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				450282921C1ED61C00600956 /* GTForms.h in Headers */,
+				45EA8C8C1C1FF85500FD0F8C /* GTForms.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +165,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45EA8C8F1C1FFC5C00FD0F8C /* BaseResultFormView.swift in Sources */,
+				45EA8C931C1FFEFF00FD0F8C /* FormTableViewController.swift in Sources */,
+				450282B91C1EDEAF00600956 /* FormRow.swift in Sources */,
+				450282B71C1EDD6700600956 /* FormViewableType.swift in Sources */,
+				45EA8C911C1FFCA000FD0F8C /* StaticForm.swift in Sources */,
+				450282B51C1EDC3F00600956 /* FormSection.swift in Sources */,
+				45EA8C961C1FFF6B00FD0F8C /* FormTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,10 +270,15 @@
 		4502828D1C1ED4D000600956 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
@@ -241,16 +286,22 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.terietor.GTForms;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		4502828E1C1ED4D000600956 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
