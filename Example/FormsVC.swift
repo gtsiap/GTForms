@@ -44,6 +44,11 @@ class FormsVC: FormTableViewController {
         placeHolder: "Type an int"
     )
     
+    private let stringForm = FormTextFieldView(
+        title: "String",
+        placeHolder: "Type a string"
+    )
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -51,6 +56,7 @@ class FormsVC: FormTableViewController {
         
         createDoubleForms()
         createIntForms()
+        createStringForms()
     }
 
     private func createDoubleForms() {
@@ -85,6 +91,24 @@ class FormsVC: FormTableViewController {
         
         section.addRow(maxAndMinForm)
 
+        
+        self.formSections.append(section)
+    }
+    
+    private func createStringForms() {
+        let section = FormSection()
+        section.addRow(self.stringForm)
+        
+        
+        let maxAndMinForm = FormTextFieldView(
+            title: "String with limits",
+            placeHolder: "Max is 10 and min is 8"
+        )
+        
+        maxAndMinForm.maximumLength = 10
+        maxAndMinForm.minimumLength = 8
+        
+        section.addRow(maxAndMinForm)
         
         self.formSections.append(section)
     }

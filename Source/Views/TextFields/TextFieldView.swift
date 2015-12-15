@@ -53,11 +53,13 @@ class TextFieldView: ControlLabelView  {
             label.snp_makeConstraints() { make in
                 make.left.equalTo(self).offset(10)
                 make.top.equalTo(self).offset(10)
+                make.width.equalTo(self).multipliedBy(0.3)
                 make.bottom.equalTo(self).offset(-10)
             } // end label
             
             
             control.snp_makeConstraints() { make in
+                make.left.equalTo(label.snp_right)
                 make.right.equalTo(self).offset(-10)
                 make.top.equalTo(self).offset(10)
                 make.bottom.equalTo(self).offset(-10)

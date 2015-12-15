@@ -27,6 +27,7 @@ class ControlLabelView: UIView {
         let label = UILabel()
         label.font = UIFont.boldSystemFontOfSize(UIFont.systemFontSize())
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
         
         return label
     }()
