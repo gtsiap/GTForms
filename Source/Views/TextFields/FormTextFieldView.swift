@@ -23,7 +23,6 @@ public class FormTextFieldView: BaseResultFormView<String> {
         
         self.textFieldView.controlLabel.text = title
         self.textFieldView.textField.placeholder = placeHolder
-        self.textFieldView.textField.keyboardType = .NumberPad
         self.textFieldView.translatesAutoresizingMaskIntoConstraints = false
         
         self.textFieldView.textDidChange = { text in
