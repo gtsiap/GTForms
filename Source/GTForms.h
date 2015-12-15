@@ -13,6 +13,3 @@ FOUNDATION_EXPORT double GTFormsVersionNumber;
 
 //! Project version string for GTForms.
 FOUNDATION_EXPORT const unsigned char GTFormsVersionString[];
-
-
-
