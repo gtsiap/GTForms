@@ -57,16 +57,7 @@ class FormsVC: FormTableViewController {
         createDoubleForms()
         createIntForms()
         createStringForms()
-        
-        let emailForm = FormEmailTextFieldView(
-            title: "E-mail",
-            placeHolder: "Type your e-mail"
-        )
-        
-        let section = FormSection()
-        section.addRow(emailForm)
-
-        self.formSections.append(section)
+        createInfomationForms()
     }
 
     private func createDoubleForms() {
@@ -121,6 +112,27 @@ class FormsVC: FormTableViewController {
         section.addRow(maxAndMinForm)
         
         self.formSections.append(section)
+    }
+    
+    private func createInfomationForms() {
+        let emailForm = FormEmailTextFieldView(
+            title: "E-mail",
+            placeHolder: "Type your e-mail"
+        )
+        
+        let section = FormSection()
+        section.addRow(emailForm)
+        
+        
+        let phoneForm = FormPhoneTextFieldView(
+            title: "Phone",
+            placeHolder: "Type your phone"
+        )
+        
+        section.addRow(phoneForm)
+        
+        self.formSections.append(section)
+
     }
     
     @objc private func didTapResultsButton() {
