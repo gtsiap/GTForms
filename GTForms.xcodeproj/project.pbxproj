@@ -12,6 +12,8 @@
 		450282B91C1EDEAF00600956 /* FormRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450282B81C1EDEAF00600956 /* FormRow.swift */; };
 		454D11451C203022003AC112 /* FormIntTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D11441C203022003AC112 /* FormIntTextFieldView.swift */; };
 		454D11471C203B6A003AC112 /* FormTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D11461C203B6A003AC112 /* FormTextFieldView.swift */; };
+		454D11491C204218003AC112 /* FormEmailTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D11481C204218003AC112 /* FormEmailTextFieldView.swift */; };
+		454D114B1C204332003AC112 /* BaseStringTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D114A1C204332003AC112 /* BaseStringTextFieldView.swift */; };
 		45EA8C8C1C1FF85500FD0F8C /* GTForms.h in Headers */ = {isa = PBXBuildFile; fileRef = 450282901C1ED61C00600956 /* GTForms.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45EA8C8F1C1FFC5C00FD0F8C /* BaseResultFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8C8E1C1FFC5C00FD0F8C /* BaseResultFormView.swift */; };
 		45EA8C911C1FFCA000FD0F8C /* StaticForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8C901C1FFCA000FD0F8C /* StaticForm.swift */; };
@@ -32,6 +34,8 @@
 		450282B81C1EDEAF00600956 /* FormRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormRow.swift; sourceTree = "<group>"; };
 		454D11441C203022003AC112 /* FormIntTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormIntTextFieldView.swift; sourceTree = "<group>"; };
 		454D11461C203B6A003AC112 /* FormTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextFieldView.swift; sourceTree = "<group>"; };
+		454D11481C204218003AC112 /* FormEmailTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormEmailTextFieldView.swift; sourceTree = "<group>"; };
+		454D114A1C204332003AC112 /* BaseStringTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseStringTextFieldView.swift; sourceTree = "<group>"; };
 		45EA8C8E1C1FFC5C00FD0F8C /* BaseResultFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseResultFormView.swift; sourceTree = "<group>"; };
 		45EA8C901C1FFCA000FD0F8C /* StaticForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticForm.swift; sourceTree = "<group>"; };
 		45EA8C921C1FFEFF00FD0F8C /* FormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 				45EA8CAF1C200AAC00FD0F8C /* FormDoubleTextFieldView.swift */,
 				454D11441C203022003AC112 /* FormIntTextFieldView.swift */,
 				454D11461C203B6A003AC112 /* FormTextFieldView.swift */,
+				454D11481C204218003AC112 /* FormEmailTextFieldView.swift */,
+				454D114A1C204332003AC112 /* BaseStringTextFieldView.swift */,
 			);
 			name = TextFields;
 			path = Views/TextFields;
@@ -197,10 +203,12 @@
 			files = (
 				45EA8C8F1C1FFC5C00FD0F8C /* BaseResultFormView.swift in Sources */,
 				45EA8C931C1FFEFF00FD0F8C /* FormTableViewController.swift in Sources */,
+				454D114B1C204332003AC112 /* BaseStringTextFieldView.swift in Sources */,
 				450282B91C1EDEAF00600956 /* FormRow.swift in Sources */,
 				450282B71C1EDD6700600956 /* FormViewableType.swift in Sources */,
 				45EA8C911C1FFCA000FD0F8C /* StaticForm.swift in Sources */,
 				45EA8CAC1C2003A900FD0F8C /* ControlLabelView.swift in Sources */,
+				454D11491C204218003AC112 /* FormEmailTextFieldView.swift in Sources */,
 				450282B51C1EDC3F00600956 /* FormSection.swift in Sources */,
 				45EA8CB01C200AAC00FD0F8C /* FormDoubleTextFieldView.swift in Sources */,
 				454D11451C203022003AC112 /* FormIntTextFieldView.swift in Sources */,

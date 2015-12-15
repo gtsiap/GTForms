@@ -57,6 +57,16 @@ class FormsVC: FormTableViewController {
         createDoubleForms()
         createIntForms()
         createStringForms()
+        
+        let emailForm = FormEmailTextFieldView(
+            title: "E-mail",
+            placeHolder: "Type your e-mail"
+        )
+        
+        let section = FormSection()
+        section.addRow(emailForm)
+
+        self.formSections.append(section)
     }
 
     private func createDoubleForms() {

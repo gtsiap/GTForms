@@ -20,13 +20,9 @@
 
 import UIKit
 
-public class FormTextFieldView: BaseResultFormView<String> {
-    
-    public var maximumLength: Int?
-    public var minimumLength: Int?
+public class BaseStringTextFieldView: BaseResultFormView<String> {
     
     private let textFieldView = TextFieldView()
-    private var candidateText = ""
     private let title: String
     
     public init(title: String, placeHolder: String) {
@@ -40,15 +36,16 @@ public class FormTextFieldView: BaseResultFormView<String> {
         self.textFieldView.textDidChange = { text in
             self.updateResult(text)
         }
-     
+        
         self.textFieldView.didPressReturnButton = {
             
             do {
-                try self.validationRulesForLimits()
+                try self.validate()
             } catch let error {
+                self.textFieldView.textField.text = ""
                 guard let
                     err = error as? ResultFormViewError
-                    else { return }
+                else { return }
                 
                 self.showValidationError(err.message)
             }
@@ -56,36 +53,9 @@ public class FormTextFieldView: BaseResultFormView<String> {
         
     }
     
-    public override func validate() throws {
-        try validationRulesForLimits()
-    }
-    
     public override func formView() -> UIView {
         return self.textFieldView
     }
-    
-    private func validationRulesForLimits() throws {
-        if let
-            maximumLength = self.maximumLength
-            where self.result?.characters.count > maximumLength
-        {
-            self.textFieldView.textField.text = ""
-            
-            throw ResultFormViewError(
-                message: "\(self.title) is too long"
-            )
-        } else if let
-            minimumLength = self.minimumLength
-            where self.result?.characters.count < minimumLength
-        {
-            self.textFieldView.textField.text = ""
-            
-            throw ResultFormViewError(
-                message: "\(self.title) is too short"
-            )
-        }
-    }
-    
     
 }
 
