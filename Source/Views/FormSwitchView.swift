@@ -72,22 +72,20 @@ class Switcher: ControlLabelView  {
 
 public class FormSwitchView: BaseResultFormView<Bool> {
 
-    private let title: String
     private let switcher = Switcher()
 
-    public init(title: String) {
-        self.title = title
+    public init(text: String) {
         super.init()
         
-        self.switcher.controlLabel.text = title
+        self.text = text
+
+        self.switcher.controlLabel.text = self.text
         
         self.switcher.valueDidChange = { result in
             self.updateResult(result)
         }
     }
-    
-    public override func validate() throws {}
-    
+        
     public override func formView() -> UIView {
         return self.switcher
     }

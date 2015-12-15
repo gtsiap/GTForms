@@ -23,13 +23,13 @@ import UIKit
 public class BaseStringTextFieldView: BaseResultFormView<String> {
     
     let textFieldView = TextFieldView()
-    let title: String
     
-    public init(title: String, placeHolder: String) {
-        self.title = title
+    public init(text: String, placeHolder: String) {
         super.init()
         
-        self.textFieldView.controlLabel.text = title
+        self.text = text
+
+        self.textFieldView.controlLabel.text = text
         self.textFieldView.textField.placeholder = placeHolder
         self.textFieldView.translatesAutoresizingMaskIntoConstraints = false
         

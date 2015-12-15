@@ -25,7 +25,9 @@ public class FormTextFieldView: BaseStringTextFieldView {
     public var maximumLength: Int?
     public var minimumLength: Int?
     
-    public override func validate() throws {
+    public override func validate() throws -> String? {
+        try super.validate()
+        
         if let
             maximumLength = self.maximumLength
             where self.result?.characters.count > maximumLength
@@ -33,7 +35,7 @@ public class FormTextFieldView: BaseStringTextFieldView {
             self.textFieldView.textField.text = ""
             
             throw ResultFormViewError(
-                message: "\(self.title) is too long"
+                message: "\(self.text) is too long"
             )
         } else if let
             minimumLength = self.minimumLength
@@ -42,9 +44,11 @@ public class FormTextFieldView: BaseStringTextFieldView {
             self.textFieldView.textField.text = ""
             
             throw ResultFormViewError(
-                message: "\(self.title) is too short"
+                message: "\(self.text) is too short"
             )
         }
+        
+        return self.result
     }
     
     

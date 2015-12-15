@@ -121,9 +121,9 @@
 			isa = PBXGroup;
 			children = (
 				45EA8CAD1C2006AF00FD0F8C /* TextFieldView.swift */,
-				45EA8CAF1C200AAC00FD0F8C /* FormDoubleTextFieldView.swift */,
 				454D11441C203022003AC112 /* FormIntTextFieldView.swift */,
 				454D11461C203B6A003AC112 /* FormTextFieldView.swift */,
+				45EA8CAF1C200AAC00FD0F8C /* FormDoubleTextFieldView.swift */,
 				454D11481C204218003AC112 /* FormEmailTextFieldView.swift */,
 				454D114A1C204332003AC112 /* BaseStringTextFieldView.swift */,
 				454D114C1C20460E003AC112 /* FormPhoneTextFieldView.swift */,

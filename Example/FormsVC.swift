@@ -35,17 +35,17 @@ class FormsVC: FormTableViewController {
     }()
     
     private let doubleForm = FormDoubleTextFieldView(
-        title: "SomeDouble",
+        text: "SomeDouble",
         placeHolder: "Type a double"
     )
     
     private let intForm = FormIntTextFieldView(
-        title: "SomeInt",
+        text: "SomeInt",
         placeHolder: "Type an int"
     )
     
     private let stringForm = FormTextFieldView(
-        title: "String",
+        text: "String",
         placeHolder: "Type a string"
     )
     
@@ -67,7 +67,7 @@ class FormsVC: FormTableViewController {
         section.addRow(self.doubleForm)
         
         let maxAndMinForm = FormDoubleTextFieldView(
-            title: "Double with limits",
+            text: "Double with limits",
             placeHolder: "Max is 10 and min is 8"
         )
 
@@ -85,7 +85,7 @@ class FormsVC: FormTableViewController {
         
         
         let maxAndMinForm = FormIntTextFieldView(
-            title: "Int with limits",
+            text: "Int with limits",
             placeHolder: "Max is 10 and min is 8"
         )
         
@@ -104,7 +104,7 @@ class FormsVC: FormTableViewController {
         
         
         let maxAndMinForm = FormTextFieldView(
-            title: "String with limits",
+            text: "String with limits",
             placeHolder: "Max is 10 and min is 8"
         )
         
@@ -118,7 +118,7 @@ class FormsVC: FormTableViewController {
     
     private func createInfomationForms() {
         let emailForm = FormEmailTextFieldView(
-            title: "E-mail",
+            text: "E-mail",
             placeHolder: "Type your e-mail"
         )
         
@@ -127,7 +127,7 @@ class FormsVC: FormTableViewController {
         
         
         let phoneForm = FormPhoneTextFieldView(
-            title: "Phone",
+            text: "Phone",
             placeHolder: "Type your phone"
         )
         
@@ -140,7 +140,7 @@ class FormsVC: FormTableViewController {
     private func createMiscForms() {
         let title = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
         
-        let emailForm = FormSwitchView(title: title)
+        let emailForm = FormSwitchView(text: title)
         
         let section = FormSection()
         section.addRow(emailForm)
@@ -150,7 +150,7 @@ class FormsVC: FormTableViewController {
     
     private func createPickers() {
         let actionSheetPickerForm = FormActionSheetPickerView(
-            title: "Choose a number",
+            text: "Choose a number",
             items: [
                 "one", "two", "three"
             ]
@@ -163,7 +163,8 @@ class FormsVC: FormTableViewController {
     }
     
     @objc private func didTapResultsButton() {
-        print("\(self.doubleForm.dynamicType): \(self.doubleForm.result)")
-        print( "\(self.intForm.dynamicType): \(self.intForm.result)")
+        self.doubleForm.required = true
+        
+        let _ = try? self.doubleForm.retrieveResult()
     }
 }

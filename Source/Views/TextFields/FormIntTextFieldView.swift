@@ -27,13 +27,13 @@ public class FormIntTextFieldView: BaseResultFormView<Int> {
     
     private let textFieldView = TextFieldView()
     private var candidateText = ""
-    private let title: String
     
-    public init(title: String, placeHolder: String) {
-        self.title = title
+    public init(text: String, placeHolder: String) {
         super.init()
         
-        self.textFieldView.controlLabel.text = title
+        self.text = text
+
+        self.textFieldView.controlLabel.text = self.text
         self.textFieldView.textField.placeholder = placeHolder
         self.textFieldView.textField.keyboardType = .NumberPad
         self.textFieldView.translatesAutoresizingMaskIntoConstraints = false
@@ -75,9 +75,12 @@ public class FormIntTextFieldView: BaseResultFormView<Int> {
         }
     }
     
-    public override func validate() throws {
+    public override func validate() throws -> Int? {
+        try super.validate()
         try validationRulesForTextEditing()
         try validationRulesForLimits()
+        
+        return self.result
     }
     
     public override func formView() -> UIView {
@@ -107,7 +110,7 @@ public class FormIntTextFieldView: BaseResultFormView<Int> {
             self.textFieldView.textField.text = ""
             
             throw ResultFormViewError(
-                message: "The value is too big for \(self.title)"
+                message: "The value is too big for \(self.text)"
             )
         } else if let
             minimumValue = self.minimumValue
@@ -116,7 +119,7 @@ public class FormIntTextFieldView: BaseResultFormView<Int> {
             self.textFieldView.textField.text = ""
             
             throw ResultFormViewError(
-                message: "The value is too small for \(self.title)"
+                message: "The value is too small for \(self.text)"
             )
         }
     }

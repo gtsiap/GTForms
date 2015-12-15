@@ -22,7 +22,9 @@ import UIKit
 
 public class FormPhoneTextFieldView: BaseStringTextFieldView {
     
-    public override func validate() throws {
+    public override func validate() throws -> String? {
+        try super.validate()
+        
         // validate email
         let phoneReg =
         "(\\+[0-9]+[\\- \\.]*)?"
@@ -35,6 +37,8 @@ public class FormPhoneTextFieldView: BaseStringTextFieldView {
                 message: "Invalid phone number"
             )
         }
+        
+        return self.result
     }
     
 }

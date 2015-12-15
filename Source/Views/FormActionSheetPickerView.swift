@@ -96,26 +96,24 @@ class ActionSheetPicker: ControlLabelView  {
 
 public class FormActionSheetPickerView: BaseResultFormView<String> {
     
-    private let title: String
     private let picker = ActionSheetPicker()
     
     public override weak var viewController: UIViewController? {
         didSet { self.picker.viewController = self.viewController }
     }
     
-    public init(title: String, items: [String]) {
-        self.title = title
+    public init(text: String, items: [String]) {
         super.init()
         
-        self.picker.controlLabel.text = title
+        self.text = text
+
+        self.picker.controlLabel.text = text
         self.picker.items = items
         
         self.picker.valueDidChange = { result in
             self.updateResult(result)
         }
     }
-    
-    public override func validate() throws {}
     
     public override func formView() -> UIView {
         return self.picker

@@ -61,7 +61,7 @@ extension FormViewableType {
         { alertAction in
             alertVC.dismissViewControllerAnimated(true, completion: nil)
         }
-                print(self.viewController)
+
         alertVC.addAction(okAction)
         self.viewController?.presentViewController(
             alertVC,

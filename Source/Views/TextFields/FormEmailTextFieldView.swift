@@ -22,7 +22,9 @@ import UIKit
 
 public class FormEmailTextFieldView: BaseStringTextFieldView {
     
-    public override func validate() throws {        
+    public override func validate() throws -> String? {
+        try super.validate()
+        
         // validate email
         let emailReg =
         "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
@@ -39,6 +41,8 @@ public class FormEmailTextFieldView: BaseStringTextFieldView {
                 message: "Invalid email address"
             )
         }
+        
+        return self.result
     }
     
 }
