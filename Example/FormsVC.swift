@@ -39,22 +39,58 @@ class FormsVC: FormTableViewController {
         placeHolder: "Type a double"
     )
     
+    private let intForm = FormIntTextFieldView(
+        title: "SomeInt",
+        placeHolder: "Type an int"
+    )
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.rightBarButtonItem = self.resultsButton
         
-        let section = FormSection()
-        section.addRow(self.doubleForm)
-
-       self.formSections.append(section)
+        createDoubleForms()
+        createIntForms()
     }
 
-    @objc private func didTapResultsButton() {
-        let forms = [
-            "\(self.doubleForm.dynamicType)": self.doubleForm.result
-        ]
+    private func createDoubleForms() {
+        let section = FormSection()
+        section.addRow(self.doubleForm)
         
-        print(forms)
+        let maxAndMinForm = FormDoubleTextFieldView(
+            title: "Double with limits",
+            placeHolder: "Max is 10 and min is 8"
+        )
+
+        maxAndMinForm.maximumValue = 10
+        maxAndMinForm.minimumValue = 8
+
+        section.addRow(maxAndMinForm)
+        
+        self.formSections.append(section)
+    }
+    
+    private func createIntForms() {
+        let section = FormSection()
+        section.addRow(self.intForm)
+        
+        
+        let maxAndMinForm = FormIntTextFieldView(
+            title: "Int with limits",
+            placeHolder: "Max is 10 and min is 8"
+        )
+        
+        maxAndMinForm.maximumValue = 10
+        maxAndMinForm.minimumValue = 8
+        
+        section.addRow(maxAndMinForm)
+
+        
+        self.formSections.append(section)
+    }
+    
+    @objc private func didTapResultsButton() {
+        print("\(self.doubleForm.dynamicType): \(self.doubleForm.result)")
+        print( "\(self.intForm.dynamicType): \(self.intForm.result)")
     }
 }
