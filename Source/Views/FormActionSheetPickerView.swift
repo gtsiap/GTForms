@@ -84,7 +84,13 @@ class ActionSheetPicker: ControlLabelView  {
         }
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-        self.viewController?.presentViewController(alert, animated: true, completion: nil)
+        
+        guard let vc = self.viewController else {
+            print("\(__FILE__):\(__LINE__): view controller doesn't exist")
+            return
+        }
+        
+        vc.presentViewController(alert, animated: true, completion: nil)
     }
 }
 
