@@ -22,8 +22,8 @@ import UIKit
 
 public class BaseStringTextFieldView: BaseResultFormView<String> {
     
-    private let textFieldView = TextFieldView()
-    private let title: String
+    let textFieldView = TextFieldView()
+    let title: String
     
     public init(title: String, placeHolder: String) {
         self.title = title
