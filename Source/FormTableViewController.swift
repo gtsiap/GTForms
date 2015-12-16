@@ -46,10 +46,7 @@ public class FormTableViewController: UITableViewController {
             cell.textLabel?.text = staticForm.text
             cell.detailTextLabel?.text = staticForm.detailText
         } else {
-            let formCell = tableView
-                .dequeueReusableCellWithIdentifier("formCell", forIndexPath: indexPath)
-                as! FormTableViewCell
-            
+            let formCell = FormTableViewCell()
             if let formViewableCell = cellRow.form as? FormViewableType {
                 formViewableCell.viewController = self
             }

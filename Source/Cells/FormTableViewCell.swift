@@ -47,14 +47,10 @@ class FormTableViewCell: UITableViewCell {
         else { return }
         
         if let _ = self.cellView {
-            // configureCell has been called from
-            // UITableView.dequeueReusableCellWithIdentifier
-            // for the second time. We have already configured
-            // the view and we don't want to add the view again.
-            // Q: When does this happen?
-            // A: If you scroll in the tableview then
-            //    the second time the tableview will reuse
-            //    the cell, thats why we use it after all :)
+            // if the cellView exists
+            // then configureCell has been
+            // called for a second time
+            // so let's remove the old view
             self.cellView.removeFromSuperview()
         }
         

@@ -52,4 +52,5 @@ class ControlLabelView: UIView {
     func configureView(@noescape makeConstraints: (UILabel, UIControl) -> ()) {
         makeConstraints(self.controlLabel, self.control)
     }
+
 }
