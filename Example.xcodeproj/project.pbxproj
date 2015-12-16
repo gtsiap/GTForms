@@ -204,6 +204,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/GTSegmentedControl.framework",
 			);
 			outputPaths = (
 			);

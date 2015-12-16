@@ -162,11 +162,29 @@ class FormsVC: FormTableViewController {
                 "1", "2", "3"
             ]
         )
-        
+
         let section = FormSection()
         section.addRow(actionSheetPickerForm)
         section.addRow(actionSheetPickerForm2)
 
+        let items = [
+            "one", "two", "three",
+            "four", "five", "six",
+            "seven", "eight", "nine"
+        ]
+        
+        let segmentedPicker = FormSegmentedPickerView(
+            text: "Choose",
+            items: items
+        )
+        
+        let segmentedPicker2 = FormSegmentedPickerView(
+            text: self.longText,
+            items: items
+        )
+        
+        section.addRow(segmentedPicker)
+        section.addRow(segmentedPicker2)
         self.formSections.append(section)
     }
     

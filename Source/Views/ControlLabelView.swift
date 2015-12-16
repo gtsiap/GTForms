@@ -32,7 +32,7 @@ class ControlLabelView: UIView {
         return label
     }()
     
-    var control: UIControl! {
+    var control: UIView! {
         didSet {
             self.control.translatesAutoresizingMaskIntoConstraints = false
             addSubview(self.control)
@@ -49,7 +49,7 @@ class ControlLabelView: UIView {
         fatalError("Missing Implementation")
     }
     
-    func configureView(@noescape makeConstraints: (UILabel, UIControl) -> ()) {
+    func configureView(@noescape makeConstraints: (UILabel, UIView) -> ()) {
         makeConstraints(self.controlLabel, self.control)
     }
 

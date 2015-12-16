@@ -1,1 +1,2 @@
 github "SnapKit/SnapKit" >= 0.14.0
+github "terietor/GTSegmentedControl" >= 0.1.2
