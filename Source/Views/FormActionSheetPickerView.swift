@@ -21,7 +21,7 @@
 import UIKit
 import SnapKit
 
-class ActionSheetPicker: ControlLabelView  {
+private class ActionSheetPicker: ControlLabelView  {
     
     var valueDidChange: ((String) -> ())?
     var items = [String]()

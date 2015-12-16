@@ -21,7 +21,7 @@
 import UIKit
 import SnapKit
 
-class Switcher: ControlLabelView  {
+private class Switcher: ControlLabelView  {
     
     private lazy private(set) var switcher: UISwitch = {
         let switcher = UISwitch()
