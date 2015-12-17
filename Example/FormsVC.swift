@@ -46,7 +46,7 @@ class FormsVC: FormTableViewController {
         placeHolder: "Type an int"
     )
     
-    private let stringForm = FormTextFieldView(
+    private let stringForm = FormTextField(
         text: "String",
         placeHolder: "Type a string"
     )
@@ -105,7 +105,7 @@ class FormsVC: FormTableViewController {
         section.addRow(self.stringForm)
         
         
-        let maxAndMinForm = FormTextFieldView(
+        let maxAndMinForm = FormTextField(
             text: "String with limits",
             placeHolder: "Max is 10 and min is 8"
         )

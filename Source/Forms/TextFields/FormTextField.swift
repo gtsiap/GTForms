@@ -20,7 +20,7 @@
 
 import UIKit
 
-public class FormTextFieldView: BaseStringTextFieldForm {
+public class FormTextField: BaseStringTextFieldForm {
     
     public var maximumLength: Int?
     public var minimumLength: Int?
