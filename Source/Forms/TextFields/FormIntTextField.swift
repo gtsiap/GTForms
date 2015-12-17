@@ -25,6 +25,10 @@ public class FormIntTextField: BaseResultForm<Int> {
     public var maximumValue: Int?
     public var minimumValue: Int?
     
+    public var textField: UITextField {
+        return self.textFieldView.textField
+    }
+    
     private let textFieldView = TextFieldView()
     private var candidateText = ""
     

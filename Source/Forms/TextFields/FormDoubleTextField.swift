@@ -25,6 +25,10 @@ public class FormDoubleTextField: BaseResultForm<Double> {
     public var maximumValue: Double?
     public var minimumValue: Double?
     
+    public var textField: UITextField {
+        return self.textFieldView.textField
+    }
+    
     private let textFieldView = TextFieldView()
     private var candidateText = ""
     

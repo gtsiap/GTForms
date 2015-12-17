@@ -24,6 +24,10 @@ public class BaseStringTextFieldForm: BaseResultForm<String> {
     
     let textFieldView = TextFieldView()
     
+    public var textField: UITextField {
+        return self.textFieldView.textField
+    }
+    
     public init(text: String, placeHolder: String) {
         super.init()
         

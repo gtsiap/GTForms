@@ -85,6 +85,7 @@ extension TextFieldView: UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.didPressReturnButton?()
+        textField.resignFirstResponder()
         return false
     }
     
