@@ -186,8 +186,13 @@ class FormsVC: FormTableViewController {
         section.addRow(segmentedPicker)
         section.addRow(segmentedPicker2)
         
-        let datePicker = FormDatePicker(text: "BirthDate")
-        section.addRow(datePicker)
+        let datePickerForm = FormDatePicker(text: "Birth Date")
+        datePickerForm.datePicker.datePickerMode = .Date
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        
+        datePickerForm.dateFormatter = dateFormatter
+        section.addRow(datePickerForm)
         
         self.formSections.append(section)
     }

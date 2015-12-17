@@ -140,9 +140,7 @@ private class DatePickerView: ControlLabelView  {
     }
     
     @objc private func dateValueDidChange() {
-        let date = self.datePicker.date
-        self.displayLabel.text = String(date)
-        self.valueDidChange?(date)
+        self.valueDidChange?(self.datePicker.date)
     }
 }
 
@@ -152,8 +150,19 @@ public class FormDatePicker: BaseResultForm<NSDate> {
     private let datePickerView = DatePickerView()
     
     public var shouldExpand: Bool = false
+    /**
+        The UIDatePicker of the form
+     */
     public var datePicker: UIDatePicker {
         return self.datePickerView.datePicker
+    }
+    
+    /**
+        The dateFormatter will be used for the
+        date label
+     */
+    public var dateFormatter: NSDateFormatter? {
+        didSet { changeDisplayedDate() }
     }
     
     public init(text: String) {
@@ -163,14 +172,28 @@ public class FormDatePicker: BaseResultForm<NSDate> {
         self.datePickerView.controlLabel.text = self.text
         
         self.datePickerView.valueDidChange = { result in
+            self.changeDisplayedDate()
             self.updateResult(result)
         }
+        
+        self.changeDisplayedDate()
     }
     
     public override func formView() -> UIView {
         return self.datePickerView
     }
     
+    private func changeDisplayedDate() {
+        
+        let date = self.datePicker.date
+        if let dateFormatter = self.dateFormatter {
+            self.datePickerView.displayLabel.text =
+                dateFormatter.stringFromDate(date)
+            return
+        }
+        
+        self.datePickerView.displayLabel.text = String(date)
+    }
 }
 
 extension FormDatePicker: FormCellExpandable {
