@@ -29,7 +29,7 @@ public class FormIntTextField: BaseResultForm<Int> {
         return self.textFieldView.textField
     }
     
-    private let textFieldView = TextFieldView()
+    let textFieldView = TextFieldView()
     private var candidateText = ""
     
     public init(text: String, placeHolder: String) {

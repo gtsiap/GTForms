@@ -21,6 +21,12 @@
 import UIKit
 import SnapKit
 
+protocol TextFieldViewDelegate: class {
+    func textFieldViewShouldReturn(
+        textFieldView: TextFieldView
+    ) -> Bool
+}
+
 class TextFieldView: ControlLabelView  {
     
     lazy private(set) var textField: UITextField = {
@@ -42,6 +48,7 @@ class TextFieldView: ControlLabelView  {
     var textWillChange: ((text: String) -> (Bool))?
     var textDidChange: ((text: String) -> ())?
     var didPressReturnButton: (() -> ())?
+    weak var delegate: TextFieldViewDelegate?
     
     override init() {
         super.init()
@@ -84,8 +91,10 @@ extension TextFieldView: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.didPressReturnButton?()
-        textField.resignFirstResponder()
+        if !self.delegate!.textFieldViewShouldReturn(self) {
+            textField.resignFirstResponder()
+        }
+        
         return false
     }
     

@@ -29,7 +29,7 @@ public class FormDoubleTextField: BaseResultForm<Double> {
         return self.textFieldView.textField
     }
     
-    private let textFieldView = TextFieldView()
+    let textFieldView = TextFieldView()
     private var candidateText = ""
     
     public init(text: String, placeHolder: String) {
@@ -54,7 +54,7 @@ public class FormDoubleTextField: BaseResultForm<Double> {
             } catch let error {
                 guard let
                     err = error as? ResultFormError
-                    else { return }
+                else { return }
                 
                 self.showValidationError(err.message)
             }

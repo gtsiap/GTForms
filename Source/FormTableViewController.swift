@@ -22,8 +22,11 @@ import UIKit
 
 public class FormTableViewController: UITableViewController {
     
+    private var textFieldViews = [TextFieldView]()
+    
     public var formSections: [FormSection] = [FormSection]() {
         didSet {
+            findTextFieldViews()
             self.tableView.reloadData()
         }
     }
@@ -85,6 +88,7 @@ public class FormTableViewController: UITableViewController {
         
         expandable.shouldExpand = !expandable.shouldExpand
         expandable.toogleExpand()
+        resignFirstTextFieldView()
         tableView.beginUpdates()
         tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Bottom)
         tableView.endUpdates()
@@ -111,5 +115,46 @@ public class FormTableViewController: UITableViewController {
     public override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.formSections[section].title
     }
+ 
+    private func findTextFieldViews() {
+        self.textFieldViews.removeAll()
+        for section in self.formSections {
+            for row in section.rows {
+                if let form = row.form as? FormDoubleTextField {
+                    self.textFieldViews.append(form.textFieldView)
+                } else if let form = row.form as? FormIntTextField {
+                    self.textFieldViews.append(form.textFieldView)
+                } else if let form = row.form as? BaseStringTextFieldForm {
+                    self.textFieldViews.append(form.textFieldView)
+                }
+            } // end for
+        } // end for
+
+        self.textFieldViews.forEach() { $0.delegate = self }
+    }
     
+    private func resignFirstTextFieldView() {
+        self.textFieldViews.forEach() {
+            if $0.textField.isFirstResponder() {
+                $0.textField.resignFirstResponder()
+            }
+        }
+    }
+    
+}
+
+extension FormTableViewController: TextFieldViewDelegate {
+    func textFieldViewShouldReturn(textFieldView: TextFieldView) -> Bool {
+        guard let
+            index = self.textFieldViews.indexOf(textFieldView)
+        else { return false }
+
+        if (self.textFieldViews.count - 1) == index {
+            return false
+        }
+        
+        let nextTextFieldView = self.textFieldViews[index + 1]
+     
+        return nextTextFieldView.textField.becomeFirstResponder()
+    }
 }
