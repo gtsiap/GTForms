@@ -158,6 +158,20 @@ public class FormDatePicker: BaseResultForm<NSDate> {
     }
     
     /**
+        The text label of form
+     */
+    public var textLabel: UILabel {
+        return self.datePickerView.controlLabel
+    }
+    
+    /**
+        The date label of form
+     */
+    public var dateLabel: UILabel {
+        return self.datePickerView.displayLabel
+    }
+    
+    /**
         The dateFormatter will be used for the
         date label
      */
