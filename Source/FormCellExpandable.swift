@@ -18,18 +18,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import UIKit
-
-/**
-    This class is used for read only forms.
-*/
-public struct StaticForm: FormableType {
-    let text: String
-    let detailText: String?
-    
-    public init(text: String, detailText: String? = nil) {
-        self.text = text
-        self.detailText = text
-    }
-
+public protocol FormCellExpandable: class {
+    var shouldExpand: Bool { get set }
+    func toogleExpand()
 }
