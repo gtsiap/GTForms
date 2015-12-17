@@ -20,7 +20,7 @@
 
 import UIKit
 
-public class FormDoubleTextFieldView: BaseResultFormView<Double> {
+public class FormDoubleTextField: BaseResultForm<Double> {
  
     public var maximumValue: Double?
     public var minimumValue: Double?
@@ -49,7 +49,7 @@ public class FormDoubleTextFieldView: BaseResultFormView<Double> {
                 try self.validationRulesForLimits()
             } catch let error {
                 guard let
-                    err = error as? ResultFormViewError
+                    err = error as? ResultFormError
                     else { return }
                 
                 self.showValidationError(err.message)
@@ -64,7 +64,7 @@ public class FormDoubleTextFieldView: BaseResultFormView<Double> {
                 try self.validationRulesForTextEditing()
             } catch let error {
                 guard let
-                    err = error as? ResultFormViewError
+                    err = error as? ResultFormError
                 else { return false }
 
                 self.showValidationError(err.message)
@@ -105,7 +105,7 @@ public class FormDoubleTextFieldView: BaseResultFormView<Double> {
         guard let
             _ = Double(self.candidateText)
         else {
-            throw ResultFormViewError(
+            throw ResultFormError(
                 message: "Only Decimal numbers are allowed"
             )
         }
@@ -118,7 +118,7 @@ public class FormDoubleTextFieldView: BaseResultFormView<Double> {
         {
             self.textFieldView.textField.text = ""
             
-            throw ResultFormViewError(
+            throw ResultFormError(
                 message: "The value is too big for \(self.text)"
             )
         } else if let
@@ -127,7 +127,7 @@ public class FormDoubleTextFieldView: BaseResultFormView<Double> {
         {
             self.textFieldView.textField.text = ""
             
-            throw ResultFormViewError(
+            throw ResultFormError(
                 message: "The value is too small for \(self.text)"
             )
         }

@@ -10,24 +10,24 @@
 		450282B51C1EDC3F00600956 /* FormSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450282B41C1EDC3F00600956 /* FormSection.swift */; };
 		450282B71C1EDD6700600956 /* FormViewableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450282B61C1EDD6700600956 /* FormViewableType.swift */; };
 		450282B91C1EDEAF00600956 /* FormRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450282B81C1EDEAF00600956 /* FormRow.swift */; };
-		45159D051C219C9600677DDC /* FormSegmentedPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45159D041C219C9600677DDC /* FormSegmentedPickerView.swift */; };
-		454D11451C203022003AC112 /* FormIntTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D11441C203022003AC112 /* FormIntTextFieldView.swift */; };
-		454D11471C203B6A003AC112 /* FormTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D11461C203B6A003AC112 /* FormTextFieldView.swift */; };
-		454D11491C204218003AC112 /* FormEmailTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D11481C204218003AC112 /* FormEmailTextFieldView.swift */; };
-		454D114B1C204332003AC112 /* BaseStringTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D114A1C204332003AC112 /* BaseStringTextFieldView.swift */; };
-		454D114D1C20460E003AC112 /* FormPhoneTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D114C1C20460E003AC112 /* FormPhoneTextFieldView.swift */; };
-		454D114F1C204819003AC112 /* FormSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D114E1C204819003AC112 /* FormSwitchView.swift */; };
-		454D11511C204C7B003AC112 /* FormActionSheetPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454D11501C204C7B003AC112 /* FormActionSheetPickerView.swift */; };
+		458C9CE81C2297E600645434 /* ControlLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CDC1C2297E600645434 /* ControlLabelView.swift */; };
+		458C9CE91C2297E600645434 /* FormActionSheetPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CDD1C2297E600645434 /* FormActionSheetPicker.swift */; };
+		458C9CEA1C2297E600645434 /* FormSegmentedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CDE1C2297E600645434 /* FormSegmentedPicker.swift */; };
+		458C9CEB1C2297E600645434 /* FormSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CDF1C2297E600645434 /* FormSwitchView.swift */; };
+		458C9CEC1C2297E600645434 /* BaseStringTextFieldForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CE11C2297E600645434 /* BaseStringTextFieldForm.swift */; };
+		458C9CED1C2297E600645434 /* FormDoubleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CE21C2297E600645434 /* FormDoubleTextField.swift */; };
+		458C9CEE1C2297E600645434 /* FormEmailTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CE31C2297E600645434 /* FormEmailTextField.swift */; };
+		458C9CEF1C2297E600645434 /* FormIntTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CE41C2297E600645434 /* FormIntTextField.swift */; };
+		458C9CF01C2297E600645434 /* FormPhoneTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CE51C2297E600645434 /* FormPhoneTextField.swift */; };
+		458C9CF11C2297E600645434 /* FormTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CE61C2297E600645434 /* FormTextField.swift */; };
+		458C9CF21C2297E600645434 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CE71C2297E600645434 /* TextFieldView.swift */; };
 		45C716E91C21A02500BBE9FA /* GTSegmentedControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C716E81C21A02500BBE9FA /* GTSegmentedControl.framework */; };
 		45EA8C8C1C1FF85500FD0F8C /* GTForms.h in Headers */ = {isa = PBXBuildFile; fileRef = 450282901C1ED61C00600956 /* GTForms.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		45EA8C8F1C1FFC5C00FD0F8C /* BaseResultFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8C8E1C1FFC5C00FD0F8C /* BaseResultFormView.swift */; };
+		45EA8C8F1C1FFC5C00FD0F8C /* BaseResultForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8C8E1C1FFC5C00FD0F8C /* BaseResultForm.swift */; };
 		45EA8C911C1FFCA000FD0F8C /* StaticForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8C901C1FFCA000FD0F8C /* StaticForm.swift */; };
 		45EA8C931C1FFEFF00FD0F8C /* FormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8C921C1FFEFF00FD0F8C /* FormTableViewController.swift */; };
 		45EA8C961C1FFF6B00FD0F8C /* FormTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8C951C1FFF6B00FD0F8C /* FormTableViewCell.swift */; };
 		45EA8C981C1FFFC700FD0F8C /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45EA8C971C1FFFC700FD0F8C /* SnapKit.framework */; };
-		45EA8CAC1C2003A900FD0F8C /* ControlLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8CAB1C2003A900FD0F8C /* ControlLabelView.swift */; };
-		45EA8CAE1C2006AF00FD0F8C /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8CAD1C2006AF00FD0F8C /* TextFieldView.swift */; };
-		45EA8CB01C200AAC00FD0F8C /* FormDoubleTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8CAF1C200AAC00FD0F8C /* FormDoubleTextFieldView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,23 +37,23 @@
 		450282B41C1EDC3F00600956 /* FormSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSection.swift; sourceTree = "<group>"; };
 		450282B61C1EDD6700600956 /* FormViewableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormViewableType.swift; sourceTree = "<group>"; };
 		450282B81C1EDEAF00600956 /* FormRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormRow.swift; sourceTree = "<group>"; };
-		45159D041C219C9600677DDC /* FormSegmentedPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSegmentedPickerView.swift; sourceTree = "<group>"; };
-		454D11441C203022003AC112 /* FormIntTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormIntTextFieldView.swift; sourceTree = "<group>"; };
-		454D11461C203B6A003AC112 /* FormTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextFieldView.swift; sourceTree = "<group>"; };
-		454D11481C204218003AC112 /* FormEmailTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormEmailTextFieldView.swift; sourceTree = "<group>"; };
-		454D114A1C204332003AC112 /* BaseStringTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseStringTextFieldView.swift; sourceTree = "<group>"; };
-		454D114C1C20460E003AC112 /* FormPhoneTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormPhoneTextFieldView.swift; sourceTree = "<group>"; };
-		454D114E1C204819003AC112 /* FormSwitchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSwitchView.swift; sourceTree = "<group>"; };
-		454D11501C204C7B003AC112 /* FormActionSheetPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormActionSheetPickerView.swift; sourceTree = "<group>"; };
+		458C9CDC1C2297E600645434 /* ControlLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlLabelView.swift; sourceTree = "<group>"; };
+		458C9CDD1C2297E600645434 /* FormActionSheetPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormActionSheetPicker.swift; sourceTree = "<group>"; };
+		458C9CDE1C2297E600645434 /* FormSegmentedPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSegmentedPicker.swift; sourceTree = "<group>"; };
+		458C9CDF1C2297E600645434 /* FormSwitchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSwitchView.swift; sourceTree = "<group>"; };
+		458C9CE11C2297E600645434 /* BaseStringTextFieldForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseStringTextFieldForm.swift; sourceTree = "<group>"; };
+		458C9CE21C2297E600645434 /* FormDoubleTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormDoubleTextField.swift; sourceTree = "<group>"; };
+		458C9CE31C2297E600645434 /* FormEmailTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormEmailTextField.swift; sourceTree = "<group>"; };
+		458C9CE41C2297E600645434 /* FormIntTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormIntTextField.swift; sourceTree = "<group>"; };
+		458C9CE51C2297E600645434 /* FormPhoneTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormPhoneTextField.swift; sourceTree = "<group>"; };
+		458C9CE61C2297E600645434 /* FormTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTextField.swift; sourceTree = "<group>"; };
+		458C9CE71C2297E600645434 /* TextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		45C716E81C21A02500BBE9FA /* GTSegmentedControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTSegmentedControl.framework; path = Carthage/Build/iOS/GTSegmentedControl.framework; sourceTree = "<group>"; };
-		45EA8C8E1C1FFC5C00FD0F8C /* BaseResultFormView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseResultFormView.swift; sourceTree = "<group>"; };
+		45EA8C8E1C1FFC5C00FD0F8C /* BaseResultForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseResultForm.swift; sourceTree = "<group>"; };
 		45EA8C901C1FFCA000FD0F8C /* StaticForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticForm.swift; sourceTree = "<group>"; };
 		45EA8C921C1FFEFF00FD0F8C /* FormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewController.swift; sourceTree = "<group>"; };
 		45EA8C951C1FFF6B00FD0F8C /* FormTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewCell.swift; sourceTree = "<group>"; };
 		45EA8C971C1FFFC700FD0F8C /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
-		45EA8CAB1C2003A900FD0F8C /* ControlLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlLabelView.swift; sourceTree = "<group>"; };
-		45EA8CAD1C2006AF00FD0F8C /* TextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
-		45EA8CAF1C200AAC00FD0F8C /* FormDoubleTextFieldView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormDoubleTextFieldView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,18 +90,44 @@
 		4502828F1C1ED61C00600956 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				45EA8CA91C20032100FD0F8C /* Views */,
+				458C9CDB1C2297E600645434 /* Forms */,
 				45EA8C941C1FFF4A00FD0F8C /* Cells */,
 				450282941C1ED63400600956 /* Info.plist */,
 				450282901C1ED61C00600956 /* GTForms.h */,
 				450282B41C1EDC3F00600956 /* FormSection.swift */,
 				450282B61C1EDD6700600956 /* FormViewableType.swift */,
 				450282B81C1EDEAF00600956 /* FormRow.swift */,
-				45EA8C8E1C1FFC5C00FD0F8C /* BaseResultFormView.swift */,
+				45EA8C8E1C1FFC5C00FD0F8C /* BaseResultForm.swift */,
 				45EA8C901C1FFCA000FD0F8C /* StaticForm.swift */,
 				45EA8C921C1FFEFF00FD0F8C /* FormTableViewController.swift */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		458C9CDB1C2297E600645434 /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+				458C9CDC1C2297E600645434 /* ControlLabelView.swift */,
+				458C9CDD1C2297E600645434 /* FormActionSheetPicker.swift */,
+				458C9CDE1C2297E600645434 /* FormSegmentedPicker.swift */,
+				458C9CDF1C2297E600645434 /* FormSwitchView.swift */,
+				458C9CE01C2297E600645434 /* TextFields */,
+			);
+			path = Forms;
+			sourceTree = "<group>";
+		};
+		458C9CE01C2297E600645434 /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				458C9CE11C2297E600645434 /* BaseStringTextFieldForm.swift */,
+				458C9CE21C2297E600645434 /* FormDoubleTextField.swift */,
+				458C9CE31C2297E600645434 /* FormEmailTextField.swift */,
+				458C9CE41C2297E600645434 /* FormIntTextField.swift */,
+				458C9CE51C2297E600645434 /* FormPhoneTextField.swift */,
+				458C9CE61C2297E600645434 /* FormTextField.swift */,
+				458C9CE71C2297E600645434 /* TextFieldView.swift */,
+			);
+			path = TextFields;
 			sourceTree = "<group>";
 		};
 		45EA8C941C1FFF4A00FD0F8C /* Cells */ = {
@@ -110,32 +136,6 @@
 				45EA8C951C1FFF6B00FD0F8C /* FormTableViewCell.swift */,
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		45EA8CA91C20032100FD0F8C /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				45EA8CAA1C20035D00FD0F8C /* TextFields */,
-				45EA8CAB1C2003A900FD0F8C /* ControlLabelView.swift */,
-				454D114E1C204819003AC112 /* FormSwitchView.swift */,
-				454D11501C204C7B003AC112 /* FormActionSheetPickerView.swift */,
-				45159D041C219C9600677DDC /* FormSegmentedPickerView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		45EA8CAA1C20035D00FD0F8C /* TextFields */ = {
-			isa = PBXGroup;
-			children = (
-				45EA8CAD1C2006AF00FD0F8C /* TextFieldView.swift */,
-				454D11441C203022003AC112 /* FormIntTextFieldView.swift */,
-				454D11461C203B6A003AC112 /* FormTextFieldView.swift */,
-				45EA8CAF1C200AAC00FD0F8C /* FormDoubleTextFieldView.swift */,
-				454D11481C204218003AC112 /* FormEmailTextFieldView.swift */,
-				454D114A1C204332003AC112 /* BaseStringTextFieldView.swift */,
-				454D114C1C20460E003AC112 /* FormPhoneTextFieldView.swift */,
-			);
-			path = TextFields;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,24 +216,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				454D114F1C204819003AC112 /* FormSwitchView.swift in Sources */,
-				45EA8C8F1C1FFC5C00FD0F8C /* BaseResultFormView.swift in Sources */,
+				458C9CEE1C2297E600645434 /* FormEmailTextField.swift in Sources */,
+				45EA8C8F1C1FFC5C00FD0F8C /* BaseResultForm.swift in Sources */,
+				458C9CEF1C2297E600645434 /* FormIntTextField.swift in Sources */,
 				45EA8C931C1FFEFF00FD0F8C /* FormTableViewController.swift in Sources */,
-				454D11511C204C7B003AC112 /* FormActionSheetPickerView.swift in Sources */,
-				454D114B1C204332003AC112 /* BaseStringTextFieldView.swift in Sources */,
+				458C9CEA1C2297E600645434 /* FormSegmentedPicker.swift in Sources */,
+				458C9CEC1C2297E600645434 /* BaseStringTextFieldForm.swift in Sources */,
+				458C9CF11C2297E600645434 /* FormTextField.swift in Sources */,
+				458C9CE91C2297E600645434 /* FormActionSheetPicker.swift in Sources */,
+				458C9CF21C2297E600645434 /* TextFieldView.swift in Sources */,
 				450282B91C1EDEAF00600956 /* FormRow.swift in Sources */,
+				458C9CEB1C2297E600645434 /* FormSwitchView.swift in Sources */,
 				450282B71C1EDD6700600956 /* FormViewableType.swift in Sources */,
+				458C9CF01C2297E600645434 /* FormPhoneTextField.swift in Sources */,
+				458C9CED1C2297E600645434 /* FormDoubleTextField.swift in Sources */,
 				45EA8C911C1FFCA000FD0F8C /* StaticForm.swift in Sources */,
-				45EA8CAC1C2003A900FD0F8C /* ControlLabelView.swift in Sources */,
-				454D11491C204218003AC112 /* FormEmailTextFieldView.swift in Sources */,
+				458C9CE81C2297E600645434 /* ControlLabelView.swift in Sources */,
 				450282B51C1EDC3F00600956 /* FormSection.swift in Sources */,
-				45159D051C219C9600677DDC /* FormSegmentedPickerView.swift in Sources */,
-				454D114D1C20460E003AC112 /* FormPhoneTextFieldView.swift in Sources */,
-				45EA8CB01C200AAC00FD0F8C /* FormDoubleTextFieldView.swift in Sources */,
-				454D11451C203022003AC112 /* FormIntTextFieldView.swift in Sources */,
 				45EA8C961C1FFF6B00FD0F8C /* FormTableViewCell.swift in Sources */,
-				454D11471C203B6A003AC112 /* FormTextFieldView.swift in Sources */,
-				45EA8CAE1C2006AF00FD0F8C /* TextFieldView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,7 +20,7 @@
 
 import UIKit
 
-public class FormTextFieldView: BaseStringTextFieldView {
+public class FormTextFieldView: BaseStringTextFieldForm {
     
     public var maximumLength: Int?
     public var minimumLength: Int?
@@ -34,7 +34,7 @@ public class FormTextFieldView: BaseStringTextFieldView {
         {
             self.textFieldView.textField.text = ""
             
-            throw ResultFormViewError(
+            throw ResultFormError(
                 message: "\(self.text) is too long"
             )
         } else if let
@@ -43,7 +43,7 @@ public class FormTextFieldView: BaseStringTextFieldView {
         {
             self.textFieldView.textField.text = ""
             
-            throw ResultFormViewError(
+            throw ResultFormError(
                 message: "\(self.text) is too short"
             )
         }

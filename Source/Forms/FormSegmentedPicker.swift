@@ -20,41 +20,32 @@
 
 import UIKit
 import SnapKit
+import GTSegmentedControl
 
-private class Switcher: ControlLabelView  {
+private class SegmentedControlLabelView: ControlLabelView  {
     
-    private lazy private(set) var switcher: UISwitch = {
-        let switcher = UISwitch()
-        
-        switcher.addTarget(
-            self,
-            action: "switchValueDidChange",
-            forControlEvents: .ValueChanged
-        )
-                
-        return switcher
-    }()
-    
-    var valueDidChange: ((Bool) -> ())?
+    let segmentedControl = SegmentedControl()
     
     override init() {
         super.init()
         
-        self.control = self.switcher
+        self.control = self.segmentedControl
         
         configureView() { (label, control) in
             
             label.snp_makeConstraints() { make in
                 make.left.equalTo(self).offset(10)
-                make.width.equalTo(self).multipliedBy(0.8)
+                make.width.equalTo(self).multipliedBy(0.4)
                 make.top.equalTo(self).offset(10)
                 make.bottom.equalTo(self).offset(-10)
             } // end label
             
             
             control.snp_makeConstraints() { make in
+                make.centerY.equalTo(label.snp_centerY).priorityLow()
                 make.right.equalTo(self).offset(-10)
-                make.centerY.equalTo(label.snp_centerY)
+                make.left.equalTo(label.snp_right)
+                make.height.lessThanOrEqualTo(self).offset(-10)
             } // end control
             
         } // end configureView
@@ -64,30 +55,29 @@ private class Switcher: ControlLabelView  {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc private func switchValueDidChange() {
-        self.valueDidChange?(self.switcher.enabled)
-    }
 }
 
 
-public class FormSwitchView: BaseResultFormView<Bool> {
-
-    private let switcher = Switcher()
-
-    public init(text: String) {
+public class FormSegmentedPicker: BaseResultForm<String> {
+    
+    private let segmentedControlView = SegmentedControlLabelView()
+    
+    public init(text: String, items: [String], itemsPerRow: Int = 3) {
         super.init()
         
         self.text = text
-
-        self.switcher.controlLabel.text = self.text
         
-        self.switcher.valueDidChange = { result in
+        self.segmentedControlView.segmentedControl.items = items
+        self.segmentedControlView.segmentedControl.itemsPerRow = itemsPerRow
+        self.segmentedControlView.controlLabel.text = self.text
+        
+        self.segmentedControlView.segmentedControl.valueDidChange = { result in
             self.updateResult(result)
         }
     }
-        
+    
     public override func formView() -> UIView {
-        return self.switcher
+        return self.segmentedControlView
     }
     
 }

@@ -20,7 +20,7 @@
 
 import UIKit
 
-public class FormEmailTextFieldView: BaseStringTextFieldView {
+public class FormEmailTextField: BaseStringTextFieldForm {
     
     public override func validate() throws -> String? {
         try super.validate()
@@ -37,7 +37,7 @@ public class FormEmailTextFieldView: BaseStringTextFieldView {
         
         let emailTest = NSPredicate(format: "SELF MATCHES %@", emailReg)
         guard emailTest.evaluateWithObject(self.result) else {
-            throw ResultFormViewError(
+            throw ResultFormError(
                 message: "Invalid email address"
             )
         }

@@ -36,12 +36,12 @@ class FormsVC: FormTableViewController {
         return button
     }()
     
-    private let doubleForm = FormDoubleTextFieldView(
+    private let doubleForm = FormDoubleTextField(
         text: "SomeDouble",
         placeHolder: "Type a double"
     )
     
-    private let intForm = FormIntTextFieldView(
+    private let intForm = FormIntTextField(
         text: "SomeInt",
         placeHolder: "Type an int"
     )
@@ -68,7 +68,7 @@ class FormsVC: FormTableViewController {
         let section = FormSection()
         section.addRow(self.doubleForm)
         
-        let maxAndMinForm = FormDoubleTextFieldView(
+        let maxAndMinForm = FormDoubleTextField(
             text: "Double with limits",
             placeHolder: "Max is 10 and min is 8"
         )
@@ -86,7 +86,7 @@ class FormsVC: FormTableViewController {
         section.addRow(self.intForm)
         
         
-        let maxAndMinForm = FormIntTextFieldView(
+        let maxAndMinForm = FormIntTextField(
             text: "Int with limits",
             placeHolder: "Max is 10 and min is 8"
         )
@@ -119,7 +119,7 @@ class FormsVC: FormTableViewController {
     }
     
     private func createInfomationForms() {
-        let emailForm = FormEmailTextFieldView(
+        let emailForm = FormEmailTextField(
             text: "E-mail",
             placeHolder: "Type your e-mail"
         )
@@ -128,7 +128,7 @@ class FormsVC: FormTableViewController {
         section.addRow(emailForm)
         
         
-        let phoneForm = FormPhoneTextFieldView(
+        let phoneForm = FormPhoneTextField(
             text: "Phone",
             placeHolder: "Type your phone"
         )
@@ -140,7 +140,7 @@ class FormsVC: FormTableViewController {
     }
     
     private func createMiscForms() {
-        let emailForm = FormSwitchView(text: self.longText)
+        let emailForm = FormSwitch(text: self.longText)
         
         let section = FormSection()
         section.addRow(emailForm)
@@ -149,14 +149,14 @@ class FormsVC: FormTableViewController {
     }
     
     private func createPickers() {
-        let actionSheetPickerForm = FormActionSheetPickerView(
+        let actionSheetPickerForm = FormActionSheetPicker(
             text: "Choose a number",
             items: [
                 "one", "two", "three"
             ]
         )
         
-        let actionSheetPickerForm2 = FormActionSheetPickerView(
+        let actionSheetPickerForm2 = FormActionSheetPicker(
             text: self.longText,
             items: [
                 "1", "2", "3"
@@ -173,12 +173,12 @@ class FormsVC: FormTableViewController {
             "seven", "eight", "nine"
         ]
         
-        let segmentedPicker = FormSegmentedPickerView(
+        let segmentedPicker = FormSegmentedPicker(
             text: "Choose",
             items: items
         )
         
-        let segmentedPicker2 = FormSegmentedPickerView(
+        let segmentedPicker2 = FormSegmentedPicker(
             text: self.longText,
             items: items
         )

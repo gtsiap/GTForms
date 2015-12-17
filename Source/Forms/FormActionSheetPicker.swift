@@ -93,7 +93,7 @@ private class ActionSheetPicker: ControlLabelView  {
     }
 }
 
-public class FormActionSheetPickerView: BaseResultFormView<String> {
+public class FormActionSheetPicker: BaseResultForm<String> {
     
     private let picker = ActionSheetPicker()
     

@@ -20,42 +20,25 @@
 
 import UIKit
 
-public class BaseStringTextFieldView: BaseResultFormView<String> {
+public class FormPhoneTextField: BaseStringTextFieldForm {
     
-    let textFieldView = TextFieldView()
-    
-    public init(text: String, placeHolder: String) {
-        super.init()
+    public override func validate() throws -> String? {
+        try super.validate()
         
-        self.text = text
-
-        self.textFieldView.controlLabel.text = text
-        self.textFieldView.textField.placeholder = placeHolder
-        self.textFieldView.translatesAutoresizingMaskIntoConstraints = false
+        // validate email
+        let phoneReg =
+        "(\\+[0-9]+[\\- \\.]*)?"
+            + "(\\([0-9]+\\)[\\- \\.]*)?"
+            + "([0-9][0-9\\- \\.]+[0-9])"
         
-        self.textFieldView.textDidChange = { text in
-            self.updateResult(text)
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneReg)
+        guard phoneTest.evaluateWithObject(self.result) else {
+            throw ResultFormError(
+                message: "Invalid phone number"
+            )
         }
         
-        self.textFieldView.didPressReturnButton = {
-            
-            do {
-                try self.validate()
-            } catch let error {
-                self.textFieldView.textField.text = ""
-                guard let
-                    err = error as? ResultFormViewError
-                else { return }
-                
-                self.showValidationError(err.message)
-            }
-        }
-        
-    }
-    
-    public override func formView() -> UIView {
-        return self.textFieldView
+        return self.result
     }
     
 }
-

@@ -20,7 +20,7 @@
 
 import UIKit
 
-public class FormIntTextFieldView: BaseResultFormView<Int> {
+public class FormIntTextField: BaseResultForm<Int> {
     
     public var maximumValue: Int?
     public var minimumValue: Int?
@@ -51,7 +51,7 @@ public class FormIntTextFieldView: BaseResultFormView<Int> {
                 try self.validationRulesForTextEditing()
             } catch let error {
                 guard let
-                    err = error as? ResultFormViewError
+                    err = error as? ResultFormError
                 else { return false }
                 
                 self.showValidationError(err.message)
@@ -67,7 +67,7 @@ public class FormIntTextFieldView: BaseResultFormView<Int> {
                 try self.validationRulesForLimits()
             } catch let error {
                 guard let
-                    err = error as? ResultFormViewError
+                    err = error as? ResultFormError
                 else { return }
                 
                 self.showValidationError(err.message)
@@ -96,7 +96,7 @@ public class FormIntTextFieldView: BaseResultFormView<Int> {
         guard let
             _ = Int(self.candidateText)
         else {
-            throw ResultFormViewError(
+            throw ResultFormError(
                 message: "Only Decimal numbers are allowed"
             )
         }
@@ -109,7 +109,7 @@ public class FormIntTextFieldView: BaseResultFormView<Int> {
         {
             self.textFieldView.textField.text = ""
             
-            throw ResultFormViewError(
+            throw ResultFormError(
                 message: "The value is too big for \(self.text)"
             )
         } else if let
@@ -118,7 +118,7 @@ public class FormIntTextFieldView: BaseResultFormView<Int> {
         {
             self.textFieldView.textField.text = ""
             
-            throw ResultFormViewError(
+            throw ResultFormError(
                 message: "The value is too small for \(self.text)"
             )
         }

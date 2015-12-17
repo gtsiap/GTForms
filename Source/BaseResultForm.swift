@@ -8,7 +8,7 @@
 
 import UIKit
 
-public struct ResultFormViewError: ErrorType {
+public struct ResultFormError: ErrorType {
     public let message: String
     
     public init(message: String) {
@@ -19,7 +19,7 @@ public struct ResultFormViewError: ErrorType {
 /**
     This is the base class for all the read-write forms
 */
-public class BaseResultFormView<T>: FormViewableType {
+public class BaseResultForm<T>: FormViewableType {
     /**
         The Result of the form
      */
@@ -66,7 +66,7 @@ public class BaseResultFormView<T>: FormViewableType {
         guard self.required else { return nil }
         
         guard let _ = self.result else {
-            throw ResultFormViewError(message: "Missing value for \(self.text)")
+            throw ResultFormError(message: "Missing value for \(self.text)")
         }
         
         return self.result
@@ -84,7 +84,7 @@ public class BaseResultFormView<T>: FormViewableType {
             return try self.validate()
         } catch let error {
             guard let
-                err = error as? ResultFormViewError
+                err = error as? ResultFormError
             else { return nil }
             
             showValidationError(err.message)
