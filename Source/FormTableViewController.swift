@@ -87,7 +87,6 @@ public class FormTableViewController: UITableViewController {
         else { return }
         
         expandable.shouldExpand = !expandable.shouldExpand
-        expandable.toogleExpand()
         resignFirstTextFieldView()
         tableView.beginUpdates()
         tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Bottom)

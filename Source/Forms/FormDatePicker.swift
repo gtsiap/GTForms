@@ -26,7 +26,10 @@ private class DatePickerView: ControlLabelView  {
     private var heightConstraint: Constraint!
     private var hiddenConstraints = [Constraint]()
     private var visibleConstraints = [Constraint]()
-
+    var shouldExpand: Bool = false {
+        didSet { setNeedsUpdateConstraints() }
+    }
+    
     lazy private(set) var datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         
@@ -85,12 +88,10 @@ private class DatePickerView: ControlLabelView  {
         
         addSubview(self.datePicker)
         self.datePicker.snp_makeConstraints() { make in
-            make.left.equalTo(self).offset(20)
-            make.right.equalTo(self).offset(-20)
-            
-            self.hiddenConstraints.append(
-                make.height.equalTo(0).constraint
-            )
+            make.left.equalTo(self).offset(20).constraint
+
+            make.right.equalTo(self).offset(-20).constraint
+        
             self.visibleConstraints.append(
                 make
                 .bottom
@@ -116,10 +117,10 @@ private class DatePickerView: ControlLabelView  {
             )
         }
         
-        shrink()
+        setNeedsUpdateConstraints()
     }
         
-    func expand() {
+    private func expand() {
         self.hiddenConstraints.forEach() {
             $0.deactivate()
         }
@@ -127,9 +128,11 @@ private class DatePickerView: ControlLabelView  {
         self.visibleConstraints.forEach() {
             $0.activate()
         }
-    }
         
-    func shrink() {
+        self.datePicker.hidden = false
+    }
+    
+    private func shrink() {
         self.visibleConstraints.forEach() {
             $0.deactivate()
         }
@@ -137,6 +140,18 @@ private class DatePickerView: ControlLabelView  {
         self.hiddenConstraints.forEach() {
             $0.activate()
         }
+  
+        self.datePicker.hidden = true
+    }
+    
+    private override func updateConstraints() {
+        if self.shouldExpand {
+            expand()
+        } else {
+            shrink()
+        }
+
+        super.updateConstraints()
     }
     
     @objc private func dateValueDidChange() {
@@ -149,7 +164,10 @@ public class FormDatePicker: BaseResultForm<NSDate> {
     
     private let datePickerView = DatePickerView()
     
-    public var shouldExpand: Bool = false
+    public var shouldExpand: Bool = false {
+        didSet { self.datePickerView.shouldExpand = self.shouldExpand }
+    }
+    
     /**
         The UIDatePicker of the form
      */
@@ -210,12 +228,4 @@ public class FormDatePicker: BaseResultForm<NSDate> {
     }
 }
 
-extension FormDatePicker: FormCellExpandable {
-    public func toogleExpand() {
-        if self.shouldExpand {
-            self.datePickerView.expand()
-        } else {
-            self.datePickerView.shrink()
-        }
-    }
-}
+extension FormDatePicker: FormCellExpandable {}

@@ -20,5 +20,4 @@
 
 public protocol FormCellExpandable: class {
     var shouldExpand: Bool { get set }
-    func toogleExpand()
 }
