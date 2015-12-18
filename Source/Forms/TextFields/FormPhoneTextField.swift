@@ -22,6 +22,11 @@ import UIKit
 
 public class FormPhoneTextField: BaseStringTextFieldForm {
     
+    public override init(text: String, placeHolder: String) {
+        super.init(text: text, placeHolder: placeHolder)
+        self.textField.keyboardType = .PhonePad
+    }
+    
     public override func validate() throws -> String? {
         try super.validate()
         
