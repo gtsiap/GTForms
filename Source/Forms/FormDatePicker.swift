@@ -116,7 +116,7 @@ private class DatePickerView: ControlLabelView  {
             )
         }
         
-        self.displayLabel.text = String(self.datePicker.date)
+        shrink()
     }
         
     func expand() {
