@@ -29,7 +29,7 @@ public class FormPhoneTextField: BaseStringTextFieldForm {
     
     public override func validate() throws -> String? {
         try super.validate()
-        
+              
         // validate email
         let phoneReg =
         "(\\+[0-9]+[\\- \\.]*)?"
@@ -37,7 +37,12 @@ public class FormPhoneTextField: BaseStringTextFieldForm {
             + "([0-9][0-9\\- \\.]+[0-9])"
         
         let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneReg)
-        guard phoneTest.evaluateWithObject(self.result) else {
+        guard let
+            result = result
+        where
+            phoneTest.evaluateWithObject(self.result) &&
+            (result.characters.count >= 10 && result.characters.count <= 20)
+        else {
             throw ResultFormError(
                 message: "Invalid phone number"
             )
