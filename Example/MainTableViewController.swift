@@ -22,10 +22,21 @@ import UIKit
 import GTForms
 
 class MainTableViewController: FormTableViewController {
+    private lazy var formButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(
+            title: "Forms",
+            style: .Done,
+            target: self,
+            action: Selector("didTapFormButton")
+        )
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        self.navigationItem.rightBarButtonItem = self.formButton
+
         let section = FormSection()
         section.addRow(StaticForm(text: "Forms")).didSelectRow = {
             self.performSegueWithIdentifier("showForms", sender: self)
@@ -33,5 +44,31 @@ class MainTableViewController: FormTableViewController {
         
         self.formSections.append(section)
     }
-    
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier != "showFormsModally" {
+            return
+        }
+
+        guard let
+            nv = segue.destinationViewController as? UINavigationController,
+            vc = nv.topViewController as? FormsVC
+        else {
+            return
+        }
+
+        vc.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .Cancel,
+            target: self,
+            action: "didTapCancelButton"
+        )
+    }
+
+    @objc private func didTapFormButton() {
+        self.performSegueWithIdentifier("showFormsModally", sender: self)
+    }
+
+    @objc private func didTapCancelButton() {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }

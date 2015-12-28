@@ -22,7 +22,6 @@ import UIKit
 import SnapKit
 
 private class ActionSheetPicker: ControlLabelView  {
-    
     var valueDidChange: ((String) -> ())?
     var items = [String]()
     weak var viewController: UIViewController?
@@ -88,7 +87,12 @@ private class ActionSheetPicker: ControlLabelView  {
             print("\(__FILE__):\(__LINE__): view controller doesn't exist")
             return
         }
-        
+
+        if let popoverVC  = alert.popoverPresentationController {
+            popoverVC.sourceView = self.button
+            popoverVC.sourceRect = self.button.bounds
+        }
+
         vc.presentViewController(alert, animated: true, completion: nil)
     }
 }
@@ -100,7 +104,7 @@ public class FormActionSheetPicker: BaseResultForm<String> {
     public override weak var viewController: UIViewController? {
         didSet { self.picker.viewController = self.viewController }
     }
-    
+
     public init(text: String, items: [String]) {
         super.init()
         
