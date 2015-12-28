@@ -61,7 +61,11 @@ private class SegmentedControlLabelView: ControlLabelView  {
 public class FormSegmentedPicker: BaseResultForm<String> {
     
     private let segmentedControlView = SegmentedControlLabelView()
-    
+
+    public var segmentedControl: SegmentedControl {
+        return self.segmentedControlView.segmentedControl
+    }
+
     public init(text: String, items: [String], itemsPerRow: Int = 3) {
         super.init()
         
