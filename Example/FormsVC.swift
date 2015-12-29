@@ -159,7 +159,7 @@ class FormsVC: FormTableViewController {
         let actionSheetPickerForm2 = FormActionSheetPicker(
             text: self.longText,
             items: [
-                "1", "2", "3"
+                "1", "2", "3", self.longText
             ]
         )
 

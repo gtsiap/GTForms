@@ -56,6 +56,7 @@ private class ActionSheetPicker: ControlLabelView  {
             control.snp_makeConstraints() { make in
                 make.right.equalTo(self).offset(-10)
                 make.centerY.equalTo(label.snp_centerY)
+                make.left.equalTo(label.snp_right).offset(-10)
             } // end control
             
         } // end configureView
