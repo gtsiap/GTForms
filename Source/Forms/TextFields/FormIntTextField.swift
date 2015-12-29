@@ -114,7 +114,7 @@ public class FormIntTextField: BaseResultForm<Int> {
             self.textFieldView.textField.text = ""
             
             throw ResultFormError(
-                message: "The value is too big for \(self.text)"
+                message: "The value is too big for \(self.text). \n The maximum value is \(maximumValue)"
             )
         } else if let
             minimumValue = self.minimumValue
@@ -123,7 +123,7 @@ public class FormIntTextField: BaseResultForm<Int> {
             self.textFieldView.textField.text = ""
             
             throw ResultFormError(
-                message: "The value is too small for \(self.text)"
+                message: "The value is too small for \(self.text) \n The minimum value is \(minimumValue)"
             )
         }
     }
