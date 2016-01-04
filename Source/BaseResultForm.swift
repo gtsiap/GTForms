@@ -47,7 +47,7 @@ public class BaseResultForm<T>: FormViewableType {
         If true then this formView is required and `validate`
         will throw if this formView doesn't have a value
      */
-    public var required: Bool = true
+    public var required: Bool = false
     
     /**
         - returns: The UIView of the form
@@ -75,12 +75,12 @@ public class BaseResultForm<T>: FormViewableType {
         - throws: ResultFormError
      */
     public func validate() throws -> T? {
-        guard self.required else { return nil }
-        
-        guard let _ = self.result else {
-            throw ResultFormError(message: "Missing value for \(self.text)")
+
+        if self.required {
+        guard let _ = self.result else  {
+            throw ResultFormError(message: "Missing value for \(self.text). \n \(self.text) is Required")
         }
-        
+        }
         return self.result
     }
     

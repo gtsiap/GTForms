@@ -80,7 +80,7 @@ public class FormIntTextField: BaseResultForm<Int> {
     }
     
     public override func validate() throws -> Int? {
-        try super.validate()
+        guard let _  = try super.validate() else { return nil }
         try validationRulesForTextEditing()
         try validationRulesForLimits()
         

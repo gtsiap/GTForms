@@ -23,7 +23,9 @@ import UIKit
 public class FormEmailTextField: BaseStringTextFieldForm {
     
     public override func validate() throws -> String? {
-        try super.validate()
+        guard let _ =
+            try super.validate()
+        else { return nil }
         
         // validate email
         let emailReg =

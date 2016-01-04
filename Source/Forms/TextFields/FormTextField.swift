@@ -26,7 +26,9 @@ public class FormTextField: BaseStringTextFieldForm {
     public var minimumLength: Int?
     
     public override func validate() throws -> String? {
-        try super.validate()
+        guard let
+            _ = try super.validate()
+        else { return nil }
         
         if let
             maximumLength = self.maximumLength

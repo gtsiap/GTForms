@@ -35,21 +35,8 @@ class FormsVC: FormTableViewController {
 
         return button
     }()
-    
-    private let doubleForm = FormDoubleTextField(
-        text: "SomeDouble",
-        placeHolder: "Type a double"
-    )
-    
-    private let intForm = FormIntTextField(
-        text: "SomeInt",
-        placeHolder: "Type an int"
-    )
-    
-    private let stringForm = FormTextField(
-        text: "String",
-        placeHolder: "Type a string"
-    )
+
+    private var formsDict = [String : FormableType]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +53,15 @@ class FormsVC: FormTableViewController {
 
     private func createDoubleForms() {
         let section = FormSection()
-        section.addRow(self.doubleForm)
+
+        let doubleForm = FormDoubleTextField(
+            text: "SomeDouble",
+            placeHolder: "Type a double"
+        )
+
+        doubleForm.required = true
+
+        section.addRow(doubleForm)
         
         let maxAndMinForm = FormDoubleTextField(
             text: "Double with limits",
@@ -79,13 +74,23 @@ class FormsVC: FormTableViewController {
         section.addRow(maxAndMinForm)
         
         self.formSections.append(section)
+
+        self.formsDict["Double (Required)"] = doubleForm
+        self.formsDict["Double with max and min"] = maxAndMinForm
     }
     
     private func createIntForms() {
         let section = FormSection()
-        section.addRow(self.intForm)
-        
-        
+
+        let intForm = FormIntTextField(
+            text: "SomeInt",
+            placeHolder: "Type an int"
+        )
+
+        intForm.required = true
+
+        section.addRow(intForm)
+
         let maxAndMinForm = FormIntTextField(
             text: "Int with limits",
             placeHolder: "Max is 10 and min is 8"
@@ -98,12 +103,20 @@ class FormsVC: FormTableViewController {
 
         
         self.formSections.append(section)
+
+        self.formsDict["Int (Required"] = intForm
+        self.formsDict["Int with limits"] = maxAndMinForm
     }
     
     private func createStringForms() {
         let section = FormSection()
-        section.addRow(self.stringForm)
-        
+
+        let stringForm = FormTextField(
+            text: "String",
+            placeHolder: "Type a string"
+        )
+
+        section.addRow(stringForm)
         
         let maxAndMinForm = FormTextField(
             text: "String with limits",
@@ -116,6 +129,9 @@ class FormsVC: FormTableViewController {
         section.addRow(maxAndMinForm)
         
         self.formSections.append(section)
+
+        self.formsDict["String"] = stringForm
+        self.formsDict["String with limits"] = maxAndMinForm
     }
     
     private func createInfomationForms() {
@@ -137,15 +153,19 @@ class FormsVC: FormTableViewController {
         
         self.formSections.append(section)
 
+        self.formsDict["email"] = emailForm
+        self.formsDict["phone"] = phoneForm
     }
     
     private func createMiscForms() {
-        let emailForm = FormSwitch(text: self.longText)
-        
+        let switchForm = FormSwitch(text: self.longText)
+        switchForm.required = true
+
         let section = FormSection()
-        section.addRow(emailForm)
+        section.addRow(switchForm)
         
         self.formSections.append(section)
+        self.formsDict["Switch (Required)"] = switchForm
     }
     
     private func createPickers() {
@@ -195,11 +215,82 @@ class FormsVC: FormTableViewController {
         section.addRow(datePickerForm)
         
         self.formSections.append(section)
+
+        self.formsDict["Short action picker"] = actionSheetPickerForm
+        self.formsDict["Long action picker"] = actionSheetPickerForm2
+        self.formsDict["Short segmented picker"] = segmentedPicker
+        self.formsDict["Long segmented picker"] = segmentedPicker2
+        self.formsDict["Date picker"] = datePickerForm
     }
     
     @objc private func didTapResultsButton() {
-        self.doubleForm.required = true
-        
-        let _ = try? self.doubleForm.retrieveResult()
+        var resultJSON = [String : AnyObject]()
+        for (key, value) in self.formsDict {
+
+            do {
+                var result: AnyObject?
+                if let
+                    uiForm = value as? FormSegmentedPicker
+                {
+                    result = try uiForm.validate()
+                } else if let
+                    uiForm = value as? FormIntTextField
+                {
+                    result = try uiForm.validate()
+                } else if let
+                    uiForm = value as? FormActionSheetPicker
+                {
+                    result = try uiForm.validate()
+                } else if let
+                    uiForm = value as? FormDoubleTextField
+                {
+                    result = try uiForm.validate()
+                } else if let
+                    uiForm = value as? FormSwitch
+                {
+                    result = try uiForm.validate()
+                } else if let
+                    uiForm = value as? FormTextField
+                {
+                    result = try uiForm.validate()
+                } else if let
+                    uiForm = value as? FormDatePicker
+                {
+                    result = try uiForm.validate()
+                } else if let
+                    uiForm = value as? FormEmailTextField
+                {
+                    result = try uiForm.validate()
+                } else if let
+                    uiForm = value as? FormPhoneTextField
+                {
+                    result = try uiForm.validate()
+                } else {
+                    fatalError("Missing form: \(value.dynamicType)")
+                }
+
+                if let result = result {
+                    resultJSON[key] = result
+                }
+            } catch let error {
+                if let resultError = error as? ResultFormError {
+                    let alertVC = UIAlertController(
+                        title: "Validation Error",
+                        message: resultError.message,
+                        preferredStyle: .Alert
+                    )
+
+                    let okAction = UIAlertAction(title: "Ok", style: .Default)
+                    { alertAction in
+                        alertVC.dismissViewControllerAnimated(true, completion: nil)
+                    }
+                            
+                    alertVC.addAction(okAction)
+                    presentViewController(alertVC, animated: true, completion: nil)
+                }
+            } // end catch
+        } // end for
+
+        print(resultJSON)
     }
 }

@@ -80,10 +80,10 @@ public class FormDoubleTextField: BaseResultForm<Double> {
     }
  
     public override func validate() throws -> Double? {
-        try super.validate()
+        guard let _  = try super.validate() else { return nil }
         try validationRulesForTextEditing()
         try validationRulesForLimits()
-        
+
         return self.result
     }
     
