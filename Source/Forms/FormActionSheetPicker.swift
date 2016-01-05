@@ -21,21 +21,63 @@
 import UIKit
 import SnapKit
 
+private class ButtonLabel: UIControl {
+    let label: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .Center
+        return label
+    }()
+
+    var text: String = "" {
+        didSet { self.label.text = self.text }
+    }
+
+    private override func didMoveToSuperview() {
+        self.label.translatesAutoresizingMaskIntoConstraints = false
+
+        addSubview(self.label)
+
+        self.label.snp_makeConstraints() { make in
+            make.edges.equalTo(self)
+        }
+    }
+
+    private var previousColor: UIColor?
+
+    override func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
+        self.label.textColor = self.previousColor
+        self.label.textColor = UIColor.grayColor()
+        return true
+    }
+
+    override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
+
+        if let textColor = self.previousColor {
+            self.label.textColor = textColor
+        } else {
+            self.label.textColor = UIColor.blackColor()
+        }
+
+        sendActionsForControlEvents(.TouchUpInside)
+    }
+
+}
+
 private class ActionSheetPicker: ControlLabelView  {
     var valueDidChange: ((String) -> ())?
     var items = [String]()
     weak var viewController: UIViewController?
     
-    private lazy var button: UIButton = {
-        let button = UIButton(type: .System)
-        
-        button.setTitle("Choose", forState: .Normal)
+    private lazy var button: ButtonLabel = {
+        let button = ButtonLabel()
+        button.text = "Choose"
         button.addTarget(
             self,
             action: "didTapButton",
             forControlEvents: .TouchUpInside
         )
-        
+
         return button
     }()
     
@@ -48,15 +90,17 @@ private class ActionSheetPicker: ControlLabelView  {
             
             label.snp_makeConstraints() { make in
                 make.left.equalTo(self).offset(10)
-                make.width.equalTo(self).multipliedBy(0.8)
+                make.width.equalTo(self).multipliedBy(0.6)
                 make.top.equalTo(self).offset(10)
                 make.bottom.equalTo(self).offset(-10)
             } // end label
             
             control.snp_makeConstraints() { make in
                 make.right.equalTo(self).offset(-10)
-                make.centerY.equalTo(label.snp_centerY)
-                make.left.equalTo(label.snp_right).offset(-10)
+                make.centerY.equalTo(label.snp_centerY).priorityLow()
+                make.width.equalTo(self).multipliedBy(0.3)
+                make.bottom.equalTo(self)
+                make.top.equalTo(self)
             } // end control
             
         } // end configureView
@@ -76,9 +120,29 @@ private class ActionSheetPicker: ControlLabelView  {
         for it in self.items {
             let action = UIAlertAction(title: it, style: .Default) { action in
                 guard let title = action.title else { return }
-                self.button.setTitle(title, forState: .Normal)
+                self.button.text = title
                 self.valueDidChange?(title)
+
+
+                if let vc = self.viewController as? UITableViewController {
+                    let point = vc.tableView.convertPoint(self.frame.origin, fromView: self)
+                    guard let
+                        indexPath = vc.tableView.indexPathForRowAtPoint(point)
+                        else { return }
+
+                    vc.tableView.reloadRowsAtIndexPaths(
+                        [indexPath],
+                        withRowAnimation: .None
+                    )
+
+                    vc.tableView.scrollToRowAtIndexPath(
+                        indexPath,
+                        atScrollPosition: .None,
+                        animated: false
+                    )
+                }
             }
+
             alert.addAction(action)
         }
         
