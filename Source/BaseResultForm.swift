@@ -77,9 +77,9 @@ public class BaseResultForm<T>: FormViewableType {
     public func validate() throws -> T? {
 
         if self.required {
-        guard let _ = self.result else  {
-            throw ResultFormError(message: "Missing value for \(self.text). \n \(self.text) is Required")
-        }
+            guard let _ = self.result else  {
+                throw ResultFormError(message: "Missing value for \(self.text). \n \(self.text) is Required")
+            }
         }
         return self.result
     }
