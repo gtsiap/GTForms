@@ -160,6 +160,10 @@ private class ActionSheetPicker: ControlLabelView  {
 
         vc.presentViewController(alert, animated: true, completion: nil)
     }
+
+    override func tintColorDidChange() {
+        self.button.label.textColor = self.tintColor
+    }
 }
 
 public class FormActionSheetPicker: BaseResultForm<String> {
