@@ -46,7 +46,7 @@ private class DatePickerView: ControlLabelView  {
     
     let displayLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFontOfSize(UIFont.systemFontSize())
+        label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         

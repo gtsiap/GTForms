@@ -26,6 +26,7 @@ private class ButtonLabel: UIControl {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .Center
+        label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
         return label
     }()
 
@@ -35,6 +36,7 @@ private class ButtonLabel: UIControl {
 
     private override func didMoveToSuperview() {
         self.label.translatesAutoresizingMaskIntoConstraints = false
+        self.label.textColor = self.tintColor
 
         addSubview(self.label)
 
@@ -55,8 +57,6 @@ private class ButtonLabel: UIControl {
 
         if let textColor = self.previousColor {
             self.label.textColor = textColor
-        } else {
-            self.label.textColor = UIColor.blackColor()
         }
 
         sendActionsForControlEvents(.TouchUpInside)
