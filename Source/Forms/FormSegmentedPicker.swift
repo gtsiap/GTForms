@@ -44,7 +44,7 @@ private class SegmentedControlLabelView: ControlLabelView  {
             control.snp_makeConstraints() { make in
                 make.centerY.equalTo(label.snp_centerY).priorityLow()
                 make.right.equalTo(self).offset(-10)
-                make.left.equalTo(label.snp_right)
+                make.left.equalTo(label.snp_right).offset(10)
                 make.height.lessThanOrEqualTo(self).offset(-10)
             } // end control
             
