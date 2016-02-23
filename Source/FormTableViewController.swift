@@ -36,8 +36,10 @@ public class FormTableViewController: UITableViewController {
         
         self.tableView.estimatedRowHeight = 50
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        
+
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ReadOnlyCell")
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SelectionCell")
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SelectionItemCell")
         self.tableView.registerClass(FormTableViewCell.self, forCellReuseIdentifier: "formCell")
     }
     
@@ -48,18 +50,34 @@ public class FormTableViewController: UITableViewController {
     }
     
     override public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.formSections[section].rows.count
+        return self.formSections[section].formItemsForSection().count
     }
     
     override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell
-        
-        let cellRow = self.formSections[indexPath.section].rows[indexPath.row]
+
+        let cellItem = self.formSections[indexPath.section].formItemsForSection()[indexPath.row]
+
+        if let selectionItem = cellItem as? SelectionFormItem {
+            cell = tableView.dequeueReusableCellWithIdentifier("SelectionItemCell", forIndexPath: indexPath)
+            cell.textLabel?.text = selectionItem.text
+            cell.detailTextLabel?.text = selectionItem.detailText
+            cell.selectionStyle = .None
+            cell.accessoryType = selectionItem.selected ? selectionItem.accessoryType : .None
+            return cell
+        }
+
+        guard let cellRow = cellItem as? FormRow else { return UITableViewCell() }
         
         if let staticForm = cellRow.form as? StaticForm {
             cell = tableView.dequeueReusableCellWithIdentifier("ReadOnlyCell", forIndexPath: indexPath)
             cell.textLabel?.text = staticForm.text
             cell.detailTextLabel?.text = staticForm.detailText
+        } else if let selectionForm = cellRow.form as? SelectionForm {
+            cell = tableView.dequeueReusableCellWithIdentifier("SelectionCell", forIndexPath: indexPath)
+            cell.textLabel?.text = selectionForm.text
+            cell.detailTextLabel?.text = selectionForm.detailText
+            cell.selectionStyle = .None
         } else {
             let formCell = FormTableViewCell()
             if let formViewableCell = cellRow.form as? FormViewableType {
@@ -69,7 +87,7 @@ public class FormTableViewController: UITableViewController {
             formCell.formRow = cellRow
             cell = formCell
         }
-        
+
         cell.accessoryType = cellRow.accessoryType
         
         return cell
@@ -78,30 +96,111 @@ public class FormTableViewController: UITableViewController {
     // MARK: tableview
     
     public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.formSections[indexPath.section].rows[indexPath.row].didSelectRow?()
-       
+        let cellItems = self.formSections[indexPath.section].formItemsForSection()
+        let cellItem = cellItems[indexPath.row]
+
+        if let selectionItem = cellItem as? SelectionFormItem {
+            let cell = tableView.cellForRowAtIndexPath(indexPath)
+            if let accessoryType = cell?.accessoryType where accessoryType != .None {
+                cell?.accessoryType = .None
+                selectionItem.selected = false
+            } else {
+                defer {
+                    selectionItem.selected = true
+                    cell?.accessoryType = selectionItem.accessoryType
+                }
+
+                if selectionItem.selectionForm?.allowsMultipleSelection ?? false {
+                    return
+                }
+
+                let rowCount = tableView.numberOfRowsInSection(indexPath.section)
+                for index in 1...rowCount {
+                    let cellIndexPath = NSIndexPath(
+                        forRow: index - 1,
+                        inSection: indexPath.section
+                    )
+
+                    if let otherSelectionItem = cellItems[index - 1] as? SelectionFormItem
+                        where otherSelectionItem.selectionForm === selectionItem.selectionForm
+                    {
+                        otherSelectionItem.selected = false
+                        let cell = tableView.cellForRowAtIndexPath(cellIndexPath)
+                        cell?.accessoryType = .None
+                    }
+                }
+            }
+            return
+        }
+
+        guard let formRow = cellItem as? FormRow else { return }
+        formRow.didSelectRow?()
+
+        if let selectionForm = formRow.form as? SelectionForm
+            where !selectionForm.shouldAlwaysShowAllItems
+        {
+
+            var selectionIndexPaths = [NSIndexPath]()
+            let rowIndex = indexPath.row
+            let sectionIndex = indexPath.section
+
+            for (index, _) in selectionForm.items.enumerate() {
+                let targetIndexPath = NSIndexPath(
+                    forRow: rowIndex + index + 1,
+                    inSection: sectionIndex
+                )
+                selectionIndexPaths.append(targetIndexPath)
+            }
+
+            tableView.beginUpdates()
+
+            if let showItems = selectionForm.showItems where showItems {
+                tableView.deleteRowsAtIndexPaths(
+                    selectionIndexPaths,
+                    withRowAnimation: selectionForm.animation
+                )
+                selectionForm.showItems = false
+            } else {
+                tableView.insertRowsAtIndexPaths(
+                    selectionIndexPaths,
+                    withRowAnimation: selectionForm.animation
+                )
+                selectionForm.showItems = true
+            }
+
+            tableView.endUpdates()
+        }
+
+
         guard let
-            cell = tableView.cellForRowAtIndexPath(indexPath) as? FormTableViewCell,
-            formRow = cell.formRow,
             expandable = formRow.form as? FormCellExpandable
         else { return }
-        
+
         expandable.shouldExpand = !expandable.shouldExpand
         resignFirstTextFieldView()
         tableView.beginUpdates()
         tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Bottom)
         tableView.endUpdates()
-
     }
-    
+
     public override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        let cellRow = self.formSections[indexPath.section].rows[indexPath.row]
-        
+        let cellItem = self.formSections[indexPath.section].formItemsForSection()[indexPath.row]
+
+        if let _ = cellItem as? SelectionFormItem {
+            return true
+        }
+
+        guard let cellRow = cellItem as? FormRow
+        else { return false }
+
         if let
             _ = cellRow.form as? StaticForm,
             _ = cellRow.didSelectRow
         {
             return true
+        } else if let selectionForm = cellRow.form as? SelectionForm
+        {
+            return !selectionForm.shouldAlwaysShowAllItems ? true : false
         } else if let
             _ = cellRow.form as? FormCellExpandable
         {

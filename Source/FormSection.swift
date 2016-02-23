@@ -21,7 +21,6 @@
 import UIKit
 
 public class FormSection {
-    
     /**
         The rows of the section
      */
@@ -39,12 +38,38 @@ public class FormSection {
      
         - parameter form: the form from which the new
                               row will be created
-        - NOTE: This is just a convenient method
      */
     public func addRow(form: FormableType) -> FormRow {
         let row = FormRow(form: form)
         self.rows.append(row)
         return row
     }
-    
+
+    func formItemsForSection() -> [AnyObject] {
+        var formRows = [AnyObject]()
+
+        for row in self.rows {
+            formRows.append(row)
+
+            if let
+                selectionForm = row.form as? SelectionForm,
+                showItems = selectionForm.showItems
+                where showItems
+            {
+                selectionForm.items.forEach() {
+                    formRows.append($0)
+                }
+            } else if let
+                selectionForm = row.form as? SelectionForm
+                where selectionForm.shouldAlwaysShowAllItems
+            {
+                selectionForm.items.forEach() {
+                    formRows.append($0)
+                }
+            }
+        }
+
+        return formRows
+    }
+
 }
