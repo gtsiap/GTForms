@@ -19,7 +19,7 @@
 // THE SOFTWARE.
 
 /**
-    - NOTE: All the formViews must comfort to this protocol
+    - NOTE: All the forms must comfort to this protocol
 */
 public protocol FormableType {}
 

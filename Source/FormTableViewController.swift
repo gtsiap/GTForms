@@ -41,8 +41,9 @@ public class FormTableViewController: UITableViewController {
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SelectionCell")
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SelectionItemCell")
         self.tableView.registerClass(FormTableViewCell.self, forCellReuseIdentifier: "formCell")
+        self.tableView.registerClass(DatePickerTableViewCell.self, forCellReuseIdentifier: "DatePickerCell")
     }
-    
+
     // MARK: - Table view data source
     
     override public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -65,6 +66,16 @@ public class FormTableViewController: UITableViewController {
             cell.selectionStyle = .None
             cell.accessoryType = selectionItem.selected ? selectionItem.accessoryType : .None
             return cell
+        } else if let datePicker = cellItem as? DatePickerView {
+            guard let
+                datePickerCell = tableView.dequeueReusableCellWithIdentifier(
+                    "DatePickerCell",
+                    forIndexPath: indexPath
+                ) as? DatePickerTableViewCell
+            else { return UITableViewCell() }
+
+            datePickerCell.datePicker = datePicker
+            return datePickerCell
         }
 
         guard let cellRow = cellItem as? FormRow else { return UITableViewCell() }
@@ -89,7 +100,8 @@ public class FormTableViewController: UITableViewController {
         }
 
         cell.accessoryType = cellRow.accessoryType
-        
+        cell.selectionStyle = .None
+
         return cell
     }
     
@@ -175,13 +187,28 @@ public class FormTableViewController: UITableViewController {
 
 
         guard let
-            expandable = formRow.form as? FormCellExpandable
+            datePickerForm = formRow.form as? FormDatePicker
         else { return }
 
-        expandable.shouldExpand = !expandable.shouldExpand
-        resignFirstTextFieldView()
+        datePickerForm.shouldExpand = !datePickerForm.shouldExpand
+        let newIndexPath = NSIndexPath(
+            forItem: indexPath.row + 1,
+            inSection: indexPath.section
+        )
+
         tableView.beginUpdates()
-        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Bottom)
+        if datePickerForm.shouldExpand {
+            tableView.insertRowsAtIndexPaths(
+                [newIndexPath],
+                withRowAnimation: .Top
+            )
+        } else {
+            tableView.deleteRowsAtIndexPaths(
+                [newIndexPath],
+                withRowAnimation: .Top
+            )
+        }
+
         tableView.endUpdates()
     }
 
@@ -204,7 +231,7 @@ public class FormTableViewController: UITableViewController {
         {
             return !selectionForm.shouldAlwaysShowAllItems ? true : false
         } else if let
-            _ = cellRow.form as? FormCellExpandable
+            datePickerForm = cellRow.form as? FormDatePicker
         {
             return true
         }

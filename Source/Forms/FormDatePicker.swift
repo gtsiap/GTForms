@@ -21,29 +21,8 @@
 import UIKit
 import SnapKit
 
-private class DatePickerView: ControlLabelView  {
-    
-    private var heightConstraint: Constraint!
-    private var hiddenConstraints = [Constraint]()
-    private var visibleConstraints = [Constraint]()
-    var shouldExpand: Bool = false {
-        didSet { setNeedsUpdateConstraints() }
-    }
-    
-    lazy private(set) var datePicker: UIDatePicker = {
-        let datePicker = UIDatePicker()
-        
-        datePicker.addTarget(
-            self,
-            action: "dateValueDidChange",
-            forControlEvents: .ValueChanged
-        )
-        
-        datePicker.translatesAutoresizingMaskIntoConstraints = false
-        
-        return datePicker
-    }()
-    
+private class DatePreviewView: ControlLabelView  {
+
     let displayLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
@@ -52,9 +31,7 @@ private class DatePickerView: ControlLabelView  {
         
         return label
     }()
-    
-    var valueDidChange: ((NSDate) -> ())?
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -70,123 +47,61 @@ private class DatePickerView: ControlLabelView  {
                 make.left.equalTo(self).offset(10)
                 make.width.equalTo(self).multipliedBy(0.4)
                 make.top.equalTo(self).offset(10)
-                self.hiddenConstraints.append(
-                    make.bottom.equalTo(self).offset(-10).constraint
-                )
+                make.bottom.equalTo(self).offset(-10).constraint
             } // end label
             
             
             control.snp_makeConstraints() { make in
-                make.right.equalTo(self).offset(-10)
+                make.leading.equalTo(label.snp_trailing).offset(10)
+                make.trailing.equalTo(self).offset(-10)
                 make.top.equalTo(self).offset(10)
-                self.hiddenConstraints.append(
-                    make.bottom.equalTo(self).offset(-10).constraint
-                )
+                make.bottom.equalTo(self).offset(-10).constraint
             } // end control
             
         } // end configureView
         
-        addSubview(self.datePicker)
-        self.datePicker.snp_makeConstraints() { make in
-            make.left.equalTo(self).offset(20).constraint
-
-            make.right.equalTo(self).offset(-20).constraint
-        
-            self.visibleConstraints.append(
-                make
-                .bottom
-                .equalTo(self)
-                .offset(-10)
-                .constraint
-            )
-            
-            self.visibleConstraints.append(
-                make
-                .top
-                .equalTo(self.controlLabel)
-                .offset(10)
-                .constraint
-            )
-            
-            self.visibleConstraints.append(
-                make
-                .top
-                .equalTo(self.displayLabel)
-                .offset(10)
-                .constraint
-            )
-        }
-        
-        setNeedsUpdateConstraints()
-    }
-        
-    private func expand() {
-        self.hiddenConstraints.forEach() {
-            $0.deactivate()
-        }
-        
-        self.visibleConstraints.forEach() {
-            $0.activate()
-        }
-        
-        self.datePicker.hidden = false
-    }
-    
-    private func shrink() {
-        self.visibleConstraints.forEach() {
-            $0.deactivate()
-        }
-        
-        self.hiddenConstraints.forEach() {
-            $0.activate()
-        }
-  
-        self.datePicker.hidden = true
-    }
-    
-    private override func updateConstraints() {
-        if self.shouldExpand {
-            expand()
-        } else {
-            shrink()
-        }
-
-        super.updateConstraints()
-    }
-    
-    @objc private func dateValueDidChange() {
-        self.valueDidChange?(self.datePicker.date)
     }
 }
 
+class DatePickerView: UIDatePicker{}
+extension DatePickerView: FormableType {}
 
 public class FormDatePicker: BaseResultForm<NSDate> {
+
+    lazy private(set) var datePickerView: DatePickerView = {
+        let datePicker = DatePickerView()
+        datePicker.addTarget(
+            self,
+            action: "changeDisplayedDate",
+            forControlEvents: .ValueChanged
+        )
+
+        return datePicker
+    }()
+
+    private let datePreviewView = DatePreviewView()
     
-    private let datePickerView = DatePickerView()
-    
-    public var shouldExpand: Bool = false {
-        didSet { self.datePickerView.shouldExpand = self.shouldExpand }
-    }
-    
+    public var shouldExpand: Bool = false
+
     /**
         The UIDatePicker of the form
      */
     public var datePicker: UIDatePicker {
-        return self.datePickerView.datePicker
+        return self.datePickerView
     }
     
     /**
         The text label of form
      */
     public var textLabel: UILabel {
-        return self.datePickerView.controlLabel
+        return self.datePreviewView.controlLabel
     }
     
     /**
         The date label of form
      */
     public var dateLabel: UILabel {
-        return self.datePickerView.displayLabel
+        return self.datePreviewView.displayLabel
     }
     
     /**
@@ -201,31 +116,26 @@ public class FormDatePicker: BaseResultForm<NSDate> {
         super.init()
         
         self.text = text
-        self.datePickerView.controlLabel.text = self.text
-        
-        self.datePickerView.valueDidChange = { result in
-            self.changeDisplayedDate()
-            self.updateResult(result)
-        }
-        
-        self.changeDisplayedDate()
+        self.datePreviewView.controlLabel.text = self.text
+
+        changeDisplayedDate()
     }
     
     public override func formView() -> UIView {
-        return self.datePickerView
+        return self.datePreviewView
     }
-    
-    private func changeDisplayedDate() {
-        
+
+    @objc private func changeDisplayedDate() {
         let date = self.datePicker.date
+
+        defer { self.updateResult(date) }
+
         if let dateFormatter = self.dateFormatter {
-            self.datePickerView.displayLabel.text =
+            self.datePreviewView.displayLabel.text =
                 dateFormatter.stringFromDate(date)
             return
         }
-        
-        self.datePickerView.displayLabel.text = String(date)
+
+        self.datePreviewView.displayLabel.text = String(date)
     }
 }
-
-extension FormDatePicker: FormCellExpandable {}
