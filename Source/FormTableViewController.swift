@@ -104,10 +104,12 @@ public class FormTableViewController: UITableViewController {
             if let accessoryType = cell?.accessoryType where accessoryType != .None {
                 cell?.accessoryType = .None
                 selectionItem.selected = false
+                selectionItem.selectionForm?.didDeselectItem?(selectedItem: selectionItem)
             } else {
                 defer {
                     selectionItem.selected = true
                     cell?.accessoryType = selectionItem.accessoryType
+                    selectionItem.selectionForm?.didSelectItem?(selectedItem: selectionItem)
                 }
 
                 if selectionItem.selectionForm?.allowsMultipleSelection ?? false {

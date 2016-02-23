@@ -45,9 +45,18 @@ class SelectionFormTableViewController: FormTableViewController {
         selectionForm2.allowsMultipleSelection = false
         selectionForm2.shouldAlwaysShowAllItems = true
 
+        selectionForm2.didSelectItem = { item in
+            print("Did Select: \(item.text)")
+        }
+
+        selectionForm2.didDeselectItem = { item in
+            print("Did Deselect: \(item.text)")
+        }
+
         let section2 = FormSection()
         section2.addRow(selectionForm2)
         self.formSections.append(section2)
 
     }
+
 }

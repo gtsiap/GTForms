@@ -24,7 +24,7 @@
 		458C9CF41C22981B00645434 /* FormDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CF31C22981B00645434 /* FormDatePicker.swift */; };
 		458C9CFA1C22B67400645434 /* FormCellExpandable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CF91C22B67400645434 /* FormCellExpandable.swift */; };
 		45A0D80A1C7C80F400F74609 /* SelectionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0D8091C7C80F400F74609 /* SelectionForm.swift */; };
-		45A0D80C1C7C813C00F74609 /* SelectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0D80B1C7C813C00F74609 /* SelectionItem.swift */; };
+		45A0D80C1C7C813C00F74609 /* SelectionFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A0D80B1C7C813C00F74609 /* SelectionFormItem.swift */; };
 		45C716E91C21A02500BBE9FA /* GTSegmentedControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45C716E81C21A02500BBE9FA /* GTSegmentedControl.framework */; };
 		45EA8C8C1C1FF85500FD0F8C /* GTForms.h in Headers */ = {isa = PBXBuildFile; fileRef = 450282901C1ED61C00600956 /* GTForms.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45EA8C8F1C1FFC5C00FD0F8C /* BaseResultForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EA8C8E1C1FFC5C00FD0F8C /* BaseResultForm.swift */; };
@@ -55,7 +55,7 @@
 		458C9CF31C22981B00645434 /* FormDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormDatePicker.swift; sourceTree = "<group>"; };
 		458C9CF91C22B67400645434 /* FormCellExpandable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormCellExpandable.swift; sourceTree = "<group>"; };
 		45A0D8091C7C80F400F74609 /* SelectionForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionForm.swift; sourceTree = "<group>"; };
-		45A0D80B1C7C813C00F74609 /* SelectionItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionItem.swift; sourceTree = "<group>"; };
+		45A0D80B1C7C813C00F74609 /* SelectionFormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionFormItem.swift; sourceTree = "<group>"; };
 		45C716E81C21A02500BBE9FA /* GTSegmentedControl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GTSegmentedControl.framework; path = Carthage/Build/iOS/GTSegmentedControl.framework; sourceTree = "<group>"; };
 		45EA8C8E1C1FFC5C00FD0F8C /* BaseResultForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseResultForm.swift; sourceTree = "<group>"; };
 		45EA8C901C1FFCA000FD0F8C /* StaticForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StaticForm.swift; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				45A0D8091C7C80F400F74609 /* SelectionForm.swift */,
-				45A0D80B1C7C813C00F74609 /* SelectionItem.swift */,
+				45A0D80B1C7C813C00F74609 /* SelectionFormItem.swift */,
 			);
 			path = Selection;
 			sourceTree = "<group>";
@@ -257,7 +257,7 @@
 				458C9CE81C2297E600645434 /* ControlLabelView.swift in Sources */,
 				450282B51C1EDC3F00600956 /* FormSection.swift in Sources */,
 				45EA8C961C1FFF6B00FD0F8C /* FormTableViewCell.swift in Sources */,
-				45A0D80C1C7C813C00F74609 /* SelectionItem.swift in Sources */,
+				45A0D80C1C7C813C00F74609 /* SelectionFormItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,15 +21,38 @@
 import UIKit
 
 public class SelectionForm: FormableType {
-    let text: String
-    let detailText: String?
-    let items: [SelectionFormItem]
+
+    public let text: String
+    public let detailText: String?
+    public let items: [SelectionFormItem]
+
+    /**
+        The animation that will be used for the
+        insertions and the deletion of rows
+     */
     let animation: UITableViewRowAnimation
 
-    var showItems: Bool?
-
+    /**
+        If true the items will always be visible
+     */
     public var shouldAlwaysShowAllItems: Bool = false
+
+    /**
+        If true multiple items can be selected.
+     */
     public var allowsMultipleSelection: Bool = true
+
+    /**
+        When an item gets selected this closure will be called
+     */
+    public var didSelectItem: ((selectedItem: SelectionFormItem) -> ())?
+
+    /**
+        When an item gets deselected this closure will be called
+    */
+    public var didDeselectItem: ((selectedItem: SelectionFormItem) -> ())?
+    
+    var showItems: Bool?
 
     public init(
         items: [SelectionFormItem],

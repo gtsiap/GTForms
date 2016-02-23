@@ -9,9 +9,9 @@
 import UIKit
 
 public class SelectionFormItem: FormableType {
-    let text: String
-    let detailText: String?
-    let accessoryType: UITableViewCellAccessoryType
+    public let text: String
+    public let detailText: String?
+    public let accessoryType: UITableViewCellAccessoryType
 
     weak var selectionForm: SelectionForm?
 
@@ -26,5 +26,5 @@ public class SelectionFormItem: FormableType {
         self.detailText = text
         self.accessoryType = accessoryType
     }
-    
+
 }
