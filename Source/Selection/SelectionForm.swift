@@ -23,7 +23,13 @@ import UIKit
 public class SelectionForm: FormableType {
 
     public let text: String
+    public var textColor: UIColor?
+    public var textFont: UIFont?
+
     public let detailText: String?
+    public var detailTextColor: UIColor?
+    public var detailTextFont: UIFont?
+
     public let items: [SelectionFormItem]
 
     /**

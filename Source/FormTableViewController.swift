@@ -88,6 +88,23 @@ public class FormTableViewController: UITableViewController {
             cell = tableView.dequeueReusableCellWithIdentifier("SelectionCell", forIndexPath: indexPath)
             cell.textLabel?.text = selectionForm.text
             cell.detailTextLabel?.text = selectionForm.detailText
+
+            if let textColor = selectionForm.textColor {
+                cell.textLabel?.textColor = textColor
+            }
+
+            if let textFont = selectionForm.textFont {
+                cell.textLabel?.font = textFont
+            }
+
+            if let detailTextColor = selectionForm.detailTextColor {
+                cell.detailTextLabel?.textColor = detailTextColor
+            }
+
+            if let detailTextFont = selectionForm.detailTextFont {
+                cell.textLabel?.font = detailTextFont
+            }
+
             cell.selectionStyle = .None
         } else {
             let formCell = FormTableViewCell()

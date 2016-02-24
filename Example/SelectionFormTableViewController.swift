@@ -24,6 +24,10 @@ class SelectionFormTableViewController: FormTableViewController {
             text: "Choose a fruit"
         )
 
+        selectionForm.textColor = UIColor.redColor()
+        selectionForm.textFont = UIFont
+            .preferredFontForTextStyle(UIFontTextStyleHeadline)
+
         selectionForm.allowsMultipleSelection = true
 
         let section = FormSection()
