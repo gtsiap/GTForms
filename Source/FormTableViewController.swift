@@ -230,9 +230,7 @@ public class FormTableViewController: UITableViewController {
         } else if let selectionForm = cellRow.form as? SelectionForm
         {
             return !selectionForm.shouldAlwaysShowAllItems ? true : false
-        } else if let
-            datePickerForm = cellRow.form as? FormDatePicker
-        {
+        } else if let _ = cellRow.form as? FormDatePicker {
             return true
         }
         
