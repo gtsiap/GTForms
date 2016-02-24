@@ -66,7 +66,7 @@ public class FormTableViewController: UITableViewController {
             cell.selectionStyle = .None
             cell.accessoryType = selectionItem.selected ? selectionItem.accessoryType : .None
             return cell
-        } else if let datePicker = cellItem as? DatePickerView {
+        } else if let datePicker = cellItem as? UIDatePicker {
             guard let
                 datePickerCell = tableView.dequeueReusableCellWithIdentifier(
                     "DatePickerCell",

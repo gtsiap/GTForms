@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class SelectionFormItem: FormableType {
+public class SelectionFormItem {
     public let text: String
     public let detailText: String?
     public let accessoryType: UITableViewCellAccessoryType

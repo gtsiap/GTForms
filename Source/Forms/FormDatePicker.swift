@@ -63,13 +63,10 @@ private class DatePreviewView: ControlLabelView  {
     }
 }
 
-class DatePickerView: UIDatePicker{}
-extension DatePickerView: FormableType {}
-
 public class FormDatePicker: BaseResultForm<NSDate> {
 
-    lazy private(set) var datePickerView: DatePickerView = {
-        let datePicker = DatePickerView()
+    lazy private(set) var datePickerView: UIDatePicker = {
+        let datePicker = UIDatePicker()
         datePicker.addTarget(
             self,
             action: "changeDisplayedDate",
