@@ -21,7 +21,9 @@
 import UIKit
 
 public class FormTableViewController: UITableViewController {
-    
+
+    private var datePickerHelper = DatePickerHelper()
+
     private var textFieldViews = [TextFieldView]()
     
     public var formSections: [FormSection] = [FormSection]() {
@@ -126,107 +128,36 @@ public class FormTableViewController: UITableViewController {
     
     public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cellItems = self.formSections[indexPath.section].formItemsForSection()
-        let cellItem = cellItems[indexPath.row]
 
-        if let selectionItem = cellItem as? SelectionFormItem {
-            let cell = tableView.cellForRowAtIndexPath(indexPath)
-            if let accessoryType = cell?.accessoryType where accessoryType != .None {
-                cell?.accessoryType = .None
-                selectionItem.selected = false
-                selectionItem.selectionForm?.didDeselectItem?(selectedItem: selectionItem)
-            } else {
-                defer {
-                    selectionItem.selected = true
-                    cell?.accessoryType = selectionItem.accessoryType
-                    selectionItem.selectionForm?.didSelectItem?(selectedItem: selectionItem)
-                }
+        SelectionFormHelper.handleAccessory(
+            cellItems,
+            tableView: self.tableView,
+            indexPath: indexPath
+        )
 
-                if selectionItem.selectionForm?.allowsMultipleSelection ?? false {
-                    return
-                }
-
-                let rowCount = tableView.numberOfRowsInSection(indexPath.section)
-                for index in 1...rowCount {
-                    let cellIndexPath = NSIndexPath(
-                        forRow: index - 1,
-                        inSection: indexPath.section
-                    )
-
-                    if let otherSelectionItem = cellItems[index - 1] as? SelectionFormItem
-                        where otherSelectionItem.selectionForm === selectionItem.selectionForm
-                    {
-                        otherSelectionItem.selected = false
-                        let cell = tableView.cellForRowAtIndexPath(cellIndexPath)
-                        cell?.accessoryType = .None
-                    }
-                }
-            }
-            return
-        }
-
-        guard let formRow = cellItem as? FormRow else { return }
+        guard let formRow = cellItems[indexPath.row] as? FormRow else { return }
         formRow.didSelectRow?()
 
-        if let selectionForm = formRow.form as? SelectionForm
-            where !selectionForm.shouldAlwaysShowAllItems
-        {
-
-            var selectionIndexPaths = [NSIndexPath]()
-            let rowIndex = indexPath.row
-            let sectionIndex = indexPath.section
-
-            for (index, _) in selectionForm.items.enumerate() {
-                let targetIndexPath = NSIndexPath(
-                    forRow: rowIndex + index + 1,
-                    inSection: sectionIndex
-                )
-                selectionIndexPaths.append(targetIndexPath)
-            }
-
-            tableView.beginUpdates()
-
-            if let showItems = selectionForm.showItems where showItems {
-                tableView.deleteRowsAtIndexPaths(
-                    selectionIndexPaths,
-                    withRowAnimation: selectionForm.animation
-                )
-                selectionForm.showItems = false
-            } else {
-                tableView.insertRowsAtIndexPaths(
-                    selectionIndexPaths,
-                    withRowAnimation: selectionForm.animation
-                )
-                selectionForm.showItems = true
-            }
-
-            tableView.endUpdates()
-        }
-
+        SelectionFormHelper.toggleItems(
+            formRow,
+            tableView: self.tableView,
+            indexPath: indexPath
+        )
 
         guard let
             datePickerForm = formRow.form as? FormDatePicker
         else { return }
+        self.datePickerHelper.currentSelectedDatePickerForm = datePickerForm
 
-        datePickerForm.shouldExpand = !datePickerForm.shouldExpand
-        let newIndexPath = NSIndexPath(
-            forItem: indexPath.row + 1,
-            inSection: indexPath.section
+        self.datePickerHelper.removeAllDatePickers(
+            self.tableView,
+            cellItems: self.formSections[indexPath.section].formItemsForSection()
         )
 
-        tableView.beginUpdates()
-        if datePickerForm.shouldExpand {
-            tableView.insertRowsAtIndexPaths(
-                [newIndexPath],
-                withRowAnimation: .Top
-            )
-        } else {
-            tableView.deleteRowsAtIndexPaths(
-                [newIndexPath],
-                withRowAnimation: .Top
-            )
-        }
-
-        tableView.endUpdates()
+        self.datePickerHelper.showDatePicker(
+            self.tableView,
+            cellItems: self.formSections[indexPath.section].formItemsForSection()
+        )
     }
 
     public override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
