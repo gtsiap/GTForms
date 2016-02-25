@@ -78,7 +78,7 @@ public class FormDatePicker: BaseResultForm<NSDate> {
 
     private let datePreviewView = DatePreviewView()
     
-    public var shouldExpand: Bool = false
+    var shouldExpand: Bool?
 
     /**
         The UIDatePicker of the form

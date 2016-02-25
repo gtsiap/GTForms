@@ -46,6 +46,10 @@ class MainTableViewController: FormTableViewController {
             self.performSegueWithIdentifier("showSelectionForm", sender: self)
         }
 
+        section.addRow(StaticForm(text: "Date Pickers")).didSelectRow = {
+            self.performSegueWithIdentifier("showDatePickers", sender: self)
+        }
+
         self.formSections.append(section)
     }
 
