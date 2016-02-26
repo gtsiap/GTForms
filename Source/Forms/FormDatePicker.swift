@@ -28,7 +28,8 @@ private class DatePreviewView: ControlLabelView  {
         label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        
+        label.textAlignment = .Left
+
         return label
     }()
 
@@ -45,7 +46,7 @@ private class DatePreviewView: ControlLabelView  {
             
             label.snp_makeConstraints() { make in
                 make.left.equalTo(self).offset(10)
-                make.width.equalTo(self).multipliedBy(0.4)
+                make.width.equalTo(self).multipliedBy(0.3)
                 make.top.equalTo(self).offset(10)
                 make.bottom.equalTo(self).offset(-10).constraint
             } // end label
