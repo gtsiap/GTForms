@@ -34,6 +34,7 @@
                         <segue destination="9hw-Lm-6ZD" kind="presentation" identifier="showFormsModally" modalPresentationStyle="formSheet" id="pX4-Td-QWD"/>
                         <segue destination="Qf2-ly-k6e" kind="show" identifier="showSelectionForm" id="nRV-Px-Vk9"/>
                         <segue destination="EAD-Q3-oRc" kind="show" identifier="showDatePickers" id="wYO-8k-gqK"/>
+                        <segue destination="tR9-zX-gkb" kind="show" identifier="showTestKeyboard" id="G5s-h8-3HU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WU2-lp-ssB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -112,6 +113,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aA1-Fz-mZ4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1539" y="1232"/>
+        </scene>
+        <!--Test Keyboard Table View Controller-->
+        <scene sceneID="F0M-Yf-N4Q">
+            <objects>
+                <tableViewController id="tR9-zX-gkb" customClass="TestKeyboardTableViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="VHm-HT-Rkz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="unused" id="p7e-41-tcr">
+                                <rect key="frame" x="0.0" y="114" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="p7e-41-tcr" id="Wm6-r0-7lB">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="tR9-zX-gkb" id="wVQ-hk-DC4"/>
+                            <outlet property="delegate" destination="tR9-zX-gkb" id="WMb-Ff-jDc"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LeS-vC-LpV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1527" y="1966"/>
         </scene>
         <!--Date Pickers Table View Controller-->
         <scene sceneID="45R-av-UvJ">

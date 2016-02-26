@@ -44,6 +44,17 @@ public class FormTableViewController: UITableViewController {
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SelectionItemCell")
         self.tableView.registerClass(FormTableViewCell.self, forCellReuseIdentifier: "formCell")
         self.tableView.registerClass(DatePickerTableViewCell.self, forCellReuseIdentifier: "DatePickerCell")
+
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: "keyboardWillAppear",
+            name: UIKeyboardWillShowNotification,
+            object: nil
+        )
+    }
+
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
     // MARK: - Table view data source
@@ -149,10 +160,9 @@ public class FormTableViewController: UITableViewController {
         else { return }
         self.datePickerHelper.currentSelectedDatePickerForm = datePickerForm
 
-        self.datePickerHelper.removeAllDatePickers(
-            self.tableView,
-            cellItems: self.formSections[indexPath.section].formItemsForSection()
-        )
+        self.datePickerHelper.removeAllDatePickers(self)
+
+        hideKeyboard()
 
         self.datePickerHelper.showDatePicker(
             self.tableView,
@@ -188,7 +198,15 @@ public class FormTableViewController: UITableViewController {
     public override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.formSections[section].title
     }
- 
+
+    public  func hideKeyboard() {
+        self.textFieldViews.forEach() {
+            if $0.textField.isFirstResponder() {
+                $0.textField.resignFirstResponder()
+            }
+        }
+    }
+
     private func findTextFieldViews() {
         self.textFieldViews.removeAll()
         for section in self.formSections {
@@ -205,19 +223,18 @@ public class FormTableViewController: UITableViewController {
 
         self.textFieldViews.forEach() { $0.delegate = self }
     }
-    
-    private func resignFirstTextFieldView() {
-        self.textFieldViews.forEach() {
-            if $0.textField.isFirstResponder() {
-                $0.textField.resignFirstResponder()
-            }
-        }
+
+    @objc private func keyboardWillAppear() {
+        let datePicker = self.datePickerHelper.currentSelectedDatePickerForm
+        self.datePickerHelper.currentSelectedDatePickerForm = nil
+        self.datePickerHelper.removeAllDatePickers(self)
+        self.datePickerHelper.currentSelectedDatePickerForm = datePicker
     }
-    
 }
 
 extension FormTableViewController: TextFieldViewDelegate {
     func textFieldViewShouldReturn(textFieldView: TextFieldView) -> Bool {
+
         guard let
             index = self.textFieldViews.indexOf(textFieldView)
         else { return false }
@@ -227,7 +244,8 @@ extension FormTableViewController: TextFieldViewDelegate {
         }
         
         let nextTextFieldView = self.textFieldViews[index + 1]
-     
         return nextTextFieldView.textField.becomeFirstResponder()
     }
+
+
 }

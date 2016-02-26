@@ -50,6 +50,10 @@ class MainTableViewController: FormTableViewController {
             self.performSegueWithIdentifier("showDatePickers", sender: self)
         }
 
+        section.addRow(StaticForm(text: "Test Keyboard")).didSelectRow = {
+            self.performSegueWithIdentifier("showTestKeyboard", sender: self)
+        }
+
         self.formSections.append(section)
     }
 

@@ -13,37 +13,42 @@ class DatePickerHelper {
 
     var currentSelectedDatePickerForm: FormDatePicker!
 
-    func removeAllDatePickers(tableView: UITableView, cellItems: [AnyObject]) {
+    func removeAllDatePickers(vc: FormTableViewController) {
         var indexPathsToDelete = [NSIndexPath]()
 
-        for section in 0...tableView.numberOfSections - 1 {
-            let rowCount = tableView.numberOfRowsInSection(section)
+        for (sectionIndex, section) in vc.formSections.enumerate() {
+            let rowCount = vc.tableView.numberOfRowsInSection(sectionIndex)
             for index in 0...rowCount - 1 {
                 let cellIndexPath = NSIndexPath(
                     forRow: index + 1,
-                    inSection: section
+                    inSection: sectionIndex
                 )
+
+                let cellItems = section.formItemsForSection()
+                
+                if index >= cellItems.count {
+                    continue
+                }
 
                 guard let
                     otherFormRow = cellItems[index]
                         as? FormRow,
                     otherDatePickerForm = otherFormRow.form
                         as? FormDatePicker,
-                    datePickerCell = tableView.cellForRowAtIndexPath(cellIndexPath)
+                    datePickerCell = vc.tableView.cellForRowAtIndexPath(cellIndexPath)
                         as? DatePickerTableViewCell
                     where
-                    datePickerCell.datePicker === otherDatePickerForm.datePicker &&
+                        datePickerCell.datePicker === otherDatePickerForm.datePicker &&
                         self.currentSelectedDatePickerForm !== otherDatePickerForm
                     else { continue }
-
 
                 otherDatePickerForm.shouldExpand = false
                 indexPathsToDelete.append(cellIndexPath)
             }
 
-            tableView.beginUpdates()
-            tableView.deleteRowsAtIndexPaths(indexPathsToDelete, withRowAnimation: .Top)
-            tableView.endUpdates()
+            vc.tableView.beginUpdates()
+            vc.tableView.deleteRowsAtIndexPaths(indexPathsToDelete, withRowAnimation: .Top)
+            vc.tableView.endUpdates()
         }
     }
 

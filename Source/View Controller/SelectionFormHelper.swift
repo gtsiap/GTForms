@@ -22,10 +22,10 @@ class SelectionFormHelper {
             let sectionIndex = indexPath.section
 
             for (index, _) in selectionForm.items.enumerate() {
-            let targetIndexPath = NSIndexPath(
-                forRow: rowIndex + index + 1,
-                inSection: sectionIndex
-            )
+                let targetIndexPath = NSIndexPath(
+                    forRow: rowIndex + index + 1,
+                    inSection: sectionIndex
+                )
                 selectionIndexPaths.append(targetIndexPath)
             }
 
