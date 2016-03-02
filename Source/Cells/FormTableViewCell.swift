@@ -61,10 +61,10 @@ class FormTableViewCell: UITableViewCell {
         
         self.contentView.addSubview(self.cellView)
         self.cellView.snp_makeConstraints() { make in
-            make.top.equalTo(self.contentView)
-            make.bottom.equalTo(self.contentView)
-            make.left.equalTo(self.contentView)
-            make.right.equalTo(self.contentView)
+            make.top.equalTo(self.contentView).offset(10)
+            make.bottom.equalTo(self.contentView).offset(-10)
+            make.left.equalTo(self.contentView).offset(10)
+            make.right.equalTo(self.contentView).offset(-10)
         }
         
     }

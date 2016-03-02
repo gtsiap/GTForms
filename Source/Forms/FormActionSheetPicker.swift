@@ -68,8 +68,9 @@ private class ActionSheetPicker: ControlLabelView  {
     var valueDidChange: ((String) -> ())?
     var items = [String]()
     weak var viewController: UIViewController?
-    
-    private lazy var button: ButtonLabel = {
+    var scrollToRow: Bool = false
+
+    lazy var button: ButtonLabel = {
         let button = ButtonLabel()
         button.text = "Choose"
         button.addTarget(
@@ -80,7 +81,7 @@ private class ActionSheetPicker: ControlLabelView  {
 
         return button
     }()
-    
+
     override init() {
         super.init()
         
@@ -89,14 +90,14 @@ private class ActionSheetPicker: ControlLabelView  {
         configureView() { (label, control) in
             
             label.snp_makeConstraints() { make in
-                make.left.equalTo(self).offset(10)
+                make.left.equalTo(self)
                 make.width.equalTo(self).multipliedBy(0.6)
-                make.top.equalTo(self).offset(10)
-                make.bottom.equalTo(self).offset(-10)
+                make.top.equalTo(self)
+                make.bottom.equalTo(self)
             } // end label
             
             control.snp_makeConstraints() { make in
-                make.right.equalTo(self).offset(-10)
+                make.right.equalTo(self)
                 make.centerY.equalTo(label.snp_centerY).priorityLow()
                 make.width.equalTo(self).multipliedBy(0.3)
                 make.bottom.equalTo(self)
@@ -123,12 +124,15 @@ private class ActionSheetPicker: ControlLabelView  {
                 self.button.text = title
                 self.valueDidChange?(title)
 
-
-                if let vc = self.viewController as? UITableViewController {
+                if let
+                    vc = self.viewController
+                        as? UITableViewController
+                    where self.scrollToRow
+                {
                     let point = vc.tableView.convertPoint(self.frame.origin, fromView: self)
                     guard let
                         indexPath = vc.tableView.indexPathForRowAtPoint(point)
-                        else { return }
+                    else { return }
 
                     vc.tableView.reloadRowsAtIndexPaths(
                         [indexPath],
@@ -174,6 +178,30 @@ public class FormActionSheetPicker: BaseResultForm<String> {
         didSet { self.picker.viewController = self.viewController }
     }
 
+    /**
+        If true, the tableView will scroll to the current row,
+        when the value changes.
+    */
+    public var scrollToRow: Bool = false {
+        didSet {
+            self.picker.scrollToRow = self.scrollToRow
+        }
+    }
+
+    /**
+        Changes the result of the form.
+     */
+    public var optionText: String {
+        set(value) {
+            self.picker.button.label.text = value
+            updateResult(value)
+        }
+
+        get {
+            return self.result ?? "Choose"
+        }
+    }
+
     public init(text: String, items: [String]) {
         super.init()
         
@@ -190,6 +218,6 @@ public class FormActionSheetPicker: BaseResultForm<String> {
     public override func formView() -> UIView {
         return self.picker
     }
-    
+
 }
 

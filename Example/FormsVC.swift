@@ -175,7 +175,9 @@ class FormsVC: FormTableViewController {
                 "one", "two", "three"
             ]
         )
-        
+
+        actionSheetPickerForm.optionText = "Custom Text"
+
         let actionSheetPickerForm2 = FormActionSheetPicker(
             text: self.longText,
             items: [

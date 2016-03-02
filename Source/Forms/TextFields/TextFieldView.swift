@@ -58,18 +58,18 @@ class TextFieldView: ControlLabelView  {
         configureView() { (label, control) in
             
             label.snp_makeConstraints() { make in
-                make.left.equalTo(self).offset(10)
-                make.top.equalTo(self).offset(10)
+                make.left.equalTo(self)
+                make.top.equalTo(self)
                 make.width.equalTo(self).multipliedBy(0.3)
-                make.bottom.equalTo(self).offset(-10)
+                make.bottom.equalTo(self)
             } // end label
             
             
             control.snp_makeConstraints() { make in
                 make.left.equalTo(label.snp_right).offset(10)
-                make.right.equalTo(self).offset(-10)
-                make.top.equalTo(self).offset(10)
-                make.bottom.equalTo(self).offset(-10)
+                make.right.equalTo(self)
+                make.top.equalTo(self)
+                make.bottom.equalTo(self)
             } // end control
             
         } // end configureView
