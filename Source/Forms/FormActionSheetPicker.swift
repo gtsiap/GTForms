@@ -124,21 +124,23 @@ private class ActionSheetPicker: ControlLabelView  {
                 self.button.text = title
                 self.valueDidChange?(title)
 
-                if let
+                guard let
                     vc = self.viewController
                         as? UITableViewController
-                    where self.scrollToRow
-                {
-                    let point = vc.tableView.convertPoint(self.frame.origin, fromView: self)
-                    guard let
-                        indexPath = vc.tableView.indexPathForRowAtPoint(point)
-                    else { return }
+                else { return }
 
-                    vc.tableView.reloadRowsAtIndexPaths(
-                        [indexPath],
-                        withRowAnimation: .None
-                    )
 
+                let point = vc.tableView.convertPoint(self.frame.origin, fromView: self)
+                guard let
+                    indexPath = vc.tableView.indexPathForRowAtPoint(point)
+                else { return }
+
+                vc.tableView.reloadRowsAtIndexPaths(
+                    [indexPath],
+                    withRowAnimation: .None
+                )
+
+                if self.scrollToRow {
                     vc.tableView.scrollToRowAtIndexPath(
                         indexPath,
                         atScrollPosition: .None,

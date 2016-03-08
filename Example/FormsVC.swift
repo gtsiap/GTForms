@@ -185,9 +185,17 @@ class FormsVC: FormTableViewController {
             ]
         )
 
+        let actionSheetPickerForm3 = FormActionSheetPicker(
+            text: "Check if the long text is visible after selection",
+            items: [
+                "1", "2", "3", self.longText
+            ]
+        )
+
         let section = FormSection()
         section.addRow(actionSheetPickerForm)
         section.addRow(actionSheetPickerForm2)
+        section.addRow(actionSheetPickerForm3)
 
         let items = [
             "one", "two", "three",
