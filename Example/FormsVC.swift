@@ -116,6 +116,7 @@ class FormsVC: FormTableViewController {
             placeHolder: "Type a string"
         )
 
+        stringForm.required = true
         section.addRow(stringForm)
         
         let maxAndMinForm = FormTextField(

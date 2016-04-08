@@ -63,7 +63,10 @@ extension FormViewableType {
         }
 
         alertVC.addAction(okAction)
-        self.viewController?.presentViewController(
+        // Q: Why do we use the parentViewController
+        // A: because the use may dismiss this vc while we will present
+        //    the UIAlertController
+        self.viewController?.parentViewController?.presentViewController(
             alertVC,
             animated: true,
             completion: nil
