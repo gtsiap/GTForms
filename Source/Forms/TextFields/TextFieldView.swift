@@ -91,7 +91,12 @@ extension TextFieldView: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if !self.delegate!.textFieldViewShouldReturn(self) {
+        guard let delegate = self.delegate else {
+            print("\(#file):\(#line): Missing Delegate!!")
+            return false
+        }
+
+        if !delegate.textFieldViewShouldReturn(self) {
             textField.resignFirstResponder()
         }
         

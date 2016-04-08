@@ -50,7 +50,7 @@ public class BaseStringTextFieldForm: BaseResultForm<String> {
                 guard let
                     err = error as? ResultFormError
                 else { return }
-                
+
                 self.showValidationError(err.message)
             }
         }
