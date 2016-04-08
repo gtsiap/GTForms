@@ -30,7 +30,7 @@ class FormsVC: FormTableViewController {
             title: "Results",
             style: .Done,
             target: self,
-            action: Selector("didTapResultsButton")
+            action: #selector(didTapResultsButton)
         )
 
         return button

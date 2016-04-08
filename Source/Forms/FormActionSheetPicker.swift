@@ -75,7 +75,7 @@ private class ActionSheetPicker: ControlLabelView  {
         button.text = "Choose"
         button.addTarget(
             self,
-            action: "didTapButton",
+            action: #selector(didTapButton),
             forControlEvents: .TouchUpInside
         )
 
@@ -155,7 +155,7 @@ private class ActionSheetPicker: ControlLabelView  {
         alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         
         guard let vc = self.viewController else {
-            print("\(__FILE__):\(__LINE__): view controller doesn't exist")
+            print("\(#file):\(#line): view controller doesn't exist")
             return
         }
 

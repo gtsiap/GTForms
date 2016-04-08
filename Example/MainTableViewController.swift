@@ -27,7 +27,7 @@ class MainTableViewController: FormTableViewController {
             title: "Forms",
             style: .Done,
             target: self,
-            action: Selector("didTapFormButton")
+            action: #selector(didTapFormButton)
         )
         return button
     }()
@@ -72,7 +72,7 @@ class MainTableViewController: FormTableViewController {
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .Cancel,
             target: self,
-            action: "didTapCancelButton"
+            action: #selector(didTapCancelButton)
         )
     }
 

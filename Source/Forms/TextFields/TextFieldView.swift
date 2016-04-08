@@ -34,7 +34,7 @@ class TextFieldView: ControlLabelView  {
         
         textField.addTarget(
             self,
-            action: "editingChanged",
+            action: #selector(editingChanged),
             forControlEvents: .EditingChanged
         )
         

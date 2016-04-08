@@ -27,7 +27,7 @@ class TestKeyboardTableViewController: FormTableViewController {
             title: "Hide Keyboard",
             style: .Done,
             target: self,
-            action: Selector("didTapHideKeyboardButton")
+            action: #selector(didTapHideKeyboardButton)
         )
 
         return button

@@ -47,7 +47,7 @@ public class FormTableViewController: UITableViewController {
 
         NSNotificationCenter.defaultCenter().addObserver(
             self,
-            selector: "keyboardWillAppear",
+            selector: #selector(keyboardWillAppear),
             name: UIKeyboardWillShowNotification,
             object: nil
         )

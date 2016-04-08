@@ -28,7 +28,7 @@ private class Switcher: ControlLabelView  {
         
         switcher.addTarget(
             self,
-            action: "switchValueDidChange",
+            action: #selector(switchValueDidChange),
             forControlEvents: .ValueChanged
         )
                 

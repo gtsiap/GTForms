@@ -70,7 +70,7 @@ public class FormDatePicker: BaseResultForm<NSDate> {
         let datePicker = UIDatePicker()
         datePicker.addTarget(
             self,
-            action: "changeDisplayedDate",
+            action: #selector(changeDisplayedDate),
             forControlEvents: .ValueChanged
         )
 
