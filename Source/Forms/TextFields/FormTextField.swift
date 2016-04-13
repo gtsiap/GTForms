@@ -29,10 +29,18 @@ public class FormTextField: BaseStringTextFieldForm {
         guard let
             _ = try super.validate()
         else { return nil }
-        
+
+        guard let result = self.result else {
+            return nil
+        }
+
+        if result.isEmpty {
+            return nil
+        }
+
         if let
             maximumLength = self.maximumLength
-            where self.result?.characters.count > maximumLength
+            where result.characters.count > maximumLength
         {
             self.textFieldView.textField.text = ""
             
@@ -41,7 +49,7 @@ public class FormTextField: BaseStringTextFieldForm {
             )
         } else if let
             minimumLength = self.minimumLength
-            where self.result?.characters.count < minimumLength
+            where result.characters.count < minimumLength
         {
             self.textFieldView.textField.text = ""
             
