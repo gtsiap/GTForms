@@ -12,7 +12,6 @@ class DatePickerHelper {
     init() {}
 
     var currentSelectedDatePickerForm: FormDatePicker!
-    private var currentExpandedSection: Int?
 
     func removeAllDatePickers(vc: FormTableViewController) {
         var indexPathsToDelete = [NSIndexPath]()
@@ -93,11 +92,9 @@ class DatePickerHelper {
                 if shouldExpand {
                     self.currentSelectedDatePickerForm.shouldExpand = true
                     tableView.insertRowsAtIndexPaths([cellIndexPath], withRowAnimation: .Top)
-                    self.currentExpandedSection = section
                 } else {
                     tableView.deleteRowsAtIndexPaths([cellIndexPath], withRowAnimation: .Top)
                     self.currentSelectedDatePickerForm.shouldExpand = false
-                    self.currentExpandedSection = nil
                 }
             }
         }
