@@ -54,12 +54,14 @@ class DatePickersTableViewController: FormTableViewController {
         let section = FormSection()
         section.addRow(self.dateForm)
         section.addRow(self.timeForm)
-        section.addRow(FormDatePicker(text: "Demo"))
-
 
         section.title = "Date and Time Picker"
 
         self.formSections.append(section)
+
+        let section2 = FormSection()
+        section2.addRow(FormDatePicker(text: "Demo"))
+        self.formSections.append(section2)
     }
 
 }

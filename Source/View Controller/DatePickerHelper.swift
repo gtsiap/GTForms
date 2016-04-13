@@ -12,6 +12,7 @@ class DatePickerHelper {
     init() {}
 
     var currentSelectedDatePickerForm: FormDatePicker!
+    private var currentExpandedSection: Int?
 
     func removeAllDatePickers(vc: FormTableViewController) {
         var indexPathsToDelete = [NSIndexPath]()
@@ -45,15 +46,14 @@ class DatePickerHelper {
                 otherDatePickerForm.shouldExpand = false
                 indexPathsToDelete.append(cellIndexPath)
             }
-
-            vc.tableView.beginUpdates()
-            vc.tableView.deleteRowsAtIndexPaths(indexPathsToDelete, withRowAnimation: .Top)
-            vc.tableView.endUpdates()
         }
+
+        vc.tableView.beginUpdates()
+        vc.tableView.deleteRowsAtIndexPaths(indexPathsToDelete, withRowAnimation: .Top)
+        vc.tableView.endUpdates()
     }
 
     func showDatePicker(tableView: UITableView, cellItems: [AnyObject]) {
-
         for section in 0...tableView.numberOfSections - 1 {
             let rowCount = tableView.numberOfRowsInSection(section)
             for index in 0...rowCount - 1 {
@@ -63,28 +63,41 @@ class DatePickerHelper {
                 )
 
                 guard let
+                    selectedIndexPath = tableView.indexPathForSelectedRow
+                where
+                    selectedIndexPath.row == index &&
+                    selectedIndexPath.section == section
+                else {
+                    continue
+                }
+
+                guard let
                     otherFormRow = cellItems[index]
                         as? FormRow,
                     otherDatePickerForm = otherFormRow.form
                         as? FormDatePicker
-                    where self.currentSelectedDatePickerForm === otherDatePickerForm
-                    else { continue }
+                where self.currentSelectedDatePickerForm === otherDatePickerForm
+                else { continue }
+
 
                 tableView.beginUpdates()
                 defer { tableView.endUpdates() }
 
-                guard let shouldExpand = self.currentSelectedDatePickerForm.shouldExpand else {
-                    self.currentSelectedDatePickerForm.shouldExpand = true
-                    tableView.insertRowsAtIndexPaths([cellIndexPath], withRowAnimation: .Top)
-                    return
+                let shouldExpand: Bool
+                if let expand = self.currentSelectedDatePickerForm.shouldExpand {
+                    shouldExpand = !expand
+                } else {
+                    shouldExpand = true
                 }
 
-                if !shouldExpand {
+                if shouldExpand {
                     self.currentSelectedDatePickerForm.shouldExpand = true
                     tableView.insertRowsAtIndexPaths([cellIndexPath], withRowAnimation: .Top)
+                    self.currentExpandedSection = section
                 } else {
                     tableView.deleteRowsAtIndexPaths([cellIndexPath], withRowAnimation: .Top)
                     self.currentSelectedDatePickerForm.shouldExpand = false
+                    self.currentExpandedSection = nil
                 }
             }
         }
