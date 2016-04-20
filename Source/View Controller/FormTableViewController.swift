@@ -44,6 +44,10 @@ public class FormTableViewController: UITableViewController {
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SelectionItemCell")
         self.tableView.registerClass(FormTableViewCell.self, forCellReuseIdentifier: "formCell")
         self.tableView.registerClass(DatePickerTableViewCell.self, forCellReuseIdentifier: "DatePickerCell")
+    }
+
+    public override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
 
         NSNotificationCenter.defaultCenter().addObserver(
             self,
@@ -53,7 +57,8 @@ public class FormTableViewController: UITableViewController {
         )
     }
 
-    deinit {
+    public override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
