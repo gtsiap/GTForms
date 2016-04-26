@@ -31,5 +31,20 @@ public struct StaticForm: FormableType {
         self.text = text
         self.detailText = text
     }
+}
 
+/**
+ This class is used for read only forms.
+ */
+public struct AttributedStaticForm: FormableType {
+    let text: NSAttributedString
+    let detailText: NSAttributedString?
+
+    public init(
+        text: NSAttributedString,
+        detailText: NSAttributedString? = nil
+    ) {
+        self.text = text
+        self.detailText = text
+    }
 }

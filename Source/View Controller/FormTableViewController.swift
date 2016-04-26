@@ -40,6 +40,7 @@ public class FormTableViewController: UITableViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
 
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ReadOnlyCell")
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AttributedReadOnlyCell")
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SelectionCell")
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SelectionItemCell")
         self.tableView.registerClass(FormTableViewCell.self, forCellReuseIdentifier: "formCell")
@@ -102,6 +103,10 @@ public class FormTableViewController: UITableViewController {
             cell = tableView.dequeueReusableCellWithIdentifier("ReadOnlyCell", forIndexPath: indexPath)
             cell.textLabel?.text = staticForm.text
             cell.detailTextLabel?.text = staticForm.detailText
+        } else if let staticForm = cellRow.form as? AttributedStaticForm {
+            cell = tableView.dequeueReusableCellWithIdentifier("AttributedReadOnlyCell", forIndexPath: indexPath)
+            cell.textLabel?.attributedText = staticForm.text
+            cell.detailTextLabel?.attributedText = staticForm.detailText
         } else if let selectionForm = cellRow.form as? SelectionForm {
             cell = tableView.dequeueReusableCellWithIdentifier("SelectionCell", forIndexPath: indexPath)
             cell.textLabel?.text = selectionForm.text

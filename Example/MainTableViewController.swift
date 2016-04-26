@@ -54,6 +54,18 @@ class MainTableViewController: FormTableViewController {
             self.performSegueWithIdentifier("showTestKeyboard", sender: self)
         }
 
+        let originalText = NSMutableAttributedString(string: "Text with ")
+
+        let text =  NSAttributedString(
+            string: "Color",
+            attributes: [NSForegroundColorAttributeName: UIColor.greenColor()]
+        )
+
+        originalText.appendAttributedString(text)
+
+        section.addRow(AttributedStaticForm(text: originalText))
+
+
         self.formSections.append(section)
     }
 
