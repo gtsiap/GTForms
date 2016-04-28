@@ -30,9 +30,19 @@ public class FormTableViewController: UITableViewController {
         didSet {
             findTextFieldViews()
             self.tableView.reloadData()
+            self.formSections.forEach() {
+                $0.tableViewController = self
+            }
         }
     }
-    
+
+    public func registerCustomForm(customForm: CustomForm) {
+        self.tableView.registerClass(
+            customForm.cellClass,
+            forCellReuseIdentifier: customForm.reuseIdentifier
+        )
+    }
+
     public override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -98,8 +108,12 @@ public class FormTableViewController: UITableViewController {
         }
 
         guard let cellRow = cellItem as? FormRow else { return UITableViewCell() }
-        
-        if let staticForm = cellRow.form as? StaticForm {
+
+        if let customForm = cellRow.form as? CustomForm {
+            let cell = tableView.dequeueReusableCellWithIdentifier(customForm.reuseIdentifier, forIndexPath: indexPath)
+            customForm.configureCell(cell)
+            return cell
+        } else if let staticForm = cellRow.form as? StaticForm {
             cell = tableView.dequeueReusableCellWithIdentifier("ReadOnlyCell", forIndexPath: indexPath)
             cell.textLabel?.text = staticForm.text
             cell.detailTextLabel?.text = staticForm.detailText

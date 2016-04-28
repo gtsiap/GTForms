@@ -23,6 +23,8 @@ import GTForms
 
 class SelectionFormTableViewController: FormTableViewController {
 
+    var selectionForm: SelectionForm!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,7 +33,7 @@ class SelectionFormTableViewController: FormTableViewController {
             SelectionFormItem(text: "Orange")
         ]
 
-        let selectionForm = SelectionForm(
+        selectionForm = SelectionForm(
             items: selectionItems,
             text: "Choose a fruit"
         )

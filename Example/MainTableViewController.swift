@@ -65,6 +65,9 @@ class MainTableViewController: FormTableViewController {
 
         section.addRow(AttributedStaticForm(text: originalText))
 
+        section.addRow(StaticForm(text: "Custom Form")).didSelectRow = {
+            self.performSegueWithIdentifier("showCustomForm", sender: self)
+        }
 
         self.formSections.append(section)
     }

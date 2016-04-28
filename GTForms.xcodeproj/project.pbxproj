@@ -10,6 +10,7 @@
 		450282B51C1EDC3F00600956 /* FormSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450282B41C1EDC3F00600956 /* FormSection.swift */; };
 		450282B71C1EDD6700600956 /* FormViewableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450282B61C1EDD6700600956 /* FormViewableType.swift */; };
 		450282B91C1EDEAF00600956 /* FormRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450282B81C1EDEAF00600956 /* FormRow.swift */; };
+		4581B10A1CD2175100A68FDE /* CustomForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4581B1091CD2175100A68FDE /* CustomForm.swift */; };
 		458C9CE81C2297E600645434 /* ControlLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CDC1C2297E600645434 /* ControlLabelView.swift */; };
 		458C9CE91C2297E600645434 /* FormActionSheetPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CDD1C2297E600645434 /* FormActionSheetPicker.swift */; };
 		458C9CEA1C2297E600645434 /* FormSegmentedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CDE1C2297E600645434 /* FormSegmentedPicker.swift */; };
@@ -43,6 +44,7 @@
 		450282B41C1EDC3F00600956 /* FormSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSection.swift; sourceTree = "<group>"; };
 		450282B61C1EDD6700600956 /* FormViewableType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormViewableType.swift; sourceTree = "<group>"; };
 		450282B81C1EDEAF00600956 /* FormRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormRow.swift; sourceTree = "<group>"; };
+		4581B1091CD2175100A68FDE /* CustomForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomForm.swift; sourceTree = "<group>"; };
 		458C9CDC1C2297E600645434 /* ControlLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlLabelView.swift; sourceTree = "<group>"; };
 		458C9CDD1C2297E600645434 /* FormActionSheetPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormActionSheetPicker.swift; sourceTree = "<group>"; };
 		458C9CDE1C2297E600645434 /* FormSegmentedPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSegmentedPicker.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				458C9CDE1C2297E600645434 /* FormSegmentedPicker.swift */,
 				458C9CDF1C2297E600645434 /* FormSwitchView.swift */,
 				458C9CF31C22981B00645434 /* FormDatePicker.swift */,
+				4581B1091CD2175100A68FDE /* CustomForm.swift */,
 			);
 			path = Forms;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				45C904BD1C7F37BD001C0611 /* SelectionFormItem.swift in Sources */,
 				458C9CEB1C2297E600645434 /* FormSwitchView.swift in Sources */,
 				450282B71C1EDD6700600956 /* FormViewableType.swift in Sources */,
+				4581B10A1CD2175100A68FDE /* CustomForm.swift in Sources */,
 				45C904B81C7F379F001C0611 /* SelectionFormHelper.swift in Sources */,
 				458C9CF01C2297E600645434 /* FormPhoneTextField.swift in Sources */,
 				458C9CED1C2297E600645434 /* FormDoubleTextField.swift in Sources */,

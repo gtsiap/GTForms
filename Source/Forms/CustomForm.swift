@@ -20,31 +20,19 @@
 
 import UIKit
 
-/**
-    This class is used for read only forms.
-*/
-public class StaticForm: FormableType {
-    let text: String
-    let detailText: String?
-    
-    public init(text: String, detailText: String? = nil) {
-        self.text = text
-        self.detailText = text
-    }
-}
-
-/**
- This class is used for read only forms.
- */
-public class AttributedStaticForm: FormableType {
-    let text: NSAttributedString
-    let detailText: NSAttributedString?
+public class CustomForm: FormableType {
+    public let cellClass: AnyClass
+    public let reuseIdentifier: String
 
     public init(
-        text: NSAttributedString,
-        detailText: NSAttributedString? = nil
+        cellClass: AnyClass,
+        reuseIdentifier: String
     ) {
-        self.text = text
-        self.detailText = text
+        self.cellClass = cellClass
+        self.reuseIdentifier = reuseIdentifier
+    }
+
+    public func configureCell(cell: UITableViewCell) {
+
     }
 }

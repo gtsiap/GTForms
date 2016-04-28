@@ -21,7 +21,7 @@
 /**
     - NOTE: All the forms must comfort to this protocol
 */
-public protocol FormableType {}
+public protocol FormableType: class {}
 
 /**
  - NOTE: If your form has custom UI then you must comform

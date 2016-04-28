@@ -21,6 +21,8 @@
 import UIKit
 
 public class FormSection {
+    weak var tableViewController: FormTableViewController?
+
     /**
         The rows of the section
      */
@@ -45,6 +47,103 @@ public class FormSection {
         return row
     }
 
+    /**
+        Appends a new row in the section
+        - parameter form: The form that will be appended to the tableView
+        - parameter animation: The UITableViewRowAnimation which will be used
+     */
+    public func appendRow(form: FormableType, animation: UITableViewRowAnimation) -> FormRow {
+        let row = addRow(form)
+
+        guard let
+            vc = self.tableViewController,
+            tableView = vc.tableView
+        else {
+            return row
+        }
+
+        tableView.beginUpdates()
+        defer { tableView.endUpdates() }
+        guard let
+            section = vc.formSections.indexOf({ $0 === self })
+        else {
+            return row
+        }
+
+        let indexPath = NSIndexPath(
+            forRow: formItemsForSection().count - 1,
+            inSection: section
+        )
+
+        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: animation)
+
+        return row
+    }
+
+    /**
+        Removes a new row from the section
+        - parameter form: The form that will be removed from the tableView
+        - parameter animation: The UITableViewRowAnimation which will be used
+     */
+    public func removeRow(form: FormableType, animation: UITableViewRowAnimation) {
+        guard let
+            vc = self.tableViewController,
+            tableView = vc.tableView
+        else {
+            return
+        }
+
+        tableView.beginUpdates()
+        defer { tableView.endUpdates() }
+
+        guard let
+            section = vc.formSections.indexOf({ $0 === self })
+        else {
+            return
+        }
+
+        var row = -1
+
+        for (index, item) in formItemsForSection().enumerate() {
+            if let f = item as? FormRow where f.form === form {
+                row = index
+                break
+            }
+        }
+
+        if row == -1 {
+            return
+        }
+
+        var isSafeToDeleteRow = false
+        for (index, it) in self.rows.enumerate() {
+            if it.form === form {
+                self.rows.removeAtIndex(index)
+                isSafeToDeleteRow = true
+                break
+            }
+        }
+
+        if !isSafeToDeleteRow {
+            return
+        }
+
+        let indexPath = NSIndexPath(
+            forRow: row,
+            inSection: section
+        )
+
+        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: animation)
+    }
+
+
+    /**
+        Returns all the items in the section.
+        It doesn't return the same number of items as the
+        rows variable
+
+        - returns: All the items of the section
+     */
     func formItemsForSection() -> [AnyObject] {
         var formRows = [AnyObject]()
 
