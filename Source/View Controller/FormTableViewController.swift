@@ -209,6 +209,11 @@ public class FormTableViewController: UITableViewController {
             _ = cellRow.didSelectRow
         {
             return true
+        } else if let
+            _ = cellRow.form as? AttributedStaticForm,
+            _ = cellRow.didSelectRow
+        {
+            return true
         } else if let selectionForm = cellRow.form as? SelectionForm
         {
             return !selectionForm.shouldAlwaysShowAllItems ? true : false
