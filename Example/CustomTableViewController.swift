@@ -65,9 +65,6 @@ class CustomTableViewCell: UITableViewCell {
         self.contentView.addSubview(self.textView)
 
         self.textView.snp_makeConstraints() { make in
-         //   make.edges.equalTo(self.contentView)
-             //   .offset(UIEdgeInsets(top: 10, left: 10, bottom: -10, right: -10))
-
             make.top.equalTo(self.contentView).offset(10)
             make.leading.equalTo(self.contentView).offset(10)
             make.trailing.equalTo(self.contentView).offset(-10)
