@@ -11,7 +11,7 @@ class DatePickerHelper {
 
     init() {}
 
-    var currentSelectedDatePickerForm: FormDatePicker!
+    var currentSelectedDatePickerForm: FormDatePickerType!
 
     func removeAllDatePickers(vc: FormTableViewController) {
         var indexPathsToDelete = [NSIndexPath]()

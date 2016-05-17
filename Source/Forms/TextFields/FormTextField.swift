@@ -20,8 +20,11 @@
 
 import UIKit
 
-public class FormTextField: BaseStringTextFieldForm {
-    
+public class FormTextField<T: UITextField, L: UILabel>: BaseStringTextFieldForm<T, L> {
+    public override init(text: String, placeHolder: String) {
+        super.init(text: text, placeHolder: placeHolder)
+    }
+
     public var maximumLength: Int?
     public var minimumLength: Int?
     

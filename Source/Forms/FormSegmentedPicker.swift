@@ -22,7 +22,7 @@ import UIKit
 import SnapKit
 import GTSegmentedControl
 
-private class SegmentedControlLabelView: ControlLabelView  {
+private class SegmentedControlLabelView<L: UILabel>: ControlLabelView<L>  {
     
     let segmentedControl = SegmentedControl()
     

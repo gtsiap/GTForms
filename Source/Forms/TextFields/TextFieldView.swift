@@ -21,16 +21,29 @@
 import UIKit
 import SnapKit
 
+protocol  TextFieldViewType: class {
+    var textField: UITextField { get }
+    weak var delegate: TextFieldViewDelegate? { get set }
+}
+
 protocol TextFieldViewDelegate: class {
     func textFieldViewShouldReturn(
-        textFieldView: TextFieldView
+        textFieldView: TextFieldViewType
     ) -> Bool
 }
 
-class TextFieldView: ControlLabelView  {
-    
-    lazy private(set) var textField: UITextField = {
-        let textField = UITextField()
+class TextFieldView<T: UITextField, L: UILabel> :
+    ControlLabelView<L>,
+    TextFieldViewType,
+    UITextFieldDelegate
+{
+
+    var textField: UITextField {
+        return self.field
+    }
+
+    lazy private(set) var field: T = {
+        let textField = T()
         
         textField.addTarget(
             self,
@@ -53,7 +66,7 @@ class TextFieldView: ControlLabelView  {
     override init() {
         super.init()
         
-        self.control = self.textField
+        self.control = self.field
         
         configureView() { (label, control) in
             
@@ -78,13 +91,10 @@ class TextFieldView: ControlLabelView  {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
 
-extension TextFieldView: UITextFieldDelegate {
-    
     @objc private func editingChanged() {
         guard let
-            text = self.textField.text
+            text = self.field.text
         else { return }
 
         self.textDidChange?(text: text)

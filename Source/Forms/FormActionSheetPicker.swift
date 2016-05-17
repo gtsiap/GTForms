@@ -64,7 +64,7 @@ private class ButtonLabel: UIControl {
 
 }
 
-private class ActionSheetPicker: ControlLabelView  {
+private class ActionSheetPicker<L: UILabel>: ControlLabelView<L> {
     var valueDidChange: ((String) -> ())?
     var items = [String]()
     weak var viewController: UIViewController?
@@ -172,9 +172,9 @@ private class ActionSheetPicker: ControlLabelView  {
     }
 }
 
-public class FormActionSheetPicker: BaseResultForm<String> {
+public class FormActionSheetPicker<L: UILabel>: BaseResultForm<String> {
     
-    private let picker = ActionSheetPicker()
+    private let picker = ActionSheetPicker<L>()
     
     public override weak var viewController: UIViewController? {
         didSet { self.picker.viewController = self.viewController }

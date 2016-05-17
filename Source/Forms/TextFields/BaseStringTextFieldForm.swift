@@ -20,9 +20,9 @@
 
 import UIKit
 
-public class BaseStringTextFieldForm: BaseResultForm<String> {
+public class BaseStringTextFieldForm<T: UITextField, L: UILabel>: BaseResultForm<String> {
     
-    let textFieldView = TextFieldView()
+    let textFieldView = TextFieldView<T, L>()
     
     public var textField: UITextField {
         return self.textFieldView.textField

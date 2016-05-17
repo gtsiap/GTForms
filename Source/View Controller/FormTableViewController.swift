@@ -24,7 +24,7 @@ public class FormTableViewController: UITableViewController {
 
     private var datePickerHelper = DatePickerHelper()
 
-    private var textFieldViews = [TextFieldView]()
+    private var textFieldViews = [TextFieldViewType]()
     
     public var formSections: [FormSection] = [FormSection]() {
         didSet {
@@ -262,11 +262,20 @@ public class FormTableViewController: UITableViewController {
 }
 
 extension FormTableViewController: TextFieldViewDelegate {
-    func textFieldViewShouldReturn(textFieldView: TextFieldView) -> Bool {
+    func textFieldViewShouldReturn(textFieldView: TextFieldViewType) -> Bool {
 
-        guard let
-            index = self.textFieldViews.indexOf(textFieldView)
-        else { return false }
+        var index = -1
+        for (i, _) in self.textFieldViews.enumerate() {
+            index = i
+        }
+
+        if index == -1 {
+            return false
+        }
+
+      //  guard let
+        //    index = self.textFieldViews.indexOf(textFieldView)
+        //else { return false }
 
         if (self.textFieldViews.count - 1) == index {
             return false

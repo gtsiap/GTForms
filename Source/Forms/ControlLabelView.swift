@@ -21,14 +21,13 @@
 import UIKit
 import SnapKit
 
-class ControlLabelView: UIView {
+class ControlLabelView<V: UILabel>: UIView {
     
     let controlLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        let label = V()
         label.numberOfLines = 0
-        
+        label.translatesAutoresizingMaskIntoConstraints = false
+
         return label
     }()
     

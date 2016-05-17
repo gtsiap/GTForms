@@ -20,7 +20,7 @@
 
 import UIKit
 
-public class FormIntTextField: BaseResultForm<Int> {
+public class FormIntTextField<T: UITextField, L: UILabel>: BaseResultForm<Int> {
     
     public var maximumValue: Int?
     public var minimumValue: Int?
@@ -29,7 +29,7 @@ public class FormIntTextField: BaseResultForm<Int> {
         return self.textFieldView.textField
     }
     
-    let textFieldView = TextFieldView()
+    let textFieldView = TextFieldView<T, L>()
     private var candidateText = ""
     
     public init(text: String, placeHolder: String) {

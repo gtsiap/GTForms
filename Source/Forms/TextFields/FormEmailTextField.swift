@@ -20,8 +20,11 @@
 
 import UIKit
 
-public class FormEmailTextField: BaseStringTextFieldForm {
-    
+public class FormEmailTextField<T: UITextField, L: UILabel>: BaseStringTextFieldForm<T, L> {
+    public override init(text: String, placeHolder: String) {
+        super.init(text: text, placeHolder: placeHolder)
+    }
+
     public override func validate() throws -> String? {
         guard let _ =
             try super.validate()

@@ -20,7 +20,7 @@
 
 import UIKit
 
-public class FormPhoneTextField: BaseStringTextFieldForm {
+public class FormPhoneTextField<T: UITextField, L: UILabel>: BaseStringTextFieldForm<T, L> {
     
     public override init(text: String, placeHolder: String) {
         super.init(text: text, placeHolder: placeHolder)

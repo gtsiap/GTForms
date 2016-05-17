@@ -21,10 +21,10 @@
 import UIKit
 import SnapKit
 
-private class Switcher: ControlLabelView  {
+private class Switcher<S: UISwitch, L: UILabel>: ControlLabelView<L>  {
     
     private lazy private(set) var switcher: UISwitch = {
-        let switcher = UISwitch()
+        let switcher = S()
         
         switcher.addTarget(
             self,
@@ -70,9 +70,9 @@ private class Switcher: ControlLabelView  {
 }
 
 
-public class FormSwitch: BaseResultForm<Bool> {
+public class FormSwitch<S: UISwitch, L: UILabel>: BaseResultForm<Bool> {
 
-    private let switcher = Switcher()
+    private let switcher = Switcher<S, L>()
 
     public init(text: String) {
         super.init()

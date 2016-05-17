@@ -40,7 +40,7 @@ class DatePickersTableViewController: FormTableViewController {
         return formatter
     }()
 
-    private lazy var timeForm: FormDatePicker = {
+    private lazy var timeForm: FormDatePicker<UILabel> = {
         let timeForm = FormDatePicker(text: "Time")
         timeForm.datePicker.datePickerMode = .Time
         timeForm.datePicker.minimumDate = NSDate()

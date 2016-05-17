@@ -20,7 +20,7 @@
 
 import UIKit
 
-public class FormDoubleTextField: BaseResultForm<Double> {
+public class FormDoubleTextField<T: UITextField, L: UILabel>: BaseResultForm<Double> {
  
     public var maximumValue: Double?
     public var minimumValue: Double?
@@ -29,7 +29,7 @@ public class FormDoubleTextField: BaseResultForm<Double> {
         return self.textFieldView.textField
     }
     
-    let textFieldView = TextFieldView()
+    let textFieldView = TextFieldView<T, L>()
     private var candidateText = ""
     
     public init(text: String, placeHolder: String) {

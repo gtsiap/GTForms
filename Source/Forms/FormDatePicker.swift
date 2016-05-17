@@ -21,7 +21,7 @@
 import UIKit
 import SnapKit
 
-private class DatePreviewView: ControlLabelView  {
+private class DatePreviewView<L: UILabel>: ControlLabelView<L>  {
 
     let displayLabel: UILabel = {
         let label = UILabel()
@@ -64,7 +64,11 @@ private class DatePreviewView: ControlLabelView  {
     }
 }
 
-public class FormDatePicker: BaseResultForm<NSDate> {
+protocol FormDatePickerType: class {
+    var shouldExpand: Bool? { get set }
+}
+
+public class FormDatePicker<L: UILabel>: BaseResultForm<NSDate> {
 
     lazy private(set) var datePickerView: UIDatePicker = {
         let datePicker = UIDatePicker()
@@ -77,7 +81,7 @@ public class FormDatePicker: BaseResultForm<NSDate> {
         return datePicker
     }()
 
-    private let datePreviewView = DatePreviewView()
+    private let datePreviewView = DatePreviewView<L>()
     
     var shouldExpand: Bool?
 
@@ -137,3 +141,5 @@ public class FormDatePicker: BaseResultForm<NSDate> {
         self.datePreviewView.displayLabel.text = String(date)
     }
 }
+
+extension FormDatePicker: FormDatePickerType {}
