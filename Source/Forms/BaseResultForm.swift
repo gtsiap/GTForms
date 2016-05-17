@@ -89,9 +89,8 @@ public class BaseResultForm<T>: FormViewableType {
         if an error exists it will try to show it
         if `viewController` is set
         - returns: The result of the form
-        - throws: ResultFormError
      */
-    public func retrieveResult() throws -> T? {
+    public func retrieveResult() -> T? {
         do {
             return try self.validate()
         } catch let error {
