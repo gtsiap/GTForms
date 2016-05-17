@@ -23,6 +23,10 @@ import SnapKit
 
 private class DatePreviewView<L: UILabel>: ControlLabelView<L>  {
 
+    override var formAxis: FormAxis {
+        didSet { configureUI() }
+    }
+
     let displayLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
@@ -41,26 +45,42 @@ private class DatePreviewView<L: UILabel>: ControlLabelView<L>  {
         super.init()
         
         self.control = self.displayLabel
-        
+        configureUI()
+    }
+
+    private func configureUI() {
         configureView() { (label, control) in
-            
-            label.snp_makeConstraints() { make in
-                make.left.equalTo(self)
-                make.width.equalTo(self).multipliedBy(0.3)
-                make.top.equalTo(self)
-                make.bottom.equalTo(self)
-            } // end label
-            
-            
-            control.snp_makeConstraints() { make in
-                make.leading.equalTo(label.snp_trailing).offset(10)
-                make.trailing.equalTo(self)
-                make.top.equalTo(self)
-                make.bottom.equalTo(self)
-            } // end control
-            
+
+            if self.formAxis == .Horizontal {
+                label.snp_remakeConstraints() { make in
+                    make.left.equalTo(self)
+                    make.width.equalTo(self).multipliedBy(0.3)
+                    make.top.equalTo(self)
+                    make.bottom.equalTo(self)
+                }// end label
+
+
+                control.snp_remakeConstraints() { make in
+                    make.leading.equalTo(label.snp_trailing).offset(10)
+                    make.trailing.equalTo(self)
+                    make.top.equalTo(self)
+                    make.bottom.equalTo(self)
+                } // end control
+            } else {
+                label.snp_remakeConstraints() { make in
+                    make.top.equalTo(self)
+                    make.leading.equalTo(self).offset(10)
+                    make.trailing.equalTo(self).offset(-10)
+                }
+
+                control.snp_remakeConstraints() { make in
+                    make.top.equalTo(label.snp_bottom).offset(10)
+                    make.bottom.equalTo(self)
+                    make.leading.equalTo(self).offset(10)
+                    make.trailing.equalTo(self).offset(-10)
+                }
+            }
         } // end configureView
-        
     }
 }
 
@@ -69,6 +89,10 @@ protocol FormDatePickerType: class {
 }
 
 public class FormDatePicker<L: UILabel>: BaseResultForm<NSDate> {
+
+    public var formAxis: FormAxis = .Horizontal {
+        didSet {self.datePreviewView.formAxis = self.formAxis }
+    }
 
     lazy private(set) var datePickerView: UIDatePicker = {
         let datePicker = UIDatePicker()

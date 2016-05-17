@@ -73,7 +73,7 @@ class TextFieldView<T: UITextField, L: UILabel> :
         configureUI()
     }
 
-    func configureUI() {
+    private func configureUI() {
         configureView() { (label, control) in
 
             if self.formAxis == .Horizontal {

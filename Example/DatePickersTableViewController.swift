@@ -26,6 +26,7 @@ class DatePickersTableViewController: FormTableViewController {
     private lazy var dateForm: FormDatePicker = {
         let dateForm = FormDatePicker(text: "Date")
         dateForm.datePicker.datePickerMode = .Date
+        dateForm.formAxis = .Vertical
 
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
