@@ -21,9 +21,13 @@
 import UIKit
 
 public class BaseStringTextFieldForm<T: UITextField, L: UILabel>: BaseResultForm<String> {
-    
+
     let textFieldView = TextFieldView<T, L>()
-    
+
+    public var formAxis = FormAxis.Horizontal {
+        didSet { self.textFieldView.formAxis = self.formAxis }
+    }
+
     public var textField: UITextField {
         return self.textFieldView.textField
     }

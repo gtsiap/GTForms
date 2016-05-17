@@ -24,7 +24,11 @@ public class FormDoubleTextField<T: UITextField, L: UILabel>: BaseResultForm<Dou
  
     public var maximumValue: Double?
     public var minimumValue: Double?
-    
+
+    public var formAxis = FormAxis.Horizontal {
+        didSet { self.textFieldView.formAxis = self.formAxis }
+    }
+
     public var textField: UITextField {
         return self.textFieldView.textField
     }

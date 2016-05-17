@@ -41,7 +41,9 @@ class TableViewViewController: UIViewController {
         }
 
         let t = FormIntTextField(text: "Field 1", placeHolder: "PlaceHolder")
+        t.formAxis = .Vertical
         let t2 = FormIntTextField(text: "Field 2", placeHolder: "PlaceHolder")
+        t2.formAxis = .Vertical
 
         let section = FormSection()
         section.addRow(t)

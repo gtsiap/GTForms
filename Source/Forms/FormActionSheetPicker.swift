@@ -173,7 +173,7 @@ private class ActionSheetPicker<L: UILabel>: ControlLabelView<L> {
 }
 
 public class FormActionSheetPicker<L: UILabel>: BaseResultForm<String> {
-    
+
     private let picker = ActionSheetPicker<L>()
     
     public override weak var viewController: UIViewController? {

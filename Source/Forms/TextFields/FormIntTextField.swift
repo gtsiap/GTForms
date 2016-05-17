@@ -24,7 +24,11 @@ public class FormIntTextField<T: UITextField, L: UILabel>: BaseResultForm<Int> {
     
     public var maximumValue: Int?
     public var minimumValue: Int?
-    
+
+    public var formAxis = FormAxis.Horizontal {
+        didSet { self.textFieldView.formAxis = self.formAxis }
+    }
+
     public var textField: UITextField {
         return self.textFieldView.textField
     }

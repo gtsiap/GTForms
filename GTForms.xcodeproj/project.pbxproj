@@ -15,6 +15,7 @@
 		450928CE1CEAF97300DC6CD2 /* FormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450928CB1CEAF97300DC6CD2 /* FormTableViewController.swift */; };
 		450928CF1CEAF97300DC6CD2 /* SelectionFormHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450928CC1CEAF97300DC6CD2 /* SelectionFormHelper.swift */; };
 		450928D11CEAF99000DC6CD2 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450928D01CEAF99000DC6CD2 /* TableViewController.swift */; };
+		45757BB31CEB2225006E30A0 /* FormAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45757BB21CEB2225006E30A0 /* FormAxis.swift */; };
 		4581B10A1CD2175100A68FDE /* CustomForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4581B1091CD2175100A68FDE /* CustomForm.swift */; };
 		458C9CE81C2297E600645434 /* ControlLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CDC1C2297E600645434 /* ControlLabelView.swift */; };
 		458C9CE91C2297E600645434 /* FormActionSheetPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CDD1C2297E600645434 /* FormActionSheetPicker.swift */; };
@@ -51,6 +52,7 @@
 		450928CB1CEAF97300DC6CD2 /* FormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewController.swift; sourceTree = "<group>"; };
 		450928CC1CEAF97300DC6CD2 /* SelectionFormHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionFormHelper.swift; sourceTree = "<group>"; };
 		450928D01CEAF99000DC6CD2 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		45757BB21CEB2225006E30A0 /* FormAxis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormAxis.swift; sourceTree = "<group>"; };
 		4581B1091CD2175100A68FDE /* CustomForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomForm.swift; sourceTree = "<group>"; };
 		458C9CDC1C2297E600645434 /* ControlLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlLabelView.swift; sourceTree = "<group>"; };
 		458C9CDD1C2297E600645434 /* FormActionSheetPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormActionSheetPicker.swift; sourceTree = "<group>"; };
@@ -145,6 +147,7 @@
 				458C9CDF1C2297E600645434 /* FormSwitchView.swift */,
 				458C9CF31C22981B00645434 /* FormDatePicker.swift */,
 				4581B1091CD2175100A68FDE /* CustomForm.swift */,
+				45757BB21CEB2225006E30A0 /* FormAxis.swift */,
 			);
 			path = Forms;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				45C904BD1C7F37BD001C0611 /* SelectionFormItem.swift in Sources */,
 				458C9CEB1C2297E600645434 /* FormSwitchView.swift in Sources */,
 				450928CD1CEAF97300DC6CD2 /* DatePickerHelper.swift in Sources */,
+				45757BB31CEB2225006E30A0 /* FormAxis.swift in Sources */,
 				450928CF1CEAF97300DC6CD2 /* SelectionFormHelper.swift in Sources */,
 				450282B71C1EDD6700600956 /* FormViewableType.swift in Sources */,
 				4581B10A1CD2175100A68FDE /* CustomForm.swift in Sources */,

@@ -37,6 +37,9 @@ class TextFieldView<T: UITextField, L: UILabel> :
     TextFieldViewType,
     UITextFieldDelegate
 {
+    override var formAxis: FormAxis {
+        didSet { configureUI() }
+    }
 
     var textField: UITextField {
         return self.field
@@ -67,24 +70,42 @@ class TextFieldView<T: UITextField, L: UILabel> :
         super.init()
         
         self.control = self.field
-        
+        configureUI()
+    }
+
+    func configureUI() {
         configureView() { (label, control) in
-            
-            label.snp_makeConstraints() { make in
-                make.left.equalTo(self)
-                make.top.equalTo(self)
-                make.width.equalTo(self).multipliedBy(0.3)
-                make.bottom.equalTo(self)
-            } // end label
-            
-            
-            control.snp_makeConstraints() { make in
-                make.left.equalTo(label.snp_right).offset(10)
-                make.right.equalTo(self)
-                make.top.equalTo(self)
-                make.bottom.equalTo(self)
-            } // end control
-            
+
+            if self.formAxis == .Horizontal {
+                label.snp_remakeConstraints() { make in
+                    make.left.equalTo(self)
+                    make.top.equalTo(self)
+                    make.width.equalTo(self).multipliedBy(0.3)
+                    make.bottom.equalTo(self)
+                } // end label
+
+
+                control.snp_remakeConstraints() { make in
+                    make.left.equalTo(label.snp_right).offset(10)
+                    make.right.equalTo(self)
+                    make.top.equalTo(self)
+                    make.bottom.equalTo(self)
+
+                } // end control
+            } else {
+                label.snp_remakeConstraints() { make in
+                    make.top.equalTo(self)
+                    make.leading.equalTo(self).offset(10)
+                    make.trailing.equalTo(self).offset(-10)
+                }
+
+                control.snp_remakeConstraints() { make in
+                    make.top.equalTo(label.snp_bottom).offset(10)
+                    make.bottom.equalTo(self)
+                    make.leading.equalTo(self).offset(10)
+                    make.trailing.equalTo(self).offset(-10)
+                }
+            }
         } // end configureView
     }
 

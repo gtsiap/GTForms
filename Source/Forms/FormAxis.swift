@@ -20,37 +20,7 @@
 
 import UIKit
 
-public class FormPhoneTextField<T: UITextField, L: UILabel>: BaseStringTextFieldForm<T, L> {
-
-    public override init(text: String, placeHolder: String) {
-        super.init(text: text, placeHolder: placeHolder)
-        self.textField.keyboardType = .PhonePad
-    }
-    
-    public override func validate() throws -> String? {
-        guard let
-            _ = try super.validate()
-        else { return nil }
-              
-        // validate email
-        let phoneReg =
-        "(\\+[0-9]+[\\- \\.]*)?"
-            + "(\\([0-9]+\\)[\\- \\.]*)?"
-            + "([0-9][0-9\\- \\.]+[0-9])"
-        
-        let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneReg)
-        guard let
-            result = result
-        where
-            phoneTest.evaluateWithObject(self.result) &&
-            (result.characters.count >= 10 && result.characters.count <= 20)
-        else {
-            throw ResultFormError(
-                message: "Invalid phone number"
-            )
-        }
-        
-        return self.result
-    }
-    
+public enum FormAxis {
+    case Vertical
+    case Horizontal
 }

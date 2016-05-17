@@ -22,7 +22,9 @@ import UIKit
 import SnapKit
 
 class ControlLabelView<V: UILabel>: UIView {
-    
+
+    var formAxis = FormAxis.Horizontal
+
     let controlLabel: UILabel = {
         let label = V()
         label.numberOfLines = 0
