@@ -21,7 +21,7 @@
 import UIKit
 
 public class FormSection {
-    weak var tableViewController: FormTableViewController?
+    weak var tableViewType: TableViewType?
 
     /**
         The rows of the section
@@ -56,8 +56,8 @@ public class FormSection {
         let row = addRow(form)
 
         guard let
-            vc = self.tableViewController,
-            tableView = vc.tableView
+            tableViewType = self.tableViewType,
+            tableView = tableViewType.tableView
         else {
             return row
         }
@@ -65,7 +65,7 @@ public class FormSection {
         tableView.beginUpdates()
         defer { tableView.endUpdates() }
         guard let
-            section = vc.formSections.indexOf({ $0 === self })
+            section = tableViewType.formSections.indexOf({ $0 === self })
         else {
             return row
         }
@@ -87,8 +87,8 @@ public class FormSection {
      */
     public func removeRow(form: FormableType, animation: UITableViewRowAnimation) {
         guard let
-            vc = self.tableViewController,
-            tableView = vc.tableView
+            tableViewType = self.tableViewType,
+            tableView = tableViewType.tableView
         else {
             return
         }
@@ -97,7 +97,7 @@ public class FormSection {
         defer { tableView.endUpdates() }
 
         guard let
-            section = vc.formSections.indexOf({ $0 === self })
+            section = tableViewType.formSections.indexOf({ $0 === self })
         else {
             return
         }

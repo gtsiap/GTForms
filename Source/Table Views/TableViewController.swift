@@ -20,46 +20,56 @@
 
 import UIKit
 
-public class FormTableViewController: UITableViewController {
+protocol TableViewType: class {
+    var formSections: [FormSection] { get set }
+    var tableView: UITableView! { get }
+}
 
+class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate {
     private var datePickerHelper = DatePickerHelper()
-
     private var textFieldViews = [TextFieldViewType]()
-    
-    public var formSections: [FormSection] = [FormSection]() {
+
+    private let tableViewType: TableViewType
+    private var viewController: UIViewController?
+
+    private var tableView: UITableView {
+        return self.tableViewType.tableView
+    }
+
+    init(tableViewType: TableViewType) {
+        self.tableViewType = tableViewType
+
+        super.init()
+        commonInit()
+    }
+
+    init(tableViewType: TableViewType, viewController: UIViewController) {
+        self.tableViewType = tableViewType
+        self.viewController = viewController
+
+        super.init()
+
+        commonInit()
+    }
+
+    var formSections: [FormSection] = [FormSection]() {
         didSet {
             findTextFieldViews()
             self.tableView.reloadData()
             self.formSections.forEach() {
-                $0.tableViewController = self
+                $0.tableViewType = self.tableViewType
             }
         }
     }
 
-    public func registerCustomForm(customForm: CustomForm) {
+    func registerCustomForm(customForm: CustomForm) {
         self.tableView.registerClass(
             customForm.cellClass,
             forCellReuseIdentifier: customForm.reuseIdentifier
         )
     }
 
-    public override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.tableView.estimatedRowHeight = 50
-        self.tableView.rowHeight = UITableViewAutomaticDimension
-
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ReadOnlyCell")
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AttributedReadOnlyCell")
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SelectionCell")
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SelectionItemCell")
-        self.tableView.registerClass(FormTableViewCell.self, forCellReuseIdentifier: "formCell")
-        self.tableView.registerClass(DatePickerTableViewCell.self, forCellReuseIdentifier: "DatePickerCell")
-    }
-
-    public override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-
+    func registerNotifications() {
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: #selector(keyboardWillAppear),
@@ -68,22 +78,21 @@ public class FormTableViewController: UITableViewController {
         )
     }
 
-    public override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
+    func unRegisterNotifications() {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
     // MARK: - Table view data source
-    
-    override public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.formSections.count
     }
-    
-    override public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.formSections[section].formItemsForSection().count
     }
-    
-    override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell
 
         let cellItem = self.formSections[indexPath.section].formItemsForSection()[indexPath.row]
@@ -100,8 +109,8 @@ public class FormTableViewController: UITableViewController {
                 datePickerCell = tableView.dequeueReusableCellWithIdentifier(
                     "DatePickerCell",
                     forIndexPath: indexPath
-                ) as? DatePickerTableViewCell
-            else { return UITableViewCell() }
+                    ) as? DatePickerTableViewCell
+                else { return UITableViewCell() }
 
             datePickerCell.datePicker = datePicker
             return datePickerCell
@@ -146,9 +155,9 @@ public class FormTableViewController: UITableViewController {
         } else {
             let formCell = FormTableViewCell()
             if let formViewableCell = cellRow.form as? FormViewableType {
-                formViewableCell.viewController = self
+                formViewableCell.viewController = self.viewController
             }
-            
+
             formCell.formRow = cellRow
             cell = formCell
         }
@@ -158,10 +167,10 @@ public class FormTableViewController: UITableViewController {
 
         return cell
     }
-    
+
     // MARK: tableview
-    
-    public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cellItems = self.formSections[indexPath.section].formItemsForSection()
 
         SelectionFormHelper.handleAccessory(
@@ -181,10 +190,10 @@ public class FormTableViewController: UITableViewController {
 
         guard let
             datePickerForm = formRow.form as? FormDatePicker
-        else { return }
+            else { return }
         self.datePickerHelper.currentSelectedDatePickerForm = datePickerForm
 
-        self.datePickerHelper.removeAllDatePickers(self)
+        self.datePickerHelper.removeAllDatePickers(self.tableViewType)
 
         hideKeyboard()
 
@@ -194,7 +203,7 @@ public class FormTableViewController: UITableViewController {
         )
     }
 
-    public override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         let cellItem = self.formSections[indexPath.section].formItemsForSection()[indexPath.row]
 
         if let _ = cellItem as? SelectionFormItem {
@@ -202,7 +211,7 @@ public class FormTableViewController: UITableViewController {
         }
 
         guard let cellRow = cellItem as? FormRow
-        else { return false }
+            else { return false }
 
         if let
             _ = cellRow.form as? StaticForm,
@@ -220,15 +229,15 @@ public class FormTableViewController: UITableViewController {
         } else if let _ = cellRow.form as? FormDatePicker {
             return true
         }
-        
+
         return false
     }
-    
-    public override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.formSections[section].title
     }
 
-    public  func hideKeyboard() {
+   func hideKeyboard() {
         self.textFieldViews.forEach() {
             if $0.textField.isFirstResponder() {
                 $0.textField.resignFirstResponder()
@@ -256,12 +265,26 @@ public class FormTableViewController: UITableViewController {
     @objc private func keyboardWillAppear() {
         let datePicker = self.datePickerHelper.currentSelectedDatePickerForm
         self.datePickerHelper.currentSelectedDatePickerForm = nil
-        self.datePickerHelper.removeAllDatePickers(self)
+
+        self.datePickerHelper.removeAllDatePickers(self.tableViewType)
         self.datePickerHelper.currentSelectedDatePickerForm = datePicker
     }
+
+    private func commonInit() {
+        self.tableView.estimatedRowHeight = 50
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ReadOnlyCell")
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AttributedReadOnlyCell")
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SelectionCell")
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SelectionItemCell")
+        self.tableView.registerClass(FormTableViewCell.self, forCellReuseIdentifier: "formCell")
+        self.tableView.registerClass(DatePickerTableViewCell.self, forCellReuseIdentifier: "DatePickerCell")
+    }
+
 }
 
-extension FormTableViewController: TextFieldViewDelegate {
+extension TableViewController: TextFieldViewDelegate {
     func textFieldViewShouldReturn(textFieldView: TextFieldViewType) -> Bool {
 
         var index = -1
@@ -272,11 +295,7 @@ extension FormTableViewController: TextFieldViewDelegate {
         if index == -1 {
             return false
         }
-
-      //  guard let
-        //    index = self.textFieldViews.indexOf(textFieldView)
-        //else { return false }
-
+        
         if (self.textFieldViews.count - 1) == index {
             return false
         }
@@ -284,6 +303,4 @@ extension FormTableViewController: TextFieldViewDelegate {
         let nextTextFieldView = self.textFieldViews[index + 1]
         return nextTextFieldView.textField.becomeFirstResponder()
     }
-
-
 }

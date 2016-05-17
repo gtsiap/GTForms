@@ -1,10 +1,22 @@
+// Copyright (c) 2015-2016 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@mykolab.com>
 //
-//  DatePickerHelper.swift
-//  GTForms
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
 //
-//  Created by Giorgos Tsiapaliokas on 25/02/16.
-//  Copyright © 2016 Giorgos Tsiapaliokas. All rights reserved.
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
 //
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
 
 import UIKit
 class DatePickerHelper {
@@ -13,11 +25,11 @@ class DatePickerHelper {
 
     var currentSelectedDatePickerForm: FormDatePickerType!
 
-    func removeAllDatePickers(vc: FormTableViewController) {
+    func removeAllDatePickers(tableViewType: TableViewType) {
         var indexPathsToDelete = [NSIndexPath]()
 
-        for (sectionIndex, section) in vc.formSections.enumerate() {
-            let rowCount = vc.tableView.numberOfRowsInSection(sectionIndex)
+        for (sectionIndex, section) in tableViewType.formSections.enumerate() {
+            let rowCount = tableViewType.tableView.numberOfRowsInSection(sectionIndex)
             for index in 0...rowCount - 1 {
                 let cellIndexPath = NSIndexPath(
                     forRow: index + 1,
@@ -35,7 +47,7 @@ class DatePickerHelper {
                         as? FormRow,
                     otherDatePickerForm = otherFormRow.form
                         as? FormDatePicker,
-                    datePickerCell = vc.tableView.cellForRowAtIndexPath(cellIndexPath)
+                    datePickerCell = tableViewType.tableView.cellForRowAtIndexPath(cellIndexPath)
                         as? DatePickerTableViewCell
                     where
                         datePickerCell.datePicker === otherDatePickerForm.datePicker &&
@@ -47,9 +59,9 @@ class DatePickerHelper {
             }
         }
 
-        vc.tableView.beginUpdates()
-        vc.tableView.deleteRowsAtIndexPaths(indexPathsToDelete, withRowAnimation: .Top)
-        vc.tableView.endUpdates()
+        tableViewType.tableView.beginUpdates()
+        tableViewType.tableView.deleteRowsAtIndexPaths(indexPathsToDelete, withRowAnimation: .Top)
+        tableViewType.tableView.endUpdates()
     }
 
     func showDatePicker(tableView: UITableView, cellItems: [AnyObject]) {

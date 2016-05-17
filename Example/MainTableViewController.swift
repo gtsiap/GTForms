@@ -68,6 +68,10 @@ class MainTableViewController: FormTableViewController {
             self.performSegueWithIdentifier("showCustomForm", sender: self)
         }
 
+        section.addRow(StaticForm(text: "TableView")).didSelectRow = {
+            self.performSegueWithIdentifier("showTableView", sender: self)
+        }
+
         self.formSections.append(section)
     }
 
