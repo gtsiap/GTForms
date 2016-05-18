@@ -249,12 +249,8 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
         self.textFieldViews.removeAll()
         for section in self.formSections {
             for row in section.rows {
-                if let form = row.form as? FormDoubleTextField {
-                    self.textFieldViews.append(form.textFieldView)
-                } else if let form = row.form as? FormIntTextField {
-                    self.textFieldViews.append(form.textFieldView)
-                } else if let form = row.form as? BaseStringTextFieldForm {
-                    self.textFieldViews.append(form.textFieldView)
+                if let form = row.form as? FormTextFieldViewType {
+                    self.textFieldViews.append(form.textFieldViewType)
                 }
             } // end for
         } // end for

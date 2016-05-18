@@ -20,18 +20,8 @@
 
 import UIKit
 
-public class BaseStringTextFieldForm<T: UITextField, L: UILabel>: BaseResultForm<String> {
-
-    let textFieldView = TextFieldView<T, L>()
-
-    public var formAxis = FormAxis.Horizontal {
-        didSet { self.textFieldView.formAxis = self.formAxis }
-    }
-
-    public var textField: UITextField {
-        return self.textFieldView.textField
-    }
-    
+public class BaseStringTextFieldForm<T: UITextField, L: UILabel>: BaseTextFieldForm<T, L, String>
+{
     public init(text: String, placeHolder: String) {
         super.init()
         
@@ -56,14 +46,11 @@ public class BaseStringTextFieldForm<T: UITextField, L: UILabel>: BaseResultForm
                 else { return }
 
                 self.showValidationError(err.message)
+                self.errorDidOccur()
             }
         }
         
     }
-    
-    public override func formView() -> UIView {
-        return self.textFieldView
-    }
-    
+
 }
 

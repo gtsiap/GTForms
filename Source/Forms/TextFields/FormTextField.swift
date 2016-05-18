@@ -47,7 +47,9 @@ public class FormTextField<T: UITextField, L: UILabel>: BaseStringTextFieldForm<
             where result.characters.count > maximumLength
         {
             self.textFieldView.textField.text = ""
-            
+
+            errorDidOccur()
+
             throw ResultFormError(
                 message: "\(self.text) is too long"
             )
@@ -56,7 +58,9 @@ public class FormTextField<T: UITextField, L: UILabel>: BaseStringTextFieldForm<
             where result.characters.count < minimumLength
         {
             self.textFieldView.textField.text = ""
-            
+
+            errorDidOccur()
+
             throw ResultFormError(
                 message: "\(self.text) is too short"
             )

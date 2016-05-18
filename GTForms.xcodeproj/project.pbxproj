@@ -17,6 +17,7 @@
 		450928D11CEAF99000DC6CD2 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450928D01CEAF99000DC6CD2 /* TableViewController.swift */; };
 		45757BB31CEB2225006E30A0 /* FormAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45757BB21CEB2225006E30A0 /* FormAxis.swift */; };
 		4581B10A1CD2175100A68FDE /* CustomForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4581B1091CD2175100A68FDE /* CustomForm.swift */; };
+		458C24971CEC916300B004EA /* BaseTextFieldForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C24961CEC916300B004EA /* BaseTextFieldForm.swift */; };
 		458C9CE81C2297E600645434 /* ControlLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CDC1C2297E600645434 /* ControlLabelView.swift */; };
 		458C9CE91C2297E600645434 /* FormActionSheetPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CDD1C2297E600645434 /* FormActionSheetPicker.swift */; };
 		458C9CEA1C2297E600645434 /* FormSegmentedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C9CDE1C2297E600645434 /* FormSegmentedPicker.swift */; };
@@ -54,6 +55,7 @@
 		450928D01CEAF99000DC6CD2 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		45757BB21CEB2225006E30A0 /* FormAxis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormAxis.swift; sourceTree = "<group>"; };
 		4581B1091CD2175100A68FDE /* CustomForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomForm.swift; sourceTree = "<group>"; };
+		458C24961CEC916300B004EA /* BaseTextFieldForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTextFieldForm.swift; sourceTree = "<group>"; };
 		458C9CDC1C2297E600645434 /* ControlLabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlLabelView.swift; sourceTree = "<group>"; };
 		458C9CDD1C2297E600645434 /* FormActionSheetPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormActionSheetPicker.swift; sourceTree = "<group>"; };
 		458C9CDE1C2297E600645434 /* FormSegmentedPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSegmentedPicker.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				458C9CE51C2297E600645434 /* FormPhoneTextField.swift */,
 				458C9CE61C2297E600645434 /* FormTextField.swift */,
 				458C9CE71C2297E600645434 /* TextFieldView.swift */,
+				458C24961CEC916300B004EA /* BaseTextFieldForm.swift */,
 			);
 			path = TextFields;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				450928CE1CEAF97300DC6CD2 /* FormTableViewController.swift in Sources */,
 				458C9CE81C2297E600645434 /* ControlLabelView.swift in Sources */,
 				450282B51C1EDC3F00600956 /* FormSection.swift in Sources */,
+				458C24971CEC916300B004EA /* BaseTextFieldForm.swift in Sources */,
 				450928D11CEAF99000DC6CD2 /* TableViewController.swift in Sources */,
 				45EA8C961C1FFF6B00FD0F8C /* FormTableViewCell.swift in Sources */,
 			);

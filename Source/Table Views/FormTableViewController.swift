@@ -26,7 +26,6 @@ public class FormTableViewController: UITableViewController {
     public var formSections: [FormSection] {
         set(newValue) {
             self.tableViewController.formSections = newValue
-            self.tableView.reloadData()
         }
 
         get {

@@ -21,7 +21,11 @@
 import UIKit
 import SnapKit
 
-protocol  TextFieldViewType: class {
+protocol FormTextFieldViewType {
+    var textFieldViewType: TextFieldViewType { get }
+}
+
+protocol TextFieldViewType: class {
     var textField: UITextField { get }
     weak var delegate: TextFieldViewDelegate? { get set }
 }

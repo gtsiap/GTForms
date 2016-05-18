@@ -45,6 +45,8 @@ public class FormPhoneTextField<T: UITextField, L: UILabel>: BaseStringTextField
             phoneTest.evaluateWithObject(self.result) &&
             (result.characters.count >= 10 && result.characters.count <= 20)
         else {
+            errorDidOccur()
+
             throw ResultFormError(
                 message: "Invalid phone number"
             )

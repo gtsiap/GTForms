@@ -20,20 +20,10 @@
 
 import UIKit
 
-public class FormIntTextField<T: UITextField, L: UILabel>: BaseResultForm<Int> {
-    
+public class FormIntTextField<T: UITextField, L: UILabel>: BaseTextFieldForm<T, L, Int> {
     public var maximumValue: Int?
     public var minimumValue: Int?
 
-    public var formAxis = FormAxis.Horizontal {
-        didSet { self.textFieldView.formAxis = self.formAxis }
-    }
-
-    public var textField: UITextField {
-        return self.textFieldView.textField
-    }
-    
-    let textFieldView = TextFieldView<T, L>()
     private var candidateText = ""
     
     public init(text: String, placeHolder: String) {
@@ -91,10 +81,6 @@ public class FormIntTextField<T: UITextField, L: UILabel>: BaseResultForm<Int> {
         return self.result
     }
     
-    public override func formView() -> UIView {
-        return self.textFieldView
-    }
-    
     private func validationRulesForTextEditing() throws {
         // Backspace
         if self.candidateText.isEmpty {
@@ -116,7 +102,8 @@ public class FormIntTextField<T: UITextField, L: UILabel>: BaseResultForm<Int> {
             where self.result > maximumValue
         {
             self.textFieldView.textField.text = ""
-            
+            errorDidOccur()
+
             throw ResultFormError(
                 message: "The value is too big for \(self.text). \n The maximum value is \(maximumValue)"
             )
@@ -125,7 +112,8 @@ public class FormIntTextField<T: UITextField, L: UILabel>: BaseResultForm<Int> {
             where self.result < minimumValue
         {
             self.textFieldView.textField.text = ""
-            
+            errorDidOccur()
+
             throw ResultFormError(
                 message: "The value is too small for \(self.text) \n The minimum value is \(minimumValue)"
             )
