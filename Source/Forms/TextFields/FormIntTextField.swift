@@ -90,6 +90,7 @@ public class FormIntTextField<T: UITextField, L: UILabel>: BaseTextFieldForm<T, 
         guard let
             _ = Int(self.candidateText)
         else {
+            errorDidOccur()
             throw ResultFormError(
                 message: "Only Decimal numbers are allowed"
             )
