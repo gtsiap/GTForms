@@ -40,10 +40,16 @@ public class FormTableView: UITableView, TableViewType {
     public init(style: UITableViewStyle) {
         super.init(frame: CGRectZero, style: style)
         self.tableViewController = TableViewController(tableViewType: self)
-        self.delegate = self.tableViewController
-        self.dataSource = self.tableViewController
+        commonInit()
+    }
 
-        self.tableViewController.registerNotifications()
+    public init(style: UITableViewStyle, viewController: UIViewController) {
+        super.init(frame: CGRectZero, style: style)
+        self.tableViewController = TableViewController(
+            tableViewType: self,
+            viewController:  viewController
+        )
+        commonInit()
     }
 
     deinit {
@@ -54,4 +60,9 @@ public class FormTableView: UITableView, TableViewType {
         fatalError("init(coder:) has not been implemented")
     }
 
+    private func commonInit() {
+        self.tableViewController.registerNotifications()
+        self.delegate = self.tableViewController
+        self.dataSource = self.tableViewController
+    }
 }
