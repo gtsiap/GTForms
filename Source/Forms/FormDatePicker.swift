@@ -29,11 +29,7 @@ private class DatePreviewView<L: UILabel>: ControlLabelView<L>  {
 
     let displayLabel: UILabel = {
         let label = L()
-        label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.textAlignment = .Left
-
         return label
     }()
 
