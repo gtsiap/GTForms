@@ -46,7 +46,7 @@ class DatePickerHelper {
                     otherFormRow = cellItems[index]
                         as? FormRow,
                     otherDatePickerForm = otherFormRow.form
-                        as? FormDatePicker,
+                        as? FormDatePickerType,
                     datePickerCell = tableViewType.tableView.cellForRowAtIndexPath(cellIndexPath)
                         as? DatePickerTableViewCell
                     where
@@ -86,7 +86,7 @@ class DatePickerHelper {
                     otherFormRow = cellItems[index]
                         as? FormRow,
                     otherDatePickerForm = otherFormRow.form
-                        as? FormDatePicker
+                        as? FormDatePickerType
                 where self.currentSelectedDatePickerForm === otherDatePickerForm
                 else { continue }
 

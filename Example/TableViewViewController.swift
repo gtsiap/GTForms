@@ -22,6 +22,9 @@ import UIKit
 import GTForms
 import SnapKit
 
+private class _Label: UILabel { }
+private class _TextField: UITextField { }
+
 class TableViewViewController: UIViewController {
     private let tableView: FormTableView = {
         let t = FormTableView(style: .Grouped)
@@ -40,14 +43,18 @@ class TableViewViewController: UIViewController {
             make.width.height.equalTo(self.view).multipliedBy(0.8)
         }
 
-        let t = FormIntTextField(text: "Field 1", placeHolder: "PlaceHolder")
+        let t = FormIntTextField<_TextField, _Label>(text: "Field 1", placeHolder: "PlaceHolder")
         t.formAxis = .Vertical
-        let t2 = FormIntTextField(text: "Field 2", placeHolder: "PlaceHolder")
+        let t2 = FormIntTextField<_TextField, _Label>(text: "Field 2", placeHolder: "PlaceHolder")
         t2.formAxis = .Vertical
+
+        let d = FormDatePicker<_Label>(text: "Date")
+        d.formAxis = .Vertical
 
         let section = FormSection()
         section.addRow(t)
         section.addRow(t2)
+        section.addRow(d)
 
         self.tableView.formSections.append(section)
     }

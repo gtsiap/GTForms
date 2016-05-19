@@ -82,6 +82,7 @@ private class DatePreviewView<L: UILabel>: ControlLabelView<L>  {
 
 protocol FormDatePickerType: class {
     var shouldExpand: Bool? { get set }
+    var datePicker: UIDatePicker { get }
 }
 
 public class FormDatePicker<L: UILabel>: BaseResultForm<NSDate> {

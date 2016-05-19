@@ -189,7 +189,7 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
         )
 
         guard let
-            datePickerForm = formRow.form as? FormDatePicker
+            datePickerForm = formRow.form as? FormDatePickerType
             else { return }
         self.datePickerHelper.currentSelectedDatePickerForm = datePickerForm
 
@@ -226,7 +226,7 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
         } else if let selectionForm = cellRow.form as? SelectionForm
         {
             return !selectionForm.shouldAlwaysShowAllItems ? true : false
-        } else if let _ = cellRow.form as? FormDatePicker {
+        } else if let _ = cellRow.form as? FormDatePickerType {
             return true
         }
 

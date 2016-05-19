@@ -168,11 +168,11 @@ public class FormSection {
             }
 
             if let
-                datePickerForm = row.form as? FormDatePicker,
+                datePickerForm = row.form as? FormDatePickerType,
                 shouldExpand = datePickerForm.shouldExpand
                 where shouldExpand
             {
-                formRows.append(datePickerForm.datePickerView)
+                formRows.append(datePickerForm.datePicker)
             }
         }
 
