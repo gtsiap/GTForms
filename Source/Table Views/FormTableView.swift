@@ -22,6 +22,7 @@ import UIKit
 
 public class FormTableView: UITableView, TableViewType {
     private var tableViewController: TableViewController!
+    private var didMofidyTableViewForKeyboard = false
 
     public var formSections: [FormSection] {
         set(newValue) {
@@ -54,6 +55,7 @@ public class FormTableView: UITableView, TableViewType {
 
     deinit {
         self.tableViewController.unRegisterNotifications()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -64,5 +66,49 @@ public class FormTableView: UITableView, TableViewType {
         self.tableViewController.registerNotifications()
         self.delegate = self.tableViewController
         self.dataSource = self.tableViewController
+
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(keyboardWillAppear),
+            name: UIKeyboardWillShowNotification,
+            object: nil
+        )
+
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIKeyboardWillHideNotification,
+            object: nil
+        )
+    }
+
+    @objc private func keyboardWillAppear(notification: NSNotification) {
+        if self.didMofidyTableViewForKeyboard {
+            return
+        }
+
+        guard let
+            keyboardHeight = notification
+                .userInfo?[UIKeyboardFrameEndUserInfoKey]?
+                .CGRectValue().size.height
+        else { return }
+
+        let contentInsets = UIEdgeInsets(
+            top: 0,
+            left: 0,
+            bottom: keyboardHeight,
+            right: 0
+        )
+
+        self.contentInset = contentInsets
+        self.scrollIndicatorInsets = contentInsets
+        self.didMofidyTableViewForKeyboard = true
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        let contentInsets = UIEdgeInsetsZero
+        self.contentInset = contentInsets
+        self.scrollIndicatorInsets = contentInsets
+        self.didMofidyTableViewForKeyboard = false
     }
 }

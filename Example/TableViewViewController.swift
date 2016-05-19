@@ -55,6 +55,14 @@ class TableViewViewController: UIViewController {
         section.addRow(t)
         section.addRow(t2)
         section.addRow(d)
+        section.addRow(FormTextField<_TextField, _Label>(text: "Field 3", placeHolder: "PlaceHolder"))
+        section.addRow(FormTextField<_TextField, _Label>(text: "Field 4", placeHolder: "PlaceHolder"))
+        section.addRow(FormTextField<_TextField, _Label>(text: "Field 5", placeHolder: "PlaceHolder"))
+        section.addRow(FormTextField<_TextField, _Label>(text: "Field 6", placeHolder: "PlaceHolder"))
+        section.addRow(FormTextField<_TextField, _Label>(text: "Field 7", placeHolder: "PlaceHolder"))
+        section.addRow(FormTextField<_TextField, _Label>(text: "Field 8", placeHolder: "PlaceHolder"))
+        section.addRow(FormTextField<_TextField, _Label>(text: "Field 9", placeHolder: "PlaceHolder"))
+        section.addRow(FormTextField<_TextField, _Label>(text: "Field 10", placeHolder: "PlaceHolder"))
 
         self.tableView.formSections.append(section)
     }
