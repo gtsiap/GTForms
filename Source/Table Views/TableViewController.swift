@@ -284,15 +284,17 @@ extension TableViewController: TextFieldViewDelegate {
     func textFieldViewShouldReturn(textFieldView: TextFieldViewType) -> Bool {
 
         var index = -1
-        for (i, _) in self.textFieldViews.enumerate() {
-            index = i
+        for (i, it) in self.textFieldViews.enumerate() {
+            if it === textFieldView {
+                index = i
+            }
         }
 
         if index == -1 {
             return false
         }
         
-        if (self.textFieldViews.count - 1) == index {
+        if index + 1 >= self.textFieldViews.count {
             return false
         }
         
