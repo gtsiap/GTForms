@@ -33,6 +33,12 @@ public struct ResultFormError: ErrorType {
 */
 public class BaseResultForm<T>: FormViewableType {
     /**
+        Use this if you want to provide a custom cell for
+        this form
+     */
+    public var customCellIdentifier: String?
+
+    /**
         The Result of the form
      */
     private(set) var result: T?

@@ -1,4 +1,3 @@
-
 // Copyright (c) 2015-2016 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@mykolab.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,33 +18,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-//
-//  FormTableViewCell.swift
-//  GtsiapKit
-//
-//  Created by Giorgos Tsiapaliokas on 22/10/15.
-//  Copyright © 2015 Giorgos Tsiapaliokas. All rights reserved.
-//
-
 import UIKit
 import SnapKit
 
-class FormTableViewCell: UITableViewCell {
-    
-    var formRow: FormRow? {
+public class FormTableViewCell: UITableViewCell {
+
+    public var formRow: FormRow? {
         didSet {
             configureCell()
         }
     }
+
+    public func configureCell() {
+    }
     
+}
+
+class BaseFormTableViewCell: FormTableViewCell {
     private var cellView: UIView!
-    
-    private func configureCell() {
+
+     override func configureCell() {
         guard let
             formRow = self.formRow,
             formView = formRow.form as? FormViewableType
         else { return }
-        
+
         if let _ = self.cellView {
             // if the cellView exists
             // then configureCell has been
@@ -53,12 +50,12 @@ class FormTableViewCell: UITableViewCell {
             // so let's remove the old view
             self.cellView.removeFromSuperview()
         }
-        
+
         self.cellView = formView.formView()
-        
+
         self.contentView.addSubview(self.cellView)
         self.cellView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         self.contentView.addSubview(self.cellView)
         self.cellView.snp_makeConstraints() { make in
             make.top.equalTo(self.contentView).offset(10)
@@ -66,7 +63,5 @@ class FormTableViewCell: UITableViewCell {
             make.left.equalTo(self.contentView).offset(10)
             make.right.equalTo(self.contentView).offset(-10)
         }
-        
     }
-    
 }

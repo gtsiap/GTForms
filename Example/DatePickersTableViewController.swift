@@ -27,6 +27,7 @@ class DatePickersTableViewController: FormTableViewController {
         let dateForm = FormDatePicker(text: "Date")
         dateForm.datePicker.datePickerMode = .Date
         dateForm.formAxis = .Vertical
+        dateForm.customCellIdentifier = "customDatePickerCell"
 
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -52,6 +53,11 @@ class DatePickersTableViewController: FormTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.tableView.registerClass(
+            FormDatePickerCustomCell.self,
+            forCellReuseIdentifier: "customDatePickerCell"
+        )
+
         let section = FormSection()
         section.addRow(self.dateForm)
         section.addRow(self.timeForm)
@@ -66,3 +72,48 @@ class DatePickersTableViewController: FormTableViewController {
     }
 
 }
+
+class FormDatePickerCustomCell: FormTableViewCell {
+    private var cellView: UIView!
+
+    override func configureCell() {
+        super.configureCell()
+
+        guard let
+            formRow = self.formRow,
+            formView = formRow.form as? FormViewableType
+            else { return }
+
+        if let _ = self.cellView {
+            // if the cellView exists
+            // then configureCell has been
+            // called for a second time
+            // so let's remove the old view
+            self.cellView.removeFromSuperview()
+        }
+
+        self.cellView = formView.formView()
+
+        self.contentView.addSubview(self.cellView)
+        self.cellView.translatesAutoresizingMaskIntoConstraints = false
+
+        let borderView = UIView()
+        borderView.translatesAutoresizingMaskIntoConstraints = false
+        borderView.layer.borderColor = UIColor.blackColor().CGColor
+        borderView.layer.borderWidth = 1
+
+        self.contentView.addSubview(borderView)
+
+        borderView.snp_makeConstraints() { make in
+            make.top.leading.equalTo(self.contentView).offset(5)
+            make.bottom.trailing.equalTo(self.contentView).offset(-5)
+        }
+
+        self.contentView.addSubview(self.cellView)
+        self.cellView.snp_makeConstraints() { make in
+            make.top.leading.equalTo(borderView).offset(5)
+            make.bottom.trailing.equalTo(borderView).offset(-5)
+        }
+    }
+}
+

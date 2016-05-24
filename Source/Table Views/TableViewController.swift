@@ -109,8 +109,8 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
                 datePickerCell = tableView.dequeueReusableCellWithIdentifier(
                     "DatePickerCell",
                     forIndexPath: indexPath
-                    ) as? DatePickerTableViewCell
-                else { return UITableViewCell() }
+                ) as? DatePickerTableViewCell
+            else { return UITableViewCell() }
 
             datePickerCell.datePicker = datePicker
             return datePickerCell
@@ -153,7 +153,19 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
 
             cell.selectionStyle = .None
         } else {
-            let formCell = FormTableViewCell()
+            let formCell: FormTableViewCell
+
+            if let
+                f = cellRow.form as? FormViewableType,
+                cellIdentifier = f.customCellIdentifier
+            {
+                formCell = tableView.dequeueReusableCellWithIdentifier(
+                    cellIdentifier, forIndexPath: indexPath
+                ) as! FormTableViewCell
+            } else {
+                formCell = BaseFormTableViewCell()
+            }
+            
             if let formViewableCell = cellRow.form as? FormViewableType {
                 formViewableCell.viewController = self.viewController
             }

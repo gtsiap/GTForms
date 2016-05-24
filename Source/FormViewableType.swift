@@ -31,6 +31,16 @@ public protocol FormableType: class {}
 public protocol FormViewableType: class, FormableType {
     func formView() -> UIView
     var viewController: UIViewController? { get set }
+
+    /**
+        Use this var if you want to provide a custom cell for an existing
+        form.
+        - NOTE: You shouldn't confuse this var with CustomForm.
+        You need to use CustomForm when you want to provide a custom form
+        if you want to provide a custom cell for an existing class use this
+        one.
+    */
+    var customCellIdentifier: String? { get }
 }
 
 extension FormViewableType {
