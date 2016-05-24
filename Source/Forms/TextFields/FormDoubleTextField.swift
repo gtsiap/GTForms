@@ -20,11 +20,8 @@
 
 import UIKit
 
-public class FormDoubleTextField<T: UITextField, L: UILabel>: BaseTextFieldForm<T, L, Double> {
+public class FormDoubleTextField<T: UITextField, L: UILabel>: BaseNumberTextFieldForm<T, L, Double> {
  
-    public var maximumValue: Double?
-    public var minimumValue: Double?
-
     private var candidateText = ""
     
     public init(text: String, placeHolder: String) {
@@ -106,33 +103,6 @@ public class FormDoubleTextField<T: UITextField, L: UILabel>: BaseTextFieldForm<
             )
         }
     }
-    
-    private func validationRulesForLimits() throws {
-        if let
-            maximumValue = self.maximumValue
-            where self.result > maximumValue
-        {
-            self.textFieldView.textField.text = ""
-
-            self.errorDidOccur()
-
-            throw ResultFormError(
-                message: "The value is too big for \(self.text). \n The maximum value is \(maximumValue)"
-            )
-        } else if let
-            minimumValue = self.minimumValue
-            where self.result < minimumValue
-        {
-            self.textFieldView.textField.text = ""
-
-            errorDidOccur()
-
-            throw ResultFormError(
-                message: "The value is too small for \(self.text) \n The minimum value is \(minimumValue)"
-            )
-        }
-    }
-    
   
 }
 

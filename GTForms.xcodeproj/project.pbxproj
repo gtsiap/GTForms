@@ -15,6 +15,7 @@
 		450928CE1CEAF97300DC6CD2 /* FormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450928CB1CEAF97300DC6CD2 /* FormTableViewController.swift */; };
 		450928CF1CEAF97300DC6CD2 /* SelectionFormHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450928CC1CEAF97300DC6CD2 /* SelectionFormHelper.swift */; };
 		450928D11CEAF99000DC6CD2 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 450928D01CEAF99000DC6CD2 /* TableViewController.swift */; };
+		456CF9051CF458CE00DF2AC6 /* BaseNumberTextFieldForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456CF9041CF458CE00DF2AC6 /* BaseNumberTextFieldForm.swift */; };
 		45757BB31CEB2225006E30A0 /* FormAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45757BB21CEB2225006E30A0 /* FormAxis.swift */; };
 		4581B10A1CD2175100A68FDE /* CustomForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4581B1091CD2175100A68FDE /* CustomForm.swift */; };
 		458C24971CEC916300B004EA /* BaseTextFieldForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458C24961CEC916300B004EA /* BaseTextFieldForm.swift */; };
@@ -53,6 +54,7 @@
 		450928CB1CEAF97300DC6CD2 /* FormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewController.swift; sourceTree = "<group>"; };
 		450928CC1CEAF97300DC6CD2 /* SelectionFormHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionFormHelper.swift; sourceTree = "<group>"; };
 		450928D01CEAF99000DC6CD2 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		456CF9041CF458CE00DF2AC6 /* BaseNumberTextFieldForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNumberTextFieldForm.swift; sourceTree = "<group>"; };
 		45757BB21CEB2225006E30A0 /* FormAxis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormAxis.swift; sourceTree = "<group>"; };
 		4581B1091CD2175100A68FDE /* CustomForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomForm.swift; sourceTree = "<group>"; };
 		458C24961CEC916300B004EA /* BaseTextFieldForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTextFieldForm.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				458C9CE61C2297E600645434 /* FormTextField.swift */,
 				458C9CE71C2297E600645434 /* TextFieldView.swift */,
 				458C24961CEC916300B004EA /* BaseTextFieldForm.swift */,
+				456CF9041CF458CE00DF2AC6 /* BaseNumberTextFieldForm.swift */,
 			);
 			path = TextFields;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 			files = (
 				458C9CEE1C2297E600645434 /* FormEmailTextField.swift in Sources */,
 				458C9CEF1C2297E600645434 /* FormIntTextField.swift in Sources */,
+				456CF9051CF458CE00DF2AC6 /* BaseNumberTextFieldForm.swift in Sources */,
 				458C9CEA1C2297E600645434 /* FormSegmentedPicker.swift in Sources */,
 				45A0D8121C7CC8C500F74609 /* DatePickerTableViewCell.swift in Sources */,
 				458C9CEC1C2297E600645434 /* BaseStringTextFieldForm.swift in Sources */,

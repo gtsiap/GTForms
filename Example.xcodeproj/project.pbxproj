@@ -13,6 +13,7 @@
 		450282AD1C1ED71000600956 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 450282AB1C1ED71000600956 /* LaunchScreen.storyboard */; };
 		4544C0C31CD26CBF00C827AF /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4544C0C21CD26CBF00C827AF /* SnapKit.framework */; };
 		455FCE1C1CEB175900E05A02 /* TableViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455FCE1B1CEB175900E05A02 /* TableViewViewController.swift */; };
+		456CF9071CF4650200DF2AC6 /* TextFieldErrorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456CF9061CF4650200DF2AC6 /* TextFieldErrorsViewController.swift */; };
 		457C1DCA1C808B09003BB111 /* TestKeyboardTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457C1DC91C808B09003BB111 /* TestKeyboardTableViewController.swift */; };
 		4581B10C1CD2187A00A68FDE /* CustomTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4581B10B1CD2187A00A68FDE /* CustomTableViewController.swift */; };
 		4594F84A1C7DE8C50089A1B9 /* DatePickersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4594F8491C7DE8C50089A1B9 /* DatePickersTableViewController.swift */; };
@@ -63,6 +64,7 @@
 		450282AE1C1ED71000600956 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4544C0C21CD26CBF00C827AF /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		455FCE1B1CEB175900E05A02 /* TableViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewViewController.swift; sourceTree = "<group>"; };
+		456CF9061CF4650200DF2AC6 /* TextFieldErrorsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldErrorsViewController.swift; sourceTree = "<group>"; };
 		457C1DC91C808B09003BB111 /* TestKeyboardTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestKeyboardTableViewController.swift; sourceTree = "<group>"; };
 		4581B10B1CD2187A00A68FDE /* CustomTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewController.swift; sourceTree = "<group>"; };
 		4594F8491C7DE8C50089A1B9 /* DatePickersTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickersTableViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 		450282A11C1ED71000600956 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				456CF9061CF4650200DF2AC6 /* TextFieldErrorsViewController.swift */,
 				450282A21C1ED71000600956 /* AppDelegate.swift */,
 				450282A61C1ED71000600956 /* Main.storyboard */,
 				450282A91C1ED71000600956 /* Assets.xcassets */,
@@ -245,6 +248,7 @@
 				450282A31C1ED71000600956 /* AppDelegate.swift in Sources */,
 				45A0D80E1C7C842A00F74609 /* SelectionFormTableViewController.swift in Sources */,
 				4581B10C1CD2187A00A68FDE /* CustomTableViewController.swift in Sources */,
+				456CF9071CF4650200DF2AC6 /* TextFieldErrorsViewController.swift in Sources */,
 				45EA8CA21C2000EB00FD0F8C /* FormsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

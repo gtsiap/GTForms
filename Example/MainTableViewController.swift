@@ -72,6 +72,11 @@ class MainTableViewController: FormTableViewController {
             self.performSegueWithIdentifier("showTableView", sender: self)
         }
 
+
+        section.addRow(StaticForm(text: "TextField Errors")).didSelectRow = {
+            self.performSegueWithIdentifier("showTextFieldErrors", sender: self)
+        }
+
         self.formSections.append(section)
     }
 

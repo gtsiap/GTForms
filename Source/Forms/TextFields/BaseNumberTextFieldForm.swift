@@ -20,67 +20,48 @@
 
 import UIKit
 
-public protocol FormTextFieldValueLengthErrorDescriptionDelegate: class {
-    func minimumLengthErrorDescription(value: Any, formText: String) -> String?
-    func maximumLengthErrorDescription(value: Any, formText: String) -> String?
+public protocol FormTextFieldValueRangeErrorDescriptionDelegate: class {
+    func minimumValueErrorDescription(value: Any, formText: String) -> String?
+    func maximumValueErrorDescription(value: Any, formText: String) -> String?
 }
 
-public class FormTextField<T: UITextField, L: UILabel>: BaseStringTextFieldForm<T, L> {
+public class BaseNumberTextFieldForm<
+    T: UITextField,
+    L: UILabel, V: Comparable>:
+    BaseTextFieldForm<T, L, V>
+{
+    public var maximumValue: V?
+    public var minimumValue: V?
+    public weak var descriptionValueErrorDelegate: FormTextFieldValueRangeErrorDescriptionDelegate?
 
-    public override init(text: String, placeHolder: String) {
-        super.init(text: text, placeHolder: placeHolder)
-    }
-
-    public weak var descriptionLengthErrorDelegate: FormTextFieldValueLengthErrorDescriptionDelegate?
-
-    public var maximumLength: Int?
-    public var minimumLength: Int?
-    
-    public override func validate() throws -> String? {
-        guard let
-            _ = try super.validate()
-        else { return nil }
-
-        guard let result = self.result else {
-            return nil
-        }
-
-        if result.isEmpty {
-            return nil
-        }
-
+    func validationRulesForLimits() throws {
         if let
-            maximumLength = self.maximumLength
-            where result.characters.count > maximumLength
+            maximumValue = self.maximumValue
+            where self.result > maximumValue
         {
             self.textFieldView.textField.text = ""
-
-            errorDidOccur()
-
-            throw ResultFormError(
-                message: self.descriptionLengthErrorDelegate?.maximumLengthErrorDescription(result, formText: self.text)
-                ??
-                "\(self.text) is too long"
-            )
-        } else if let
-            minimumLength = self.minimumLength
-            where result.characters.count < minimumLength
-        {
-            self.textFieldView.textField.text = ""
-
             errorDidOccur()
 
             throw ResultFormError(
                 message:
-                self.descriptionLengthErrorDelegate?.minimumLengthErrorDescription(result, formText: self.text)
+                    self.descriptionValueErrorDelegate?.maximumValueErrorDescription(maximumValue, formText: self.text)
+                    ??
+                    "The value is too big for \(self.text). \n The maximum value is \(maximumValue)"
+            )
+        } else if let
+            minimumValue = self.minimumValue
+            where self.result < minimumValue
+        {
+            self.textFieldView.textField.text = ""
+            errorDidOccur()
+
+            throw ResultFormError(
+                message:
+                self.descriptionValueErrorDelegate?.minimumValueErrorDescription(minimumValue, formText: self.text)
                 ??
-                "\(self.text) is too short"
+                "The value is too small for \(self.text) \n The minimum value is \(minimumValue)"
             )
         }
-        
-        return self.result
     }
-    
-    
-}
 
+}
