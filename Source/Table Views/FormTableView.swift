@@ -62,6 +62,10 @@ public class FormTableView: UITableView, TableViewType {
         fatalError("init(coder:) has not been implemented")
     }
 
+    public func registerCustomForm(customForm: CustomForm) {
+        self.tableViewController.registerCustomForm(customForm)
+    }
+
     private func commonInit() {
         self.tableViewController.registerNotifications()
         self.delegate = self.tableViewController
