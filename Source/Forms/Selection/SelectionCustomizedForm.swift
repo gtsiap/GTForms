@@ -1,4 +1,4 @@
-// Copyright (c) 2015-2016 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@mykolab.com>
+// Copyright (c) 2016 Giorgos Tsiapaliokas <giorgos.tsiapaliokas@mykolab.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,26 +20,21 @@
 
 import UIKit
 
-public class SelectionForm: BaseSelectionForm {
+public class SelectionCustomizedFormCell: UITableViewCell {
+    public func configure(text: String, detailText: String?) {
+        
+    }
+}
 
-    public var textColor: UIColor?
-    public var textFont: UIFont?
-
-    public var detailTextColor: UIColor?
-    public var detailTextFont: UIFont?
-
+public class SelectionCustomizedForm: BaseSelectionForm {
     public init(
-        items: [SelectionFormItem],
+        items: [BaseSelectionFormItem],
         text: String,
-        detailText: String? = nil,
-        animation: UITableViewRowAnimation = .Top
+        cellReuseIdentifier: String,
+        detailText: String? = nil, animation: UITableViewRowAnimation = .Top
     ) {
-        super.init(
-            items: items,
-            text: text,
-            detailText: detailText,
-            animation: animation
-        )
+        super.init(items: items, text: text, detailText: detailText, animation: animation)
+        self.cellReuseIdentifier = cellReuseIdentifier
     }
 
 }

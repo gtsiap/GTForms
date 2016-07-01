@@ -97,12 +97,23 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
 
         let cellItem = self.formSections[indexPath.section].formItemsForSection()[indexPath.row]
 
-        if let selectionItem = cellItem as? SelectionFormItem {
-            cell = tableView.dequeueReusableCellWithIdentifier("SelectionItemCell", forIndexPath: indexPath)
-            cell.textLabel?.text = selectionItem.text
-            cell.detailTextLabel?.text = selectionItem.detailText
+        if let selectionItem = cellItem as? BaseSelectionFormItem {
+            cell = tableView.dequeueReusableCellWithIdentifier(
+                selectionItem.cellReuseIdentifier,
+                forIndexPath: indexPath
+            )
+
             cell.selectionStyle = .None
-            cell.accessoryType = selectionItem.selected ? selectionItem.accessoryType : .None
+            if let selectionItem = selectionItem as? SelectionFormItem {
+                cell.textLabel?.text = selectionItem.text
+                cell.detailTextLabel?.text = selectionItem.detailText
+                cell.accessoryType = selectionItem.selected ? selectionItem.accessoryType : .None
+            } else if let
+                _ = selectionItem as? SelectionCustomizedFormItem,
+                cell = cell as? SelectionCustomizedFormItemCell
+            {
+                cell.configure(selectionItem.text, detailText: selectionItem.detailText)
+            }
             return cell
         } else if let datePicker = cellItem as? UIDatePicker {
             guard let
@@ -130,27 +141,34 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
             cell = tableView.dequeueReusableCellWithIdentifier("AttributedReadOnlyCell", forIndexPath: indexPath)
             cell.textLabel?.attributedText = staticForm.text
             cell.detailTextLabel?.attributedText = staticForm.detailText
-        } else if let selectionForm = cellRow.form as? SelectionForm {
-            cell = tableView.dequeueReusableCellWithIdentifier("SelectionCell", forIndexPath: indexPath)
-            cell.textLabel?.text = selectionForm.text
-            cell.detailTextLabel?.text = selectionForm.detailText
+        } else if let selectionForm = cellRow.form as? BaseSelectionForm {
+            cell = tableView.dequeueReusableCellWithIdentifier(selectionForm.cellReuseIdentifier, forIndexPath: indexPath)
 
-            if let textColor = selectionForm.textColor {
-                cell.textLabel?.textColor = textColor
+            if let selectionForm = selectionForm as? SelectionForm {
+                cell.textLabel?.text = selectionForm.text
+                cell.detailTextLabel?.text = selectionForm.detailText
+
+                if let textColor = selectionForm.textColor {
+                    cell.textLabel?.textColor = textColor
+                }
+
+                if let textFont = selectionForm.textFont {
+                    cell.textLabel?.font = textFont
+                }
+
+                if let detailTextColor = selectionForm.detailTextColor {
+                    cell.detailTextLabel?.textColor = detailTextColor
+                }
+
+                if let detailTextFont = selectionForm.detailTextFont {
+                    cell.textLabel?.font = detailTextFont
+                }
+            } else if let
+                item = selectionForm as? SelectionCustomizedForm,
+                cell = cell as? SelectionCustomizedFormCell
+            {
+                cell.configure(item.text, detailText: item.detailText)
             }
-
-            if let textFont = selectionForm.textFont {
-                cell.textLabel?.font = textFont
-            }
-
-            if let detailTextColor = selectionForm.detailTextColor {
-                cell.detailTextLabel?.textColor = detailTextColor
-            }
-
-            if let detailTextFont = selectionForm.detailTextFont {
-                cell.textLabel?.font = detailTextFont
-            }
-
             cell.selectionStyle = .None
         } else {
             let formCell: FormTableViewCell
@@ -215,10 +233,20 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
         )
     }
 
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        let cellItems = self.formSections[indexPath.section].formItemsForSection()
+
+        SelectionFormHelper.handleAccessory(
+            cellItems,
+            tableView: self.tableView,
+            indexPath: indexPath
+        )
+    }
+
     func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         let cellItem = self.formSections[indexPath.section].formItemsForSection()[indexPath.row]
 
-        if let _ = cellItem as? SelectionFormItem {
+        if let _ = cellItem as? BaseSelectionFormItem {
             return true
         }
 
@@ -235,7 +263,7 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
             _ = cellRow.didSelectRow
         {
             return true
-        } else if let selectionForm = cellRow.form as? SelectionForm
+        } else if let selectionForm = cellRow.form as? BaseSelectionForm
         {
             return !selectionForm.shouldAlwaysShowAllItems ? true : false
         } else if let _ = cellRow.form as? FormDatePickerType {

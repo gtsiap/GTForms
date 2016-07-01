@@ -20,6 +20,67 @@
 
 import UIKit
 import GTForms
+import SnapKit
+
+class ExampleSelectionCustomizedFormCell: SelectionCustomizedFormCell {
+    private let label = UILabel()
+
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        self.label.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(label)
+        self.label.snp_makeConstraints() { make in
+            make.edges.equalTo(self.contentView).offset(UIEdgeInsetsMake(10, 10, -10, -10))
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func configure(text: String, detailText: String?) {
+        self.label.text = text
+        self.contentView.backgroundColor = UIColor.redColor()
+    }
+}
+
+class ExampleSelectionCustomizedFormItemCell: SelectionCustomizedFormItemCell {
+
+    private let label = UILabel()
+
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
+        self.label.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(label)
+        self.label.snp_makeConstraints() { make in
+            make.edges.equalTo(self.contentView).offset(UIEdgeInsetsMake(10, 10, -10, -10))
+        }
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func configure(text: String, detailText: String?) {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = text
+        self.contentView.addSubview(label)
+        label.snp_makeConstraints() { make in
+            make.edges.equalTo(self.contentView).offset(UIEdgeInsetsMake(10, 10, -10, -10))
+        }
+    }
+
+    override func didSelect() {
+        self.contentView.backgroundColor = UIColor.yellowColor()
+    }
+
+    override func didDeSelect() {
+        self.contentView.backgroundColor = UIColor.whiteColor()
+    }
+}
 
 class SelectionFormTableViewController: FormTableViewController {
 
@@ -75,6 +136,32 @@ class SelectionFormTableViewController: FormTableViewController {
         section2.addRow(selectionForm2)
         self.formSections.append(section2)
 
+
+
+        let selectionItems3 = [
+            SelectionCustomizedFormItem(text: "customized vim", cellReuseIdentifier: "selectionCustomizedCellItem"),
+            SelectionCustomizedFormItem(text: "customized emacs", cellReuseIdentifier: "selectionCustomizedCellItem")
+        ]
+
+        let selectionForm3 = SelectionCustomizedForm(
+            items: selectionItems3,
+            text: "Choose an editor (customized)",
+            cellReuseIdentifier: "selectionCustomizedCell"
+        )
+
+        self.tableView.registerClass(
+            ExampleSelectionCustomizedFormItemCell.self,
+            forCellReuseIdentifier: "selectionCustomizedCellItem"
+        )
+
+        self.tableView.registerClass(
+            ExampleSelectionCustomizedFormCell.self,
+            forCellReuseIdentifier: "selectionCustomizedCell"
+        )
+
+        let section3 = FormSection()
+        section3.addRow(selectionForm3)
+        self.formSections.append(section3)
     }
 
 }

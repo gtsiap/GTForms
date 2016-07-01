@@ -27,7 +27,7 @@ class SelectionFormHelper {
         tableView: UITableView,
         indexPath: NSIndexPath
     ) {
-        if let selectionForm = formRow.form as? SelectionForm
+        if let selectionForm = formRow.form as? BaseSelectionForm
             where !selectionForm.shouldAlwaysShowAllItems {
             var selectionIndexPaths = [NSIndexPath]()
             let rowIndex = indexPath.row
@@ -68,17 +68,31 @@ class SelectionFormHelper {
     ) {
         let cellItem = cellItems[indexPath.row]
 
-        guard let selectionItem = cellItem as? SelectionFormItem else { return }
+        guard let selectionItem = cellItem as? BaseSelectionFormItem else { return }
 
         let cell = tableView.cellForRowAtIndexPath(indexPath)
-        if let accessoryType = cell?.accessoryType where accessoryType != .None {
-            cell?.accessoryType = .None
+        if selectionItem.selected {
             selectionItem.selected = false
             selectionItem.selectionForm?.didDeselectItem?(selectedItem: selectionItem)
+            cell?.accessoryType = .None
+
+            if let
+                _ = selectionItem as? SelectionCustomizedFormItem,
+                cell = cell as? SelectionCustomizedFormItemCell
+            {
+                cell.didDeSelect()
+            }
         } else {
             defer {
                 selectionItem.selected = true
-                cell?.accessoryType = selectionItem.accessoryType
+                if let selectionItem = selectionItem as? SelectionFormItem {
+                    cell?.accessoryType = selectionItem.accessoryType
+                } else if let
+                    _ = selectionItem as? SelectionCustomizedFormItem,
+                    cell = cell as? SelectionCustomizedFormItemCell
+                {
+                    cell.didSelect()
+                }
                 selectionItem.selectionForm?.didSelectItem?(selectedItem: selectionItem)
             }
 
@@ -93,12 +107,20 @@ class SelectionFormHelper {
                     inSection: indexPath.section
                 )
 
-                if let otherSelectionItem = cellItems[index - 1] as? SelectionFormItem
+                if let otherSelectionItem = cellItems[index - 1] as? BaseSelectionFormItem
                     where otherSelectionItem.selectionForm === selectionItem.selectionForm
                 {
                     otherSelectionItem.selected = false
-                    let cell = tableView.cellForRowAtIndexPath(cellIndexPath)
-                    cell?.accessoryType = .None
+
+                    if let _ = selectionItem as? SelectionFormItem {
+                        let cell = tableView.cellForRowAtIndexPath(cellIndexPath)
+                        cell?.accessoryType = .None
+                    } else if let
+                        _ = selectionItem as? SelectionCustomizedFormItem,
+                        cell = cell as? SelectionCustomizedFormItemCell
+                    {
+                        cell.didDeSelect()
+                    }
                 }
             }
         }

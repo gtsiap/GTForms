@@ -151,7 +151,7 @@ public class FormSection {
             formRows.append(row)
 
             if let
-                selectionForm = row.form as? SelectionForm,
+                selectionForm = row.form as? BaseSelectionForm,
                 showItems = selectionForm.showItems
                 where showItems
             {
@@ -159,7 +159,7 @@ public class FormSection {
                     formRows.append($0)
                 }
             } else if let
-                selectionForm = row.form as? SelectionForm
+                selectionForm = row.form as? BaseSelectionForm
                 where selectionForm.shouldAlwaysShowAllItems
             {
                 selectionForm.items.forEach() {
