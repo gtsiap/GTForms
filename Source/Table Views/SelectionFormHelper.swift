@@ -119,7 +119,7 @@ class SelectionFormHelper {
                         _ = selectionItem as? SelectionCustomizedFormItem,
                         cell = cell as? SelectionCustomizedFormItemCell
                     {
-                        cell.didDeSelect()
+                        cell.didSelect()
                     }
                 }
             }
