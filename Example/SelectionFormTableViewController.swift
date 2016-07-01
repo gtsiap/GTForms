@@ -140,7 +140,8 @@ class SelectionFormTableViewController: FormTableViewController {
 
         let selectionItems3 = [
             SelectionCustomizedFormItem(text: "customized vim", cellReuseIdentifier: "selectionCustomizedCellItem"),
-            SelectionCustomizedFormItem(text: "customized emacs", cellReuseIdentifier: "selectionCustomizedCellItem")
+            SelectionCustomizedFormItem(text: "customized emacs", cellReuseIdentifier: "selectionCustomizedCellItem"),
+            SelectionCustomizedFormItem(text: "customized atom", cellReuseIdentifier: "selectionCustomizedCellItem")
         ]
 
         let selectionForm3 = SelectionCustomizedForm(
@@ -148,6 +149,8 @@ class SelectionFormTableViewController: FormTableViewController {
             text: "Choose an editor (customized)",
             cellReuseIdentifier: "selectionCustomizedCell"
         )
+
+        selectionForm3.allowsMultipleSelection = false
 
         self.tableView.registerClass(
             ExampleSelectionCustomizedFormItemCell.self,

@@ -111,15 +111,15 @@ class SelectionFormHelper {
                     where otherSelectionItem.selectionForm === selectionItem.selectionForm
                 {
                     otherSelectionItem.selected = false
+                    let cell = tableView.cellForRowAtIndexPath(cellIndexPath)
 
                     if let _ = selectionItem as? SelectionFormItem {
-                        let cell = tableView.cellForRowAtIndexPath(cellIndexPath)
                         cell?.accessoryType = .None
                     } else if let
                         _ = selectionItem as? SelectionCustomizedFormItem,
                         cell = cell as? SelectionCustomizedFormItemCell
                     {
-                        cell.didSelect()
+                        cell.didDeSelect()
                     }
                 }
             }
