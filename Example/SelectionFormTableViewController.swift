@@ -63,7 +63,7 @@ class ExampleSelectionCustomizedFormItemCell: SelectionCustomizedFormItemCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func configure(text: String, detailText: String?) {
+    override func configure(text: String, detailText: String?, isSelected: Bool) {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = text
@@ -71,6 +71,8 @@ class ExampleSelectionCustomizedFormItemCell: SelectionCustomizedFormItemCell {
         label.snp_makeConstraints() { make in
             make.edges.equalTo(self.contentView).offset(UIEdgeInsetsMake(10, 10, -10, -10))
         }
+
+        self.contentView.backgroundColor = isSelected ? UIColor.yellowColor() : UIColor.whiteColor()
     }
 
     override func didSelect() {
@@ -165,6 +167,24 @@ class SelectionFormTableViewController: FormTableViewController {
         let section3 = FormSection()
         section3.addRow(selectionForm3)
         self.formSections.append(section3)
+
+        let selectionItems4 = [
+            SelectionCustomizedFormItem(text: "Apple", cellReuseIdentifier: "selectionCustomizedCellItem"),
+            SelectionCustomizedFormItem(text: "Orange", cellReuseIdentifier: "selectionCustomizedCellItem"),
+            SelectionCustomizedFormItem(text: "Carrot", cellReuseIdentifier: "selectionCustomizedCellItem")
+        ]
+
+        let selectionForm4 = SelectionCustomizedForm(
+            items: selectionItems4,
+            text: "Choose a fruit (customized)",
+            cellReuseIdentifier: "selectionCustomizedCell"
+        )
+
+        selectionForm4.shouldAlwaysShowAllItems = true
+
+        let section4 = FormSection()
+        section4.addRow(selectionForm4)
+        self.formSections.append(section4)
     }
 
 }

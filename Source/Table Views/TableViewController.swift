@@ -109,10 +109,14 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
                 cell.detailTextLabel?.text = selectionItem.detailText
                 cell.accessoryType = selectionItem.selected ? selectionItem.accessoryType : .None
             } else if let
-                _ = selectionItem as? SelectionCustomizedFormItem,
+                selectionItem = selectionItem as? SelectionCustomizedFormItem,
                 cell = cell as? SelectionCustomizedFormItemCell
             {
-                cell.configure(selectionItem.text, detailText: selectionItem.detailText)
+                cell.configure(
+                    selectionItem.text,
+                    detailText: selectionItem.detailText,
+                    isSelected: selectionItem.selected
+                )
             }
             return cell
         } else if let datePicker = cellItem as? UIDatePicker {
@@ -230,16 +234,6 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
         self.datePickerHelper.showDatePicker(
             self.tableView,
             cellItems: self.formSections[indexPath.section].formItemsForSection()
-        )
-    }
-
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        let cellItems = self.formSections[indexPath.section].formItemsForSection()
-
-        SelectionFormHelper.handleAccessory(
-            cellItems,
-            tableView: self.tableView,
-            indexPath: indexPath
         )
     }
 

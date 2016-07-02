@@ -96,7 +96,11 @@ class SelectionFormHelper {
                 selectionItem.selectionForm?.didSelectItem?(selectedItem: selectionItem)
             }
 
-            if selectionItem.selectionForm?.allowsMultipleSelection ?? false {
+            if let
+                allowsMultipleSelection = selectionItem.selectionForm?
+                    .allowsMultipleSelection
+                where allowsMultipleSelection
+            {
                 return
             }
 

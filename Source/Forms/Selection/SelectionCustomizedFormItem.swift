@@ -21,7 +21,7 @@
 import UIKit
 
 public class SelectionCustomizedFormItemCell: UITableViewCell {
-    public func configure(text: String, detailText: String?) {
+    public func configure(text: String, detailText: String?, isSelected: Bool) {
 
     }
     
