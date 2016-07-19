@@ -26,7 +26,7 @@ public class FormSection {
     /**
         The rows of the section
      */
-    private (set) var rows: [FormRow] = [FormRow]()
+    public private(set) var rows: [FormRow] = [FormRow]()
     
     /**
         The title of the section
