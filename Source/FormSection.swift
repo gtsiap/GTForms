@@ -102,16 +102,21 @@ public class FormSection {
             return
         }
 
-        var row = -1
+        var rowsToDelete = [Int]()
 
         for (index, item) in formItemsForSection().enumerate() {
             if let f = item as? FormRow where f.form === form {
-                row = index
-                break
+                rowsToDelete.append(index)
+            } else if let
+                baseSelectionItem = item as? BaseSelectionFormItem,
+                selectionForm  = form as? BaseSelectionForm
+            where baseSelectionItem.selectionForm === selectionForm
+            {
+                rowsToDelete.append(index)
             }
         }
 
-        if row == -1 {
+        if rowsToDelete.isEmpty {
             return
         }
 
@@ -128,12 +133,16 @@ public class FormSection {
             return
         }
 
-        let indexPath = NSIndexPath(
-            forRow: row,
-            inSection: section
-        )
+        var indexPaths = [NSIndexPath]()
+        rowsToDelete.forEach() {
+            indexPaths.append(NSIndexPath(
+                    forRow: $0,
+                    inSection: section
+                )
+            )
+        }
 
-        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: animation)
+        tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
     }
 
 
