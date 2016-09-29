@@ -31,7 +31,7 @@ public class FormIntTextField<T: UITextField, L: UILabel>: BaseNumberTextFieldFo
 
         self.textFieldView.controlLabel.text = self.text
         self.textFieldView.textField.placeholder = placeHolder
-        self.textFieldView.textField.keyboardType = .NumberPad
+        self.textFieldView.textField.keyboardType = .numberPad
         self.textFieldView.translatesAutoresizingMaskIntoConstraints = false
         
         self.textFieldView.textDidChange = { text in

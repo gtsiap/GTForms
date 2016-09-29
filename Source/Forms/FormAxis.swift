@@ -21,6 +21,6 @@
 import UIKit
 
 public enum FormAxis {
-    case Vertical
-    case Horizontal
+    case vertical
+    case horizontal
 }

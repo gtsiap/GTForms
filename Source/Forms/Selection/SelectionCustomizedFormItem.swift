@@ -20,17 +20,17 @@
 
 import UIKit
 
-public class SelectionCustomizedFormItemCell: UITableViewCell {
-    public func configure(text: String, detailText: String?, isSelected: Bool) {
+open class SelectionCustomizedFormItemCell: UITableViewCell {
+    open func configure(_ text: String, detailText: String?, isSelected: Bool) {
 
     }
     
-    public func didSelect() {
+    open func didSelect() {
 
 
     }
 
-    public func didDeSelect() {
+    open func didDeSelect() {
         
     }
 }

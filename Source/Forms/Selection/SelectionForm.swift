@@ -32,7 +32,7 @@ public class SelectionForm: BaseSelectionForm {
         items: [SelectionFormItem],
         text: String,
         detailText: String? = nil,
-        animation: UITableViewRowAnimation = .Top
+        animation: UITableViewRowAnimation = .top
     ) {
         super.init(
             items: items,

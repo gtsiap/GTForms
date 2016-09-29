@@ -23,15 +23,15 @@ import GTForms
 import SnapKit
 
 class ExampleSelectionCustomizedFormCell: SelectionCustomizedFormCell {
-    private let label = UILabel()
+    fileprivate let label = UILabel()
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         self.label.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(label)
-        self.label.snp_makeConstraints() { make in
-            make.edges.equalTo(self.contentView).offset(UIEdgeInsetsMake(10, 10, -10, -10))
+        self.label.snp.makeConstraints() { make in
+            make.edges.equalToSuperview().inset(UIEdgeInsetsMake(10, 10, 10, 10))
         }
     }
     
@@ -39,23 +39,23 @@ class ExampleSelectionCustomizedFormCell: SelectionCustomizedFormCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func configure(text: String, detailText: String?) {
+    override func configure(_ text: String, detailText: String?) {
         self.label.text = text
-        self.contentView.backgroundColor = UIColor.redColor()
+        self.contentView.backgroundColor = UIColor.red
     }
 }
 
 class ExampleSelectionCustomizedFormItemCell: SelectionCustomizedFormItemCell {
 
-    private let label = UILabel()
+    fileprivate let label = UILabel()
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         self.label.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(label)
-        self.label.snp_makeConstraints() { make in
-            make.edges.equalTo(self.contentView).offset(UIEdgeInsetsMake(10, 10, -10, -10))
+        self.label.snp.makeConstraints() { make in
+            make.edges.equalTo(self.contentView).inset(UIEdgeInsetsMake(10, 10, 10, 10))
         }
     }
 
@@ -63,24 +63,24 @@ class ExampleSelectionCustomizedFormItemCell: SelectionCustomizedFormItemCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func configure(text: String, detailText: String?, isSelected: Bool) {
+    override func configure(_ text: String, detailText: String?, isSelected: Bool) {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = text
         self.contentView.addSubview(label)
-        label.snp_makeConstraints() { make in
-            make.edges.equalTo(self.contentView).offset(UIEdgeInsetsMake(10, 10, -10, -10))
+        label.snp.makeConstraints() { make in
+            make.edges.equalTo(self.contentView).inset(UIEdgeInsetsMake(10, 10, 10, 10))
         }
 
-        self.contentView.backgroundColor = isSelected ? UIColor.yellowColor() : UIColor.whiteColor()
+        self.contentView.backgroundColor = isSelected ? UIColor.yellow : UIColor.white
     }
 
     override func didSelect() {
-        self.contentView.backgroundColor = UIColor.yellowColor()
+        self.contentView.backgroundColor = UIColor.yellow
     }
 
     override func didDeSelect() {
-        self.contentView.backgroundColor = UIColor.whiteColor()
+        self.contentView.backgroundColor = UIColor.white
     }
 }
 
@@ -101,9 +101,9 @@ class SelectionFormTableViewController: FormTableViewController {
             text: "Choose a fruit"
         )
 
-        selectionForm.textColor = UIColor.redColor()
+        selectionForm.textColor = UIColor.red
         selectionForm.textFont = UIFont
-            .preferredFontForTextStyle(UIFontTextStyleHeadline)
+            .preferredFont(forTextStyle: UIFontTextStyle.headline)
 
         selectionForm.allowsMultipleSelection = true
 
@@ -154,12 +154,12 @@ class SelectionFormTableViewController: FormTableViewController {
 
         selectionForm3.allowsMultipleSelection = false
 
-        self.tableView.registerClass(
+        self.tableView.register(
             ExampleSelectionCustomizedFormItemCell.self,
             forCellReuseIdentifier: "selectionCustomizedCellItem"
         )
 
-        self.tableView.registerClass(
+        self.tableView.register(
             ExampleSelectionCustomizedFormCell.self,
             forCellReuseIdentifier: "selectionCustomizedCell"
         )

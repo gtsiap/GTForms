@@ -15,13 +15,14 @@ class TextFieldErrorsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let tableView = FormTableView(style: .Grouped, viewController: self)
+        let tableView = FormTableView(style: .grouped, viewController: self)
+
 
         self.view.addSubview(tableView)
-        tableView.snp_makeConstraints() { make in
-            make.top.equalTo(self.snp_topLayoutGuideBottom)
+        tableView.snp.makeConstraints() { make in
+            make.top.equalTo(self.topLayoutGuide.snp.bottom)
             make.leading.trailing.equalTo(self.view)
-            make.bottom.equalTo(self.snp_bottomLayoutGuideTop)
+            make.bottom.equalTo(self.bottomLayoutGuide.snp.top)
         }
 
         let section = FormSection()
@@ -52,21 +53,21 @@ class TextFieldErrorsViewController: UIViewController {
 }
 
 extension TextFieldErrorsViewController: FormTextFieldValueRangeErrorDescriptionDelegate {
-    func minimumValueErrorDescription(value: Any, formText: String) -> String? {
+    func minimumValueErrorDescription(_ value: Any, formText: String) -> String? {
         return "Custom Error: \(value) for \(formText) is too small"
     }
 
-    func maximumValueErrorDescription(value: Any, formText: String) -> String? {
+    func maximumValueErrorDescription(_ value: Any, formText: String) -> String? {
         return "Custom Error: \(value) for \(formText) is too big"
     }
 }
 
 extension TextFieldErrorsViewController: FormTextFieldValueLengthErrorDescriptionDelegate {
-    func minimumLengthErrorDescription(value: Any, formText: String) -> String? {
+    func minimumLengthErrorDescription(_ value: Any, formText: String) -> String? {
         return "Min Length: \(value):\(formText)"
     }
 
-    func maximumLengthErrorDescription(value: Any, formText: String) -> String? {
+    func maximumLengthErrorDescription(_ value: Any, formText: String) -> String? {
         return "Max Length: \(value):\(formText)"
     }
 }

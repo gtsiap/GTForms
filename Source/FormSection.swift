@@ -41,7 +41,8 @@ public class FormSection {
         - parameter form: the form from which the new
                               row will be created
      */
-    public func addRow(form: FormableType) -> FormRow {
+    @discardableResult
+    public func addRow(_ form: FormableType) -> FormRow {
         let row = FormRow(form: form)
         self.rows.append(row)
         return row
@@ -52,12 +53,13 @@ public class FormSection {
         - parameter form: The form that will be appended to the tableView
         - parameter animation: The UITableViewRowAnimation which will be used
      */
-    public func appendRow(form: FormableType, animation: UITableViewRowAnimation) -> FormRow {
+    @discardableResult
+    public func appendRow(_ form: FormableType, animation: UITableViewRowAnimation) -> FormRow {
         let row = addRow(form)
 
         guard let
             tableViewType = self.tableViewType,
-            tableView = tableViewType.tableView
+            let tableView = tableViewType.tableView
         else {
             return row
         }
@@ -65,17 +67,17 @@ public class FormSection {
         tableView.beginUpdates()
         defer { tableView.endUpdates() }
         guard let
-            section = tableViewType.formSections.indexOf({ $0 === self })
+            section = tableViewType.formSections.index(where: { $0 === self })
         else {
             return row
         }
 
-        let indexPath = NSIndexPath(
-            forRow: formItemsForSection().count - 1,
-            inSection: section
+        let indexPath = IndexPath(
+            row: formItemsForSection().count - 1,
+            section: section
         )
 
-        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: animation)
+        tableView.insertRows(at: [indexPath], with: animation)
 
         return row
     }
@@ -85,10 +87,10 @@ public class FormSection {
         - parameter form: The form that will be removed from the tableView
         - parameter animation: The UITableViewRowAnimation which will be used
      */
-    public func removeRow(form: FormableType, animation: UITableViewRowAnimation) {
+    public func removeRow(_ form: FormableType, animation: UITableViewRowAnimation) {
         guard let
             tableViewType = self.tableViewType,
-            tableView = tableViewType.tableView
+            let tableView = tableViewType.tableView
         else {
             return
         }
@@ -97,20 +99,20 @@ public class FormSection {
         defer { tableView.endUpdates() }
 
         guard let
-            section = tableViewType.formSections.indexOf({ $0 === self })
+            section = tableViewType.formSections.index(where: { $0 === self })
         else {
             return
         }
 
         var rowsToDelete = [Int]()
 
-        for (index, item) in formItemsForSection().enumerate() {
-            if let f = item as? FormRow where f.form === form {
+        for (index, item) in formItemsForSection().enumerated() {
+            if let f = item as? FormRow , f.form === form {
                 rowsToDelete.append(index)
             } else if let
                 baseSelectionItem = item as? BaseSelectionFormItem,
-                selectionForm  = form as? BaseSelectionForm
-            where baseSelectionItem.selectionForm === selectionForm
+                let selectionForm  = form as? BaseSelectionForm
+            , baseSelectionItem.selectionForm === selectionForm
             {
                 rowsToDelete.append(index)
             }
@@ -121,9 +123,9 @@ public class FormSection {
         }
 
         var isSafeToDeleteRow = false
-        for (index, it) in self.rows.enumerate() {
+        for (index, it) in self.rows.enumerated() {
             if it.form === form {
-                self.rows.removeAtIndex(index)
+                self.rows.remove(at: index)
                 isSafeToDeleteRow = true
                 break
             }
@@ -133,16 +135,16 @@ public class FormSection {
             return
         }
 
-        var indexPaths = [NSIndexPath]()
+        var indexPaths = [IndexPath]()
         rowsToDelete.forEach() {
-            indexPaths.append(NSIndexPath(
-                    forRow: $0,
-                    inSection: section
+            indexPaths.append(IndexPath(
+                    row: $0,
+                    section: section
                 )
             )
         }
 
-        tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: animation)
+        tableView.deleteRows(at: indexPaths, with: animation)
     }
 
 
@@ -161,15 +163,15 @@ public class FormSection {
 
             if let
                 selectionForm = row.form as? BaseSelectionForm,
-                showItems = selectionForm.showItems
-                where showItems
+                let showItems = selectionForm.showItems
+                , showItems
             {
                 selectionForm.items.forEach() {
                     formRows.append($0)
                 }
             } else if let
                 selectionForm = row.form as? BaseSelectionForm
-                where selectionForm.shouldAlwaysShowAllItems
+                , selectionForm.shouldAlwaysShowAllItems
             {
                 selectionForm.items.forEach() {
                     formRows.append($0)
@@ -178,8 +180,8 @@ public class FormSection {
 
             if let
                 datePickerForm = row.form as? FormDatePickerType,
-                shouldExpand = datePickerForm.shouldExpand
-                where shouldExpand
+                let shouldExpand = datePickerForm.shouldExpand
+                , shouldExpand
             {
                 formRows.append(datePickerForm.datePicker)
             }

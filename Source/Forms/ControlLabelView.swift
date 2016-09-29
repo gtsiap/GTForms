@@ -23,7 +23,7 @@ import SnapKit
 
 class ControlLabelView<V: UILabel>: UIView {
 
-    var formAxis = FormAxis.Horizontal
+    var formAxis = FormAxis.horizontal
 
     let controlLabel: UILabel = {
         let label = V()
@@ -41,7 +41,7 @@ class ControlLabelView<V: UILabel>: UIView {
     }
     
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         addSubview(self.controlLabel)
     }
@@ -50,7 +50,7 @@ class ControlLabelView<V: UILabel>: UIView {
         fatalError("Missing Implementation")
     }
     
-    func configureView(@noescape makeConstraints: (UILabel, UIView) -> ()) {
+    func configureView(_ makeConstraints: (UILabel, UIView) -> ()) {
         makeConstraints(self.controlLabel, self.control)
     }
 

@@ -20,7 +20,7 @@
 
 import UIKit
 
-public class CustomForm: FormableType {
+open class CustomForm: FormableType {
     public let cellClass: AnyClass
     public let reuseIdentifier: String
 
@@ -32,7 +32,7 @@ public class CustomForm: FormableType {
         self.reuseIdentifier = reuseIdentifier
     }
 
-    public func configureCell(cell: UITableViewCell) {
+    open func configureCell(_ cell: UITableViewCell) {
 
     }
 }

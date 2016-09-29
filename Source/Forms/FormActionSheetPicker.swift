@@ -25,8 +25,8 @@ private class ButtonLabel: UIControl {
     let label: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.textAlignment = .Center
-        label.font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
+        label.textAlignment = .center
+        label.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
         return label
     }()
 
@@ -40,26 +40,26 @@ private class ButtonLabel: UIControl {
 
         addSubview(self.label)
 
-        self.label.snp_makeConstraints() { make in
+        self.label.snp.makeConstraints() { make in
             make.edges.equalTo(self)
         }
     }
 
     private var previousColor: UIColor?
 
-    override func beginTrackingWithTouch(touch: UITouch, withEvent event: UIEvent?) -> Bool {
+    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         self.label.textColor = self.previousColor
-        self.label.textColor = UIColor.grayColor()
+        self.label.textColor = UIColor.gray
         return true
     }
 
-    override func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
+    override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
 
         if let textColor = self.previousColor {
             self.label.textColor = textColor
         }
 
-        sendActionsForControlEvents(.TouchUpInside)
+        sendActions(for: .touchUpInside)
     }
 
 }
@@ -76,7 +76,7 @@ private class ActionSheetPicker<L: UILabel>: ControlLabelView<L> {
         button.addTarget(
             self,
             action: #selector(didTapButton),
-            forControlEvents: .TouchUpInside
+            for: .touchUpInside
         )
 
         return button
@@ -89,16 +89,16 @@ private class ActionSheetPicker<L: UILabel>: ControlLabelView<L> {
         
         configureView() { (label, control) in
             
-            label.snp_makeConstraints() { make in
+            label.snp.makeConstraints() { make in
                 make.left.equalTo(self)
                 make.width.equalTo(self).multipliedBy(0.6)
                 make.top.equalTo(self)
                 make.bottom.equalTo(self)
             } // end label
             
-            control.snp_makeConstraints() { make in
+            control.snp.makeConstraints() { make in
                 make.right.equalTo(self)
-                make.centerY.equalTo(label.snp_centerY).priorityLow()
+                make.centerY.equalTo(label.snp.centerY).priority(UILayoutPriorityDefaultLow)
                 make.width.equalTo(self).multipliedBy(0.3)
                 make.bottom.equalTo(self)
                 make.top.equalTo(self)
@@ -115,11 +115,11 @@ private class ActionSheetPicker<L: UILabel>: ControlLabelView<L> {
         let alert = UIAlertController(
             title: "Please Choose one",
             message: nil,
-            preferredStyle: .ActionSheet
+            preferredStyle: .actionSheet
         )
         
         for it in self.items {
-            let action = UIAlertAction(title: it, style: .Default) { action in
+            let action = UIAlertAction(title: it, style: .default) { action in
                 guard let title = action.title else { return }
                 self.button.text = title
                 self.valueDidChange?(title)
@@ -130,20 +130,20 @@ private class ActionSheetPicker<L: UILabel>: ControlLabelView<L> {
                 else { return }
 
 
-                let point = vc.tableView.convertPoint(self.frame.origin, fromView: self)
+                let point = vc.tableView.convert(self.frame.origin, from: self)
                 guard let
-                    indexPath = vc.tableView.indexPathForRowAtPoint(point)
+                    indexPath = vc.tableView.indexPathForRow(at: point)
                 else { return }
 
-                vc.tableView.reloadRowsAtIndexPaths(
-                    [indexPath],
-                    withRowAnimation: .None
+                vc.tableView.reloadRows(
+                    at: [indexPath],
+                    with: .none
                 )
 
                 if self.scrollToRow {
-                    vc.tableView.scrollToRowAtIndexPath(
-                        indexPath,
-                        atScrollPosition: .None,
+                    vc.tableView.scrollToRow(
+                        at: indexPath,
+                        at: .none,
                         animated: false
                     )
                 }
@@ -152,7 +152,7 @@ private class ActionSheetPicker<L: UILabel>: ControlLabelView<L> {
             alert.addAction(action)
         }
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         guard let vc = self.viewController else {
             print("\(#file):\(#line): view controller doesn't exist")
@@ -164,7 +164,7 @@ private class ActionSheetPicker<L: UILabel>: ControlLabelView<L> {
             popoverVC.sourceRect = self.button.bounds
         }
 
-        vc.presentViewController(alert, animated: true, completion: nil)
+        vc.present(alert, animated: true, completion: nil)
     }
 
     override func tintColorDidChange() {

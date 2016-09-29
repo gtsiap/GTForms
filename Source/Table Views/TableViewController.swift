@@ -27,7 +27,7 @@ protocol TableViewType: class {
 
 class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate {
     private var datePickerHelper = DatePickerHelper()
-    private var textFieldViews = [TextFieldViewType]()
+    fileprivate var textFieldViews = [TextFieldViewType]()
 
     private let tableViewType: TableViewType
     private var viewController: UIViewController?
@@ -62,55 +62,55 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
         }
     }
 
-    func registerCustomForm(customForm: CustomForm) {
-        self.tableView.registerClass(
+    func registerCustomForm(_ customForm: CustomForm) {
+        self.tableView.register(
             customForm.cellClass,
             forCellReuseIdentifier: customForm.reuseIdentifier
         )
     }
 
     func registerNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillAppear),
-            name: UIKeyboardWillShowNotification,
+            name: NSNotification.Name.UIKeyboardWillShow,
             object: nil
         )
     }
 
     func unRegisterNotifications() {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - Table view data source
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return self.formSections.count
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.formSections[section].formItemsForSection().count
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell
 
-        let cellItem = self.formSections[indexPath.section].formItemsForSection()[indexPath.row]
+        let cellItem = self.formSections[(indexPath as NSIndexPath).section].formItemsForSection()[(indexPath as NSIndexPath).row]
 
         if let selectionItem = cellItem as? BaseSelectionFormItem {
-            cell = tableView.dequeueReusableCellWithIdentifier(
-                selectionItem.cellReuseIdentifier,
-                forIndexPath: indexPath
+            cell = tableView.dequeueReusableCell(
+                withIdentifier: selectionItem.cellReuseIdentifier,
+                for: indexPath
             )
 
-            cell.selectionStyle = .None
+            cell.selectionStyle = .none
             if let selectionItem = selectionItem as? SelectionFormItem {
                 cell.textLabel?.text = selectionItem.text
                 cell.detailTextLabel?.text = selectionItem.detailText
-                cell.accessoryType = selectionItem.selected ? selectionItem.accessoryType : .None
+                cell.accessoryType = selectionItem.selected ? selectionItem.accessoryType : .none
             } else if let
                 selectionItem = selectionItem as? SelectionCustomizedFormItem,
-                cell = cell as? SelectionCustomizedFormItemCell
+                let cell = cell as? SelectionCustomizedFormItemCell
             {
                 cell.configure(
                     selectionItem.text,
@@ -121,9 +121,9 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
             return cell
         } else if let datePicker = cellItem as? UIDatePicker {
             guard let
-                datePickerCell = tableView.dequeueReusableCellWithIdentifier(
-                    "DatePickerCell",
-                    forIndexPath: indexPath
+                datePickerCell = tableView.dequeueReusableCell(
+                    withIdentifier: "DatePickerCell",
+                    for: indexPath
                 ) as? DatePickerTableViewCell
             else { return UITableViewCell() }
 
@@ -134,19 +134,19 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
         guard let cellRow = cellItem as? FormRow else { return UITableViewCell() }
 
         if let customForm = cellRow.form as? CustomForm {
-            let cell = tableView.dequeueReusableCellWithIdentifier(customForm.reuseIdentifier, forIndexPath: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: customForm.reuseIdentifier, for: indexPath)
             customForm.configureCell(cell)
             return cell
         } else if let staticForm = cellRow.form as? StaticForm {
-            cell = tableView.dequeueReusableCellWithIdentifier("ReadOnlyCell", forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "ReadOnlyCell", for: indexPath)
             cell.textLabel?.text = staticForm.text
             cell.detailTextLabel?.text = staticForm.detailText
         } else if let staticForm = cellRow.form as? AttributedStaticForm {
-            cell = tableView.dequeueReusableCellWithIdentifier("AttributedReadOnlyCell", forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "AttributedReadOnlyCell", for: indexPath)
             cell.textLabel?.attributedText = staticForm.text
             cell.detailTextLabel?.attributedText = staticForm.detailText
         } else if let selectionForm = cellRow.form as? BaseSelectionForm {
-            cell = tableView.dequeueReusableCellWithIdentifier(selectionForm.cellReuseIdentifier, forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: selectionForm.cellReuseIdentifier, for: indexPath)
 
             if let selectionForm = selectionForm as? SelectionForm {
                 cell.textLabel?.text = selectionForm.text
@@ -169,20 +169,20 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
                 }
             } else if let
                 item = selectionForm as? SelectionCustomizedForm,
-                cell = cell as? SelectionCustomizedFormCell
+                let cell = cell as? SelectionCustomizedFormCell
             {
                 cell.configure(item.text, detailText: item.detailText)
             }
-            cell.selectionStyle = .None
+            cell.selectionStyle = .none
         } else {
             let formCell: FormTableViewCell
 
             if let
                 f = cellRow.form as? FormViewableType,
-                cellIdentifier = f.customCellIdentifier
+                let cellIdentifier = f.customCellIdentifier
             {
-                formCell = tableView.dequeueReusableCellWithIdentifier(
-                    cellIdentifier, forIndexPath: indexPath
+                formCell = tableView.dequeueReusableCell(
+                    withIdentifier: cellIdentifier, for: indexPath
                 ) as! FormTableViewCell
             } else {
                 formCell = BaseFormTableViewCell()
@@ -197,15 +197,15 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
         }
 
         cell.accessoryType = cellRow.accessoryType
-        cell.selectionStyle = .None
+        cell.selectionStyle = .none
 
         return cell
     }
 
     // MARK: tableview
 
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cellItems = self.formSections[indexPath.section].formItemsForSection()
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cellItems = self.formSections[(indexPath as NSIndexPath).section].formItemsForSection()
 
         SelectionFormHelper.handleAccessory(
             cellItems,
@@ -213,7 +213,7 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
             indexPath: indexPath
         )
 
-        guard let formRow = cellItems[indexPath.row] as? FormRow else { return }
+        guard let formRow = cellItems[(indexPath as NSIndexPath).row] as? FormRow else { return }
         formRow.didSelectRow?()
 
         SelectionFormHelper.toggleItems(
@@ -233,12 +233,12 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
 
         self.datePickerHelper.showDatePicker(
             self.tableView,
-            cellItems: self.formSections[indexPath.section].formItemsForSection()
+            cellItems: self.formSections[(indexPath as NSIndexPath).section].formItemsForSection()
         )
     }
 
-    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        let cellItem = self.formSections[indexPath.section].formItemsForSection()[indexPath.row]
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        let cellItem = self.formSections[(indexPath as NSIndexPath).section].formItemsForSection()[(indexPath as NSIndexPath).row]
 
         if let _ = cellItem as? BaseSelectionFormItem {
             return true
@@ -249,12 +249,12 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
 
         if let
             _ = cellRow.form as? StaticForm,
-            _ = cellRow.didSelectRow
+            let _ = cellRow.didSelectRow
         {
             return true
         } else if let
             _ = cellRow.form as? AttributedStaticForm,
-            _ = cellRow.didSelectRow
+            let _ = cellRow.didSelectRow
         {
             return true
         } else if let selectionForm = cellRow.form as? BaseSelectionForm
@@ -267,13 +267,13 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
         return false
     }
 
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.formSections[section].title
     }
 
    func hideKeyboard() {
         self.textFieldViews.forEach() {
-            if $0.textField.isFirstResponder() {
+            if $0.textField.isFirstResponder {
                 $0.textField.resignFirstResponder()
             }
         }
@@ -304,21 +304,21 @@ class TableViewController: NSObject, UITableViewDataSource, UITableViewDelegate 
         self.tableView.estimatedRowHeight = 50
         self.tableView.rowHeight = UITableViewAutomaticDimension
 
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "ReadOnlyCell")
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "AttributedReadOnlyCell")
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SelectionCell")
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "SelectionItemCell")
-        self.tableView.registerClass(FormTableViewCell.self, forCellReuseIdentifier: "formCell")
-        self.tableView.registerClass(DatePickerTableViewCell.self, forCellReuseIdentifier: "DatePickerCell")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ReadOnlyCell")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "AttributedReadOnlyCell")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SelectionCell")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SelectionItemCell")
+        self.tableView.register(FormTableViewCell.self, forCellReuseIdentifier: "formCell")
+        self.tableView.register(DatePickerTableViewCell.self, forCellReuseIdentifier: "DatePickerCell")
     }
 
 }
 
 extension TableViewController: TextFieldViewDelegate {
-    func textFieldViewShouldReturn(textFieldView: TextFieldViewType) -> Bool {
+    func textFieldViewShouldReturn(_ textFieldView: TextFieldViewType) -> Bool {
 
         var index = -1
-        for (i, it) in self.textFieldViews.enumerate() {
+        for (i, it) in self.textFieldViews.enumerated() {
             if it === textFieldView {
                 index = i
             }

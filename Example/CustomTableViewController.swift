@@ -28,33 +28,33 @@ class CustomTableViewController: SelectionFormTableViewController {
         super.viewDidLoad()
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         let myCustomForm = MyCustomForm(cellClass: CustomTableViewCell.self, reuseIdentifier: "foo")
         registerCustomForm(myCustomForm)
 
         self.selectionForm.didSelectItem = { _ in
-            self.formSections[0].appendRow(myCustomForm, animation: .Fade)
+            self.formSections[0].appendRow(myCustomForm, animation: .fade)
         }
 
         self.selectionForm.didDeselectItem = { _ in
-            self.formSections[0].removeRow(myCustomForm, animation: .Fade)
+            self.formSections[0].removeRow(myCustomForm, animation: .fade)
         }
     }
 }
 
 class MyCustomForm: CustomForm {
-    override func configureCell(cell: UITableViewCell) {
+    override func configureCell(_ cell: UITableViewCell) {
     }
 }
 
 class CustomTableViewCell: UITableViewCell {
 
-    private let textView: UITextView = {
+    fileprivate let textView: UITextView = {
         let textView = UITextView()
         textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.layer.borderColor = UIColor.grayColor().CGColor
+        textView.layer.borderColor = UIColor.gray.cgColor
         textView.layer.borderWidth = 1.0
         return textView
     }()
@@ -64,11 +64,11 @@ class CustomTableViewCell: UITableViewCell {
 
         self.contentView.addSubview(self.textView)
 
-        self.textView.snp_makeConstraints() { make in
+        self.textView.snp.makeConstraints() { make in
             make.top.equalTo(self.contentView).offset(10)
             make.leading.equalTo(self.contentView).offset(10)
             make.trailing.equalTo(self.contentView).offset(-10)
-            make.bottom.equalTo(self.contentView).offset(-10).priorityLow()
+            make.bottom.equalTo(self.contentView).offset(-10).priority(UILayoutPriorityDefaultLow)
             make.height.equalTo(200)
         }
     }

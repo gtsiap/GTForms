@@ -21,7 +21,7 @@
 import UIKit
 import SnapKit
 
-public class FormTableViewCell: UITableViewCell {
+open class FormTableViewCell: UITableViewCell {
 
     public var formRow: FormRow? {
         didSet {
@@ -29,7 +29,7 @@ public class FormTableViewCell: UITableViewCell {
         }
     }
 
-    public func configureCell() {
+    open func configureCell() {
     }
     
 }
@@ -40,7 +40,7 @@ class BaseFormTableViewCell: FormTableViewCell {
      override func configureCell() {
         guard let
             formRow = self.formRow,
-            formView = formRow.form as? FormViewableType
+            let formView = formRow.form as? FormViewableType
         else { return }
 
         if let _ = self.cellView {
@@ -57,7 +57,7 @@ class BaseFormTableViewCell: FormTableViewCell {
         self.cellView.translatesAutoresizingMaskIntoConstraints = false
 
         self.contentView.addSubview(self.cellView)
-        self.cellView.snp_makeConstraints() { make in
+        self.cellView.snp.makeConstraints() { make in
             make.top.equalTo(self.contentView).offset(10)
             make.bottom.equalTo(self.contentView).offset(-10)
             make.left.equalTo(self.contentView).offset(10)

@@ -20,7 +20,7 @@
 
 import UIKit
 
-public struct ResultFormError: ErrorType {
+public struct ResultFormError: Error {
     public let message: String
     
     public init(message: String) {
@@ -47,7 +47,7 @@ public class BaseResultForm<T>: FormViewableType {
         This closure is being called when the result
         gets changed
      */
-    public var didUpdateResult: ((result: T?) -> ())?
+    public var didUpdateResult: ((_ result: T?) -> ())?
     
     /**
         If true then this formView is required and `validate`
@@ -59,7 +59,7 @@ public class BaseResultForm<T>: FormViewableType {
         - returns: The UIView of the form
      */
     public func formView() -> UIView {
-        fatalError("Missing implementation: \(self.dynamicType)")
+        fatalError("Missing implementation: \(type(of: self))")
     }
     
     /**
@@ -113,9 +113,9 @@ public class BaseResultForm<T>: FormViewableType {
         The subclasses must use this method in order to update
         the result
      */
-    func updateResult(result: T) {
+    func updateResult(_ result: T) {
         self.result = result
-        self.didUpdateResult?(result: self.result)
+        self.didUpdateResult?(self.result)
     }
     
 }

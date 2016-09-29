@@ -60,23 +60,23 @@ extension FormViewableType {
         so in this case you could use if you want the
         showValidationError prematurely
      */
-    public func showValidationError(error: String) {
+    public func showValidationError(_ error: String) {
         let alertVC = UIAlertController(
             title: "Validation Error",
             message: error,
-            preferredStyle: .Alert
+            preferredStyle: .alert
         )
                 
-        let okAction = UIAlertAction(title: "Ok", style: .Default)
+        let okAction = UIAlertAction(title: "Ok", style: .default)
         { alertAction in
-            alertVC.dismissViewControllerAnimated(true, completion: nil)
+            alertVC.dismiss(animated: true, completion: nil)
         }
 
         alertVC.addAction(okAction)
         // Q: Why do we use the parentViewController
         // A: because the use may dismiss this vc while we will present
         //    the UIAlertController
-        self.viewController?.parentViewController?.presentViewController(
+        self.viewController?.parent?.present(
             alertVC,
             animated: true,
             completion: nil

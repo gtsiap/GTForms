@@ -22,10 +22,10 @@ import UIKit
 import GTForms
 
 class MainTableViewController: FormTableViewController {
-    private lazy var formButton: UIBarButtonItem = {
+    fileprivate lazy var formButton: UIBarButtonItem = {
         let button = UIBarButtonItem(
             title: "Forms",
-            style: .Done,
+            style: .done,
             target: self,
             action: #selector(didTapFormButton)
         )
@@ -39,71 +39,71 @@ class MainTableViewController: FormTableViewController {
 
         let section = FormSection()
         section.addRow(StaticForm(text: "Forms")).didSelectRow = {
-            self.performSegueWithIdentifier("showForms", sender: self)
+            self.performSegue(withIdentifier: "showForms", sender: self)
         }
 
         section.addRow(StaticForm(text: "Selection Form")).didSelectRow = {
-            self.performSegueWithIdentifier("showSelectionForm", sender: self)
+            self.performSegue(withIdentifier: "showSelectionForm", sender: self)
         }
 
         section.addRow(StaticForm(text: "Date Pickers")).didSelectRow = {
-            self.performSegueWithIdentifier("showDatePickers", sender: self)
+            self.performSegue(withIdentifier: "showDatePickers", sender: self)
         }
 
         section.addRow(StaticForm(text: "Test Keyboard")).didSelectRow = {
-            self.performSegueWithIdentifier("showTestKeyboard", sender: self)
+            self.performSegue(withIdentifier: "showTestKeyboard", sender: self)
         }
 
         let originalText = NSMutableAttributedString(string: "Text with ")
 
         let text =  NSAttributedString(
             string: "Color",
-            attributes: [NSForegroundColorAttributeName: UIColor.greenColor()]
+            attributes: [NSForegroundColorAttributeName: UIColor.green]
         )
 
-        originalText.appendAttributedString(text)
+        originalText.append(text)
 
         section.addRow(AttributedStaticForm(text: originalText))
         section.addRow(StaticForm(text: "Custom Form")).didSelectRow = {
-            self.performSegueWithIdentifier("showCustomForm", sender: self)
+            self.performSegue(withIdentifier: "showCustomForm", sender: self)
         }
 
         section.addRow(StaticForm(text: "TableView")).didSelectRow = {
-            self.performSegueWithIdentifier("showTableView", sender: self)
+            self.performSegue(withIdentifier: "showTableView", sender: self)
         }
 
 
         section.addRow(StaticForm(text: "TextField Errors")).didSelectRow = {
-            self.performSegueWithIdentifier("showTextFieldErrors", sender: self)
+            self.performSegue(withIdentifier: "showTextFieldErrors", sender: self)
         }
 
         self.formSections.append(section)
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier != "showFormsModally" {
             return
         }
 
         guard let
-            nv = segue.destinationViewController as? UINavigationController,
-            vc = nv.topViewController as? FormsVC
+            nv = segue.destination as? UINavigationController,
+            let vc = nv.topViewController as? FormsVC
         else {
             return
         }
 
         vc.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .Cancel,
+            barButtonSystemItem: .cancel,
             target: self,
             action: #selector(didTapCancelButton)
         )
     }
 
-    @objc private func didTapFormButton() {
-        self.performSegueWithIdentifier("showFormsModally", sender: self)
+    @objc fileprivate func didTapFormButton() {
+        self.performSegue(withIdentifier: "showFormsModally", sender: self)
     }
 
-    @objc private func didTapCancelButton() {
-        dismissViewControllerAnimated(true, completion: nil)
+    @objc fileprivate func didTapCancelButton() {
+        dismiss(animated: true, completion: nil)
     }
 }

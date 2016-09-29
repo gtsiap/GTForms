@@ -23,36 +23,36 @@ import UIKit
 class SelectionFormHelper {
 
     class func toggleItems(
-        formRow: FormRow,
+        _ formRow: FormRow,
         tableView: UITableView,
-        indexPath: NSIndexPath
+        indexPath: IndexPath
     ) {
         if let selectionForm = formRow.form as? BaseSelectionForm
-            where !selectionForm.shouldAlwaysShowAllItems {
-            var selectionIndexPaths = [NSIndexPath]()
-            let rowIndex = indexPath.row
-            let sectionIndex = indexPath.section
+            , !selectionForm.shouldAlwaysShowAllItems {
+            var selectionIndexPaths = [IndexPath]()
+            let rowIndex = (indexPath as NSIndexPath).row
+            let sectionIndex = (indexPath as NSIndexPath).section
 
-            for (index, _) in selectionForm.items.enumerate() {
-                let targetIndexPath = NSIndexPath(
-                    forRow: rowIndex + index + 1,
-                    inSection: sectionIndex
+            for (index, _) in selectionForm.items.enumerated() {
+                let targetIndexPath = IndexPath(
+                    row: rowIndex + index + 1,
+                    section: sectionIndex
                 )
                 selectionIndexPaths.append(targetIndexPath)
             }
 
             tableView.beginUpdates()
 
-            if let showItems = selectionForm.showItems where showItems {
-                tableView.deleteRowsAtIndexPaths(
-                    selectionIndexPaths,
-                    withRowAnimation: selectionForm.animation
+            if let showItems = selectionForm.showItems , showItems {
+                tableView.deleteRows(
+                    at: selectionIndexPaths,
+                    with: selectionForm.animation
                 )
                 selectionForm.showItems = false
             } else {
-                tableView.insertRowsAtIndexPaths(
-                    selectionIndexPaths,
-                    withRowAnimation: selectionForm.animation
+                tableView.insertRows(
+                    at: selectionIndexPaths,
+                    with: selectionForm.animation
                 )
                 selectionForm.showItems = true
             }
@@ -62,23 +62,23 @@ class SelectionFormHelper {
     }
 
     class func handleAccessory(
-        cellItems: [AnyObject],
+        _ cellItems: [AnyObject],
         tableView: UITableView,
-        indexPath: NSIndexPath
+        indexPath: IndexPath
     ) {
-        let cellItem = cellItems[indexPath.row]
+        let cellItem = cellItems[(indexPath as NSIndexPath).row]
 
         guard let selectionItem = cellItem as? BaseSelectionFormItem else { return }
 
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        let cell = tableView.cellForRow(at: indexPath)
         if selectionItem.selected {
             selectionItem.selected = false
-            selectionItem.selectionForm?.didDeselectItem?(selectedItem: selectionItem)
-            cell?.accessoryType = .None
+            selectionItem.selectionForm?.didDeselectItem?(selectionItem)
+            cell?.accessoryType = .none
 
             if let
                 _ = selectionItem as? SelectionCustomizedFormItem,
-                cell = cell as? SelectionCustomizedFormItemCell
+                let cell = cell as? SelectionCustomizedFormItemCell
             {
                 cell.didDeSelect()
             }
@@ -89,39 +89,39 @@ class SelectionFormHelper {
                     cell?.accessoryType = selectionItem.accessoryType
                 } else if let
                     _ = selectionItem as? SelectionCustomizedFormItem,
-                    cell = cell as? SelectionCustomizedFormItemCell
+                    let cell = cell as? SelectionCustomizedFormItemCell
                 {
                     cell.didSelect()
                 }
-                selectionItem.selectionForm?.didSelectItem?(selectedItem: selectionItem)
+                selectionItem.selectionForm?.didSelectItem?(selectionItem)
             }
 
             if let
                 allowsMultipleSelection = selectionItem.selectionForm?
                     .allowsMultipleSelection
-                where allowsMultipleSelection
+                , allowsMultipleSelection
             {
                 return
             }
 
-            let rowCount = tableView.numberOfRowsInSection(indexPath.section)
+            let rowCount = tableView.numberOfRows(inSection: (indexPath as NSIndexPath).section)
             for index in 1...rowCount {
-                let cellIndexPath = NSIndexPath(
-                    forRow: index - 1,
-                    inSection: indexPath.section
+                let cellIndexPath = IndexPath(
+                    row: index - 1,
+                    section: (indexPath as NSIndexPath).section
                 )
 
                 if let otherSelectionItem = cellItems[index - 1] as? BaseSelectionFormItem
-                    where otherSelectionItem.selectionForm === selectionItem.selectionForm
+                    , otherSelectionItem.selectionForm === selectionItem.selectionForm
                 {
                     otherSelectionItem.selected = false
-                    let cell = tableView.cellForRowAtIndexPath(cellIndexPath)
+                    let cell = tableView.cellForRow(at: cellIndexPath)
 
                     if let _ = selectionItem as? SelectionFormItem {
-                        cell?.accessoryType = .None
+                        cell?.accessoryType = .none
                     } else if let
                         _ = selectionItem as? SelectionCustomizedFormItem,
-                        cell = cell as? SelectionCustomizedFormItemCell
+                        let cell = cell as? SelectionCustomizedFormItemCell
                     {
                         cell.didDeSelect()
                     }

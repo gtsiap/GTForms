@@ -39,10 +39,10 @@ public class FormRow {
      */
     var accessoryType: UITableViewCellAccessoryType {
         guard let _ = self.didSelectRow else {
-            return .None
+            return .none
         }
         
-        return UITableViewCellAccessoryType.DisclosureIndicator
+        return UITableViewCellAccessoryType.disclosureIndicator
     }
     
     /**

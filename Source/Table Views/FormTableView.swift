@@ -39,13 +39,13 @@ public class FormTableView: UITableView, TableViewType {
     }
 
     public init(style: UITableViewStyle) {
-        super.init(frame: CGRectZero, style: style)
+        super.init(frame: CGRect.zero, style: style)
         self.tableViewController = TableViewController(tableViewType: self)
         commonInit()
     }
 
     public init(style: UITableViewStyle, viewController: UIViewController) {
-        super.init(frame: CGRectZero, style: style)
+        super.init(frame: CGRect.zero, style: style)
         self.tableViewController = TableViewController(
             tableViewType: self,
             viewController:  viewController
@@ -55,14 +55,14 @@ public class FormTableView: UITableView, TableViewType {
 
     deinit {
         self.tableViewController.unRegisterNotifications()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public func registerCustomForm(customForm: CustomForm) {
+    public func registerCustomForm(_ customForm: CustomForm) {
         self.tableViewController.registerCustomForm(customForm)
     }
 
@@ -71,30 +71,31 @@ public class FormTableView: UITableView, TableViewType {
         self.delegate = self.tableViewController
         self.dataSource = self.tableViewController
 
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillAppear),
-            name: UIKeyboardWillShowNotification,
+            name: NSNotification.Name.UIKeyboardWillShow,
             object: nil
         )
 
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillHide),
-            name: UIKeyboardWillHideNotification,
+            name: NSNotification.Name.UIKeyboardWillHide,
             object: nil
         )
     }
 
-    @objc private func keyboardWillAppear(notification: NSNotification) {
+    @objc private func keyboardWillAppear(_ notification: Notification) {
         if self.didMofidyTableViewForKeyboard {
             return
         }
 
+
         guard let
-            keyboardHeight = notification
-                .userInfo?[UIKeyboardFrameEndUserInfoKey]?
-                .CGRectValue().size.height
+            keyboardHeight = (notification
+                .userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?
+                .cgRectValue.size.height
         else { return }
 
         let contentInsets = UIEdgeInsets(
@@ -109,8 +110,8 @@ public class FormTableView: UITableView, TableViewType {
         self.didMofidyTableViewForKeyboard = true
     }
 
-    @objc private func keyboardWillHide(notification: NSNotification) {
-        let contentInsets = UIEdgeInsetsZero
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        let contentInsets = UIEdgeInsets.zero
         self.contentInset = contentInsets
         self.scrollIndicatorInsets = contentInsets
         self.didMofidyTableViewForKeyboard = false

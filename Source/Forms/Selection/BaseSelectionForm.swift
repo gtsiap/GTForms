@@ -51,12 +51,12 @@ public class BaseSelectionForm: FormableType {
     /**
         When an item gets selected this closure will be called
      */
-    public var didSelectItem: ((selectedItem: BaseSelectionFormItem) -> ())?
+    public var didSelectItem: ((_ selectedItem: BaseSelectionFormItem) -> ())?
 
     /**
         When an item gets deselected this closure will be called
      */
-    public var didDeselectItem: ((selectedItem: BaseSelectionFormItem) -> ())?
+    public var didDeselectItem: ((_ selectedItem: BaseSelectionFormItem) -> ())?
 
     var showItems: Bool?
 
@@ -64,7 +64,7 @@ public class BaseSelectionForm: FormableType {
         items: [BaseSelectionFormItem],
         text: String,
         detailText: String? = nil,
-        animation: UITableViewRowAnimation = .Top
+        animation: UITableViewRowAnimation = .top
     ) {
         self.text = text
         self.detailText = text

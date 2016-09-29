@@ -26,8 +26,8 @@ private class _Label: UILabel { }
 private class _TextField: UITextField { }
 
 class TableViewViewController: UIViewController {
-    private let tableView: FormTableView = {
-        let t = FormTableView(style: .Grouped)
+    fileprivate let tableView: FormTableView = {
+        let t = FormTableView(style: .grouped)
         t.translatesAutoresizingMaskIntoConstraints = false
         return t
     }()
@@ -35,21 +35,21 @@ class TableViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor.redColor()
+        self.view.backgroundColor = UIColor.red
         self.view.addSubview(self.tableView)
 
-        self.tableView.snp_makeConstraints() { make in
+        self.tableView.snp.makeConstraints() { make in
             make.center.equalTo(self.view)
             make.width.height.equalTo(self.view).multipliedBy(0.8)
         }
 
         let t = FormIntTextField<_TextField, _Label>(text: "Field 1", placeHolder: "PlaceHolder")
-        t.formAxis = .Vertical
+        t.formAxis = .vertical
         let t2 = FormIntTextField<_TextField, _Label>(text: "Field 2", placeHolder: "PlaceHolder")
-        t2.formAxis = .Vertical
+        t2.formAxis = .vertical
 
         let d = FormDatePicker<_Label>(text: "Date")
-        d.formAxis = .Vertical
+        d.formAxis = .vertical
 
         let section = FormSection()
         section.addRow(t)

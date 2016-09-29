@@ -41,7 +41,7 @@ public class FormEmailTextField<T: UITextField, L: UILabel>: BaseStringTextField
         ")+"
         
         let emailTest = NSPredicate(format: "SELF MATCHES %@", emailReg)
-        guard emailTest.evaluateWithObject(self.result) else {
+        guard emailTest.evaluate(with: self.result) else {
             errorDidOccur()
 
             throw ResultFormError(

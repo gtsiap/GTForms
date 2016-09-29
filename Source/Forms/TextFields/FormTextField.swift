@@ -21,8 +21,8 @@
 import UIKit
 
 public protocol FormTextFieldValueLengthErrorDescriptionDelegate: class {
-    func minimumLengthErrorDescription(value: Any, formText: String) -> String?
-    func maximumLengthErrorDescription(value: Any, formText: String) -> String?
+    func minimumLengthErrorDescription(_ value: Any, formText: String) -> String?
+    func maximumLengthErrorDescription(_ value: Any, formText: String) -> String?
 }
 
 public class FormTextField<T: UITextField, L: UILabel>: BaseStringTextFieldForm<T, L> {
@@ -51,7 +51,7 @@ public class FormTextField<T: UITextField, L: UILabel>: BaseStringTextFieldForm<
 
         if let
             maximumLength = self.maximumLength
-            where result.characters.count > maximumLength
+            , result.characters.count > maximumLength
         {
             self.textFieldView.textField.text = ""
 
@@ -64,7 +64,7 @@ public class FormTextField<T: UITextField, L: UILabel>: BaseStringTextFieldForm<
             )
         } else if let
             minimumLength = self.minimumLength
-            where result.characters.count < minimumLength
+            , result.characters.count < minimumLength
         {
             self.textFieldView.textField.text = ""
 

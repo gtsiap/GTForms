@@ -23,29 +23,29 @@ import GTForms
 
 class DatePickersTableViewController: FormTableViewController {
 
-    private lazy var dateForm: FormDatePicker = {
+    fileprivate lazy var dateForm: FormDatePicker = {
         let dateForm = FormDatePicker(text: "Date")
-        dateForm.datePicker.datePickerMode = .Date
-        dateForm.formAxis = .Vertical
+        dateForm.datePicker.datePickerMode = .date
+        dateForm.formAxis = .vertical
         dateForm.customCellIdentifier = "customDatePickerCell"
 
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         dateForm.dateFormatter = dateFormatter
 
         return dateForm
     }()
 
-    let timeFormatter: NSDateFormatter = {
-        let formatter = NSDateFormatter()
+    let timeFormatter: DateFormatter = {
+        let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm"
         return formatter
     }()
 
-    private lazy var timeForm: FormDatePicker<UILabel> = {
+    fileprivate lazy var timeForm: FormDatePicker<UILabel> = {
         let timeForm = FormDatePicker(text: "Time")
-        timeForm.datePicker.datePickerMode = .Time
-        timeForm.datePicker.minimumDate = NSDate()
+        timeForm.datePicker.datePickerMode = .time
+        timeForm.datePicker.minimumDate = Date()
         timeForm.dateFormatter = self.timeFormatter
         return timeForm
     }()
@@ -53,7 +53,7 @@ class DatePickersTableViewController: FormTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.registerClass(
+        self.tableView.register(
             FormDatePickerCustomCell.self,
             forCellReuseIdentifier: "customDatePickerCell"
         )
@@ -74,14 +74,14 @@ class DatePickersTableViewController: FormTableViewController {
 }
 
 class FormDatePickerCustomCell: FormTableViewCell {
-    private var cellView: UIView!
+    fileprivate var cellView: UIView!
 
     override func configureCell() {
         super.configureCell()
 
         guard let
             formRow = self.formRow,
-            formView = formRow.form as? FormViewableType
+            let formView = formRow.form as? FormViewableType
             else { return }
 
         if let _ = self.cellView {
@@ -99,18 +99,18 @@ class FormDatePickerCustomCell: FormTableViewCell {
 
         let borderView = UIView()
         borderView.translatesAutoresizingMaskIntoConstraints = false
-        borderView.layer.borderColor = UIColor.blackColor().CGColor
+        borderView.layer.borderColor = UIColor.black.cgColor
         borderView.layer.borderWidth = 1
 
         self.contentView.addSubview(borderView)
 
-        borderView.snp_makeConstraints() { make in
+        borderView.snp.makeConstraints() { make in
             make.top.leading.equalTo(self.contentView).offset(5)
             make.bottom.trailing.equalTo(self.contentView).offset(-5)
         }
 
         self.contentView.addSubview(self.cellView)
-        self.cellView.snp_makeConstraints() { make in
+        self.cellView.snp.makeConstraints() { make in
             make.top.leading.equalTo(borderView).offset(5)
             make.bottom.trailing.equalTo(borderView).offset(-5)
         }

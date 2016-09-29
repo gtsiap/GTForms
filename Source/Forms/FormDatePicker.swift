@@ -47,8 +47,8 @@ private class DatePreviewView<L: UILabel>: ControlLabelView<L>  {
     private func configureUI() {
         configureView() { (label, control) in
 
-            if self.formAxis == .Horizontal {
-                label.snp_remakeConstraints() { make in
+            if self.formAxis == .horizontal {
+                label.snp.remakeConstraints() { make in
                     make.left.equalTo(self)
                     make.width.equalTo(self).multipliedBy(0.3)
                     make.top.equalTo(self)
@@ -56,21 +56,21 @@ private class DatePreviewView<L: UILabel>: ControlLabelView<L>  {
                 }// end label
 
 
-                control.snp_remakeConstraints() { make in
-                    make.leading.equalTo(label.snp_trailing).offset(10)
+                control.snp.remakeConstraints() { make in
+                    make.leading.equalTo(label.snp.trailing).offset(10)
                     make.trailing.equalTo(self)
                     make.top.equalTo(self)
                     make.bottom.equalTo(self)
                 } // end control
             } else {
-                label.snp_remakeConstraints() { make in
+                label.snp.remakeConstraints() { make in
                     make.top.equalTo(self)
                     make.leading.equalTo(self).offset(10)
                     make.trailing.equalTo(self).offset(-10)
                 }
 
-                control.snp_remakeConstraints() { make in
-                    make.top.equalTo(label.snp_bottom).offset(10)
+                control.snp.remakeConstraints() { make in
+                    make.top.equalTo(label.snp.bottom).offset(10)
                     make.bottom.equalTo(self)
                     make.leading.equalTo(self).offset(10)
                     make.trailing.equalTo(self).offset(-10)
@@ -85,9 +85,9 @@ protocol FormDatePickerType: class {
     var datePicker: UIDatePicker { get }
 }
 
-public class FormDatePicker<L: UILabel>: BaseResultForm<NSDate> {
+public class FormDatePicker<L: UILabel>: BaseResultForm<Date> {
 
-    public var formAxis: FormAxis = .Horizontal {
+    public var formAxis: FormAxis = .horizontal {
         didSet {self.datePreviewView.formAxis = self.formAxis }
     }
 
@@ -96,7 +96,7 @@ public class FormDatePicker<L: UILabel>: BaseResultForm<NSDate> {
         datePicker.addTarget(
             self,
             action: #selector(changeDisplayedDate),
-            forControlEvents: .ValueChanged
+            for: .valueChanged
         )
 
         return datePicker
@@ -131,7 +131,7 @@ public class FormDatePicker<L: UILabel>: BaseResultForm<NSDate> {
         The dateFormatter will be used for the
         date label
      */
-    public var dateFormatter: NSDateFormatter? {
+    public var dateFormatter: DateFormatter? {
         didSet { changeDisplayedDate() }
     }
     
@@ -155,11 +155,11 @@ public class FormDatePicker<L: UILabel>: BaseResultForm<NSDate> {
 
         if let dateFormatter = self.dateFormatter {
             self.datePreviewView.displayLabel.text =
-                dateFormatter.stringFromDate(date)
+                dateFormatter.string(from: date)
             return
         }
 
-        self.datePreviewView.displayLabel.text = String(date)
+        self.datePreviewView.displayLabel.text = String(describing: date)
     }
 }
 

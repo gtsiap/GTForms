@@ -24,7 +24,7 @@ public class FormPhoneTextField<T: UITextField, L: UILabel>: BaseStringTextField
 
     public override init(text: String, placeHolder: String) {
         super.init(text: text, placeHolder: placeHolder)
-        self.textField.keyboardType = .PhonePad
+        self.textField.keyboardType = .phonePad
     }
     
     public override func validate() throws -> String? {
@@ -41,8 +41,8 @@ public class FormPhoneTextField<T: UITextField, L: UILabel>: BaseStringTextField
         let phoneTest = NSPredicate(format: "SELF MATCHES %@", phoneReg)
         guard let
             result = result
-        where
-            phoneTest.evaluateWithObject(self.result) &&
+        ,
+            phoneTest.evaluate(with: self.result) &&
             (result.characters.count >= 10 && result.characters.count <= 20)
         else {
             errorDidOccur()

@@ -23,12 +23,12 @@ import GTForms
 
 class FormsVC: FormTableViewController {
    
-    private var longText: String = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+    fileprivate var longText: String = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
     
-    private lazy var resultsButton: UIBarButtonItem = {
+    fileprivate lazy var resultsButton: UIBarButtonItem = {
         let button = UIBarButtonItem(
             title: "Results",
-            style: .Done,
+            style: .done,
             target: self,
             action: #selector(didTapResultsButton)
         )
@@ -36,7 +36,7 @@ class FormsVC: FormTableViewController {
         return button
     }()
 
-    private var formsDict = [String : FormableType]()
+    fileprivate var formsDict = [String : FormableType]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +51,7 @@ class FormsVC: FormTableViewController {
         createPickers()
     }
 
-    private func createDoubleForms() {
+    fileprivate func createDoubleForms() {
         let section = FormSection()
 
         let doubleForm = FormDoubleTextField(
@@ -79,7 +79,7 @@ class FormsVC: FormTableViewController {
         self.formsDict["Double with max and min"] = maxAndMinForm
     }
     
-    private func createIntForms() {
+    fileprivate func createIntForms() {
         let section = FormSection()
 
         let intForm = FormIntTextField(
@@ -108,7 +108,7 @@ class FormsVC: FormTableViewController {
         self.formsDict["Int with limits"] = maxAndMinForm
     }
     
-    private func createStringForms() {
+    fileprivate func createStringForms() {
         let section = FormSection()
 
         let stringForm = FormTextField(
@@ -135,7 +135,7 @@ class FormsVC: FormTableViewController {
         self.formsDict["String with limits"] = maxAndMinForm
     }
     
-    private func createInfomationForms() {
+    fileprivate func createInfomationForms() {
         let emailForm = FormEmailTextField(
             text: "E-mail",
             placeHolder: "Type your e-mail"
@@ -158,7 +158,7 @@ class FormsVC: FormTableViewController {
         self.formsDict["phone"] = phoneForm
     }
     
-    private func createMiscForms() {
+    fileprivate func createMiscForms() {
         let switchForm = FormSwitch(text: self.longText)
         switchForm.required = true
 
@@ -169,7 +169,7 @@ class FormsVC: FormTableViewController {
         self.formsDict["Switch (Required)"] = switchForm
     }
     
-    private func createPickers() {
+    fileprivate func createPickers() {
         let actionSheetPickerForm = FormActionSheetPicker(
             text: "Choose a number",
             items: [
@@ -218,8 +218,8 @@ class FormsVC: FormTableViewController {
         section.addRow(segmentedPicker2)
         
         let datePickerForm = FormDatePicker(text: "Birth Date")
-        datePickerForm.datePicker.datePickerMode = .Date
-        let dateFormatter = NSDateFormatter()
+        datePickerForm.datePicker.datePickerMode = .date
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
         
         datePickerForm.dateFormatter = dateFormatter
@@ -234,12 +234,12 @@ class FormsVC: FormTableViewController {
         self.formsDict["Date picker"] = datePickerForm
     }
     
-    @objc private func didTapResultsButton() {
-        var resultJSON = [String : AnyObject]()
+    @objc fileprivate func didTapResultsButton() {
+        var resultJSON = [String : Any]()
         for (key, value) in self.formsDict {
 
             do {
-                var result: AnyObject?
+                var result: Any?
                 if let
                     uiForm = value as? FormSegmentedPicker
                 {
@@ -277,7 +277,7 @@ class FormsVC: FormTableViewController {
                 {
                     result = try uiForm.validate()
                 } else {
-                    fatalError("Missing form: \(value.dynamicType)")
+                    fatalError("Missing form: \(type(of: value))")
                 }
 
                 if let result = result {
@@ -288,16 +288,16 @@ class FormsVC: FormTableViewController {
                     let alertVC = UIAlertController(
                         title: "Validation Error",
                         message: resultError.message,
-                        preferredStyle: .Alert
+                        preferredStyle: .alert
                     )
 
-                    let okAction = UIAlertAction(title: "Ok", style: .Default)
+                    let okAction = UIAlertAction(title: "Ok", style: .default)
                     { alertAction in
-                        alertVC.dismissViewControllerAnimated(true, completion: nil)
+                        alertVC.dismiss(animated: true, completion: nil)
                     }
                             
                     alertVC.addAction(okAction)
-                    presentViewController(alertVC, animated: true, completion: nil)
+                    present(alertVC, animated: true, completion: nil)
                 }
             } // end catch
         } // end for

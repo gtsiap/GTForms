@@ -33,7 +33,7 @@ private class SegmentedControlLabelView<L: UILabel>: ControlLabelView<L>  {
         
         configureView() { (label, control) in
             
-            label.snp_makeConstraints() { make in
+            label.snp.makeConstraints() { make in
                 make.left.equalTo(self)
                 make.width.equalTo(self).multipliedBy(0.4)
                 make.top.equalTo(self)
@@ -41,10 +41,10 @@ private class SegmentedControlLabelView<L: UILabel>: ControlLabelView<L>  {
             } // end label
             
             
-            control.snp_makeConstraints() { make in
-                make.centerY.equalTo(label.snp_centerY).priorityLow()
+            control.snp.makeConstraints() { make in
+                make.centerY.equalTo(label.snp.centerY).priority(UILayoutPriorityDefaultLow)
                 make.right.equalTo(self)
-                make.left.equalTo(label.snp_right).offset(10)
+                make.left.equalTo(label.snp.right).offset(10)
                 make.height.lessThanOrEqualTo(self)
             } // end control
             

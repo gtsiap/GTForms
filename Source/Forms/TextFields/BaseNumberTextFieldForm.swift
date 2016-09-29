@@ -19,10 +19,30 @@
 // THE SOFTWARE.
 
 import UIKit
+private func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+private func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 public protocol FormTextFieldValueRangeErrorDescriptionDelegate: class {
-    func minimumValueErrorDescription(value: Any, formText: String) -> String?
-    func maximumValueErrorDescription(value: Any, formText: String) -> String?
+    func minimumValueErrorDescription(_ value: Any, formText: String) -> String?
+    func maximumValueErrorDescription(_ value: Any, formText: String) -> String?
 }
 
 public class BaseNumberTextFieldForm<
@@ -37,7 +57,7 @@ public class BaseNumberTextFieldForm<
     func validationRulesForLimits() throws {
         if let
             maximumValue = self.maximumValue
-            where self.result > maximumValue
+            , self.result > maximumValue
         {
             self.textFieldView.textField.text = ""
             errorDidOccur()
@@ -50,7 +70,7 @@ public class BaseNumberTextFieldForm<
             )
         } else if let
             minimumValue = self.minimumValue
-            where self.result < minimumValue
+            , self.result < minimumValue
         {
             self.textFieldView.textField.text = ""
             errorDidOccur()

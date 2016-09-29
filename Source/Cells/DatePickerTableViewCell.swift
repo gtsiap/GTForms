@@ -26,7 +26,7 @@ class DatePickerTableViewCell: UITableViewCell {
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(datePicker)
 
-        datePicker.snp_makeConstraints() { make in
+        datePicker.snp.makeConstraints() { make in
             make.top.equalTo(self.contentView).offset(10)
             make.bottom.equalTo(self.contentView).offset(-10)
             make.leading.equalTo(self.contentView).offset(10)

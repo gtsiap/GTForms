@@ -22,10 +22,10 @@ import UIKit
 import GTForms
 
 class TestKeyboardTableViewController: FormTableViewController {
-    private lazy var hideKeyboardButton: UIBarButtonItem = {
+    fileprivate lazy var hideKeyboardButton: UIBarButtonItem = {
         let button = UIBarButtonItem(
             title: "Hide Keyboard",
-            style: .Done,
+            style: .done,
             target: self,
             action: #selector(didTapHideKeyboardButton)
         )
@@ -48,9 +48,9 @@ class TestKeyboardTableViewController: FormTableViewController {
             text: "Choose a fruit"
         )
 
-        selectionForm.textColor = UIColor.redColor()
+        selectionForm.textColor = UIColor.red
         selectionForm.textFont = UIFont
-            .preferredFontForTextStyle(UIFontTextStyleHeadline)
+            .preferredFont(forTextStyle: UIFontTextStyle.headline)
 
         selectionForm.allowsMultipleSelection = true
 
@@ -66,7 +66,7 @@ class TestKeyboardTableViewController: FormTableViewController {
         self.formSections.append(section)
     }
 
-    @objc private func didTapHideKeyboardButton() {
+    @objc fileprivate func didTapHideKeyboardButton() {
         hideKeyboard()
     }
     

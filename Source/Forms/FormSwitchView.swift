@@ -29,7 +29,7 @@ private class Switcher<S: UISwitch, L: UILabel>: ControlLabelView<L>  {
         switcher.addTarget(
             self,
             action: #selector(switchValueDidChange),
-            forControlEvents: .ValueChanged
+            for: .valueChanged
         )
                 
         return switcher
@@ -44,7 +44,7 @@ private class Switcher<S: UISwitch, L: UILabel>: ControlLabelView<L>  {
         
         configureView() { (label, control) in
             
-            label.snp_makeConstraints() { make in
+            label.snp.makeConstraints() { make in
                 make.left.equalTo(self)
                 make.width.equalTo(self).multipliedBy(0.8)
                 make.top.equalTo(self)
@@ -52,9 +52,9 @@ private class Switcher<S: UISwitch, L: UILabel>: ControlLabelView<L>  {
             } // end label
             
             
-            control.snp_makeConstraints() { make in
+            control.snp.makeConstraints() { make in
                 make.right.equalTo(self)
-                make.centerY.equalTo(label.snp_centerY)
+                make.centerY.equalTo(label.snp.centerY)
             } // end control
             
         } // end configureView
@@ -65,7 +65,7 @@ private class Switcher<S: UISwitch, L: UILabel>: ControlLabelView<L>  {
     }
     
     @objc private func switchValueDidChange() {
-        self.valueDidChange?(self.switcher.enabled)
+        self.valueDidChange?(self.switcher.isEnabled)
     }
 }
 

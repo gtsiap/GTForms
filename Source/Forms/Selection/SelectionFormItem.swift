@@ -26,7 +26,7 @@ public class SelectionFormItem: BaseSelectionFormItem {
     public init(
         text: String,
         detailText: String? = nil,
-        accessoryType: UITableViewCellAccessoryType = .Checkmark
+        accessoryType: UITableViewCellAccessoryType = .checkmark
     ) {
         self.accessoryType = accessoryType
         super.init(text: text, detailText: detailText)

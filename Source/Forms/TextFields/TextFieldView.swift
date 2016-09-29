@@ -32,7 +32,7 @@ protocol TextFieldViewType: class {
 
 protocol TextFieldViewDelegate: class {
     func textFieldViewShouldReturn(
-        textFieldView: TextFieldViewType
+        _ textFieldView: TextFieldViewType
     ) -> Bool
 }
 
@@ -55,18 +55,18 @@ class TextFieldView<T: UITextField, L: UILabel> :
         textField.addTarget(
             self,
             action: #selector(editingChanged),
-            forControlEvents: .EditingChanged
+            for: .editingChanged
         )
         
-        textField.borderStyle = .None
+        textField.borderStyle = .none
         textField.delegate = self
         
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
-    var textWillChange: ((text: String) -> (Bool))?
-    var textDidChange: ((text: String) -> ())?
+    var textWillChange: ((_ text: String) -> (Bool))?
+    var textDidChange: ((_ text: String) -> ())?
     var didPressReturnButton: (() -> ())?
     weak var delegate: TextFieldViewDelegate?
     
@@ -80,8 +80,8 @@ class TextFieldView<T: UITextField, L: UILabel> :
     private func configureUI() {
         configureView() { (label, control) in
 
-            if self.formAxis == .Horizontal {
-                label.snp_remakeConstraints() { make in
+            if self.formAxis == .horizontal {
+                label.snp.remakeConstraints() { make in
                     make.left.equalTo(self)
                     make.top.equalTo(self)
                     make.width.equalTo(self).multipliedBy(0.3)
@@ -89,22 +89,22 @@ class TextFieldView<T: UITextField, L: UILabel> :
                 } // end label
 
 
-                control.snp_remakeConstraints() { make in
-                    make.left.equalTo(label.snp_right).offset(10)
+                control.snp.remakeConstraints() { make in
+                    make.left.equalTo(label.snp.right).offset(10)
                     make.right.equalTo(self)
                     make.top.equalTo(self)
                     make.bottom.equalTo(self)
 
                 } // end control
             } else {
-                label.snp_remakeConstraints() { make in
+                label.snp.remakeConstraints() { make in
                     make.top.equalTo(self)
                     make.leading.equalTo(self).offset(10)
                     make.trailing.equalTo(self).offset(-10)
                 }
 
-                control.snp_remakeConstraints() { make in
-                    make.top.equalTo(label.snp_bottom).offset(10)
+                control.snp.remakeConstraints() { make in
+                    make.top.equalTo(label.snp.bottom).offset(10)
                     make.bottom.equalTo(self)
                     make.leading.equalTo(self).offset(10)
                     make.trailing.equalTo(self).offset(-10)
@@ -122,10 +122,10 @@ class TextFieldView<T: UITextField, L: UILabel> :
             text = self.field.text
         else { return }
 
-        self.textDidChange?(text: text)
+        self.textDidChange?(text)
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let delegate = self.delegate else {
             print("\(#file):\(#line): Missing Delegate!!")
             return false
@@ -139,8 +139,8 @@ class TextFieldView<T: UITextField, L: UILabel> :
     }
     
     func textField(
-        textField: UITextField,
-        shouldChangeCharactersInRange range: NSRange,
+        _ textField: UITextField,
+        shouldChangeCharactersIn range: NSRange,
         replacementString string: String
     ) -> Bool {
         
@@ -148,10 +148,10 @@ class TextFieldView<T: UITextField, L: UILabel> :
             textWillChange = self.textWillChange
         else { return true }
         
-        return textWillChange(text: string)
+        return textWillChange(string)
     }
  
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         self.didPressReturnButton?()
     }
 }

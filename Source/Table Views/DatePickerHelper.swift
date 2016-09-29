@@ -25,15 +25,15 @@ class DatePickerHelper {
 
     var currentSelectedDatePickerForm: FormDatePickerType!
 
-    func removeAllDatePickers(tableViewType: TableViewType) {
-        var indexPathsToDelete = [NSIndexPath]()
+    func removeAllDatePickers(_ tableViewType: TableViewType) {
+        var indexPathsToDelete = [IndexPath]()
 
-        for (sectionIndex, section) in tableViewType.formSections.enumerate() {
-            let rowCount = tableViewType.tableView.numberOfRowsInSection(sectionIndex)
+        for (sectionIndex, section) in tableViewType.formSections.enumerated() {
+            let rowCount = tableViewType.tableView.numberOfRows(inSection: sectionIndex)
             for index in 0...rowCount - 1 {
-                let cellIndexPath = NSIndexPath(
-                    forRow: index + 1,
-                    inSection: sectionIndex
+                let cellIndexPath = IndexPath(
+                    row: index + 1,
+                    section: sectionIndex
                 )
 
                 let cellItems = section.formItemsForSection()
@@ -45,11 +45,11 @@ class DatePickerHelper {
                 guard let
                     otherFormRow = cellItems[index]
                         as? FormRow,
-                    otherDatePickerForm = otherFormRow.form
+                    let otherDatePickerForm = otherFormRow.form
                         as? FormDatePickerType,
-                    datePickerCell = tableViewType.tableView.cellForRowAtIndexPath(cellIndexPath)
+                    let datePickerCell = tableViewType.tableView.cellForRow(at: cellIndexPath)
                         as? DatePickerTableViewCell
-                    where
+                    ,
                         datePickerCell.datePicker === otherDatePickerForm.datePicker &&
                         self.currentSelectedDatePickerForm !== otherDatePickerForm
                     else { continue }
@@ -60,24 +60,24 @@ class DatePickerHelper {
         }
 
         tableViewType.tableView.beginUpdates()
-        tableViewType.tableView.deleteRowsAtIndexPaths(indexPathsToDelete, withRowAnimation: .Top)
+        tableViewType.tableView.deleteRows(at: indexPathsToDelete, with: .top)
         tableViewType.tableView.endUpdates()
     }
 
-    func showDatePicker(tableView: UITableView, cellItems: [AnyObject]) {
+    func showDatePicker(_ tableView: UITableView, cellItems: [AnyObject]) {
         for section in 0...tableView.numberOfSections - 1 {
-            let rowCount = tableView.numberOfRowsInSection(section)
+            let rowCount = tableView.numberOfRows(inSection: section)
             for index in 0...rowCount - 1 {
-                let cellIndexPath = NSIndexPath(
-                    forRow: index + 1,
-                    inSection: section
+                let cellIndexPath = IndexPath(
+                    row: index + 1,
+                    section: section
                 )
 
                 guard let
                     selectedIndexPath = tableView.indexPathForSelectedRow
-                where
-                    selectedIndexPath.row == index &&
-                    selectedIndexPath.section == section
+                ,
+                    (selectedIndexPath as NSIndexPath).row == index &&
+                    (selectedIndexPath as NSIndexPath).section == section
                 else {
                     continue
                 }
@@ -85,9 +85,9 @@ class DatePickerHelper {
                 guard let
                     otherFormRow = cellItems[index]
                         as? FormRow,
-                    otherDatePickerForm = otherFormRow.form
+                    let otherDatePickerForm = otherFormRow.form
                         as? FormDatePickerType
-                where self.currentSelectedDatePickerForm === otherDatePickerForm
+                , self.currentSelectedDatePickerForm === otherDatePickerForm
                 else { continue }
 
 
@@ -103,9 +103,9 @@ class DatePickerHelper {
 
                 if shouldExpand {
                     self.currentSelectedDatePickerForm.shouldExpand = true
-                    tableView.insertRowsAtIndexPaths([cellIndexPath], withRowAnimation: .Top)
+                    tableView.insertRows(at: [cellIndexPath], with: .top)
                 } else {
-                    tableView.deleteRowsAtIndexPaths([cellIndexPath], withRowAnimation: .Top)
+                    tableView.deleteRows(at: [cellIndexPath], with: .top)
                     self.currentSelectedDatePickerForm.shouldExpand = false
                 }
             }

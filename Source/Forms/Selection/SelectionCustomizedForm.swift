@@ -20,8 +20,8 @@
 
 import UIKit
 
-public class SelectionCustomizedFormCell: UITableViewCell {
-    public func configure(text: String, detailText: String?) {
+open class SelectionCustomizedFormCell: UITableViewCell {
+    open func configure(_ text: String, detailText: String?) {
         
     }
 }
@@ -31,7 +31,7 @@ public class SelectionCustomizedForm: BaseSelectionForm {
         items: [BaseSelectionFormItem],
         text: String,
         cellReuseIdentifier: String,
-        detailText: String? = nil, animation: UITableViewRowAnimation = .Top
+        detailText: String? = nil, animation: UITableViewRowAnimation = .top
     ) {
         super.init(items: items, text: text, detailText: detailText, animation: animation)
         self.cellReuseIdentifier = cellReuseIdentifier

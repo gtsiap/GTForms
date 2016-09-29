@@ -31,7 +31,7 @@ public class FormDoubleTextField<T: UITextField, L: UILabel>: BaseNumberTextFiel
 
         self.textFieldView.controlLabel.text = text
         self.textFieldView.textField.placeholder = placeHolder
-        self.textFieldView.textField.keyboardType = .DecimalPad
+        self.textFieldView.textField.keyboardType = .decimalPad
         self.textFieldView.translatesAutoresizingMaskIntoConstraints = false
         
         self.textFieldView.textDidChange = { text in
@@ -87,9 +87,9 @@ public class FormDoubleTextField<T: UITextField, L: UILabel>: BaseNumberTextFiel
         
         if let
             textFieldText = self.textFieldView.textField.text
-            where self.candidateText == "." &&
+            , self.candidateText == "." &&
                 !textFieldText.isEmpty &&
-                !textFieldText.containsString(".")
+                !textFieldText.contains(".")
         {
             return
         }

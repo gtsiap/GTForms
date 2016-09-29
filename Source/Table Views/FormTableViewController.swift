@@ -20,7 +20,7 @@
 
 import UIKit
 
-public class FormTableViewController: UITableViewController {
+open class FormTableViewController: UITableViewController {
     private var tableViewController: TableViewController!
 
     public var formSections: [FormSection] {
@@ -33,52 +33,52 @@ public class FormTableViewController: UITableViewController {
         }
     }
 
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
 
         self.tableViewController = TableViewController(tableViewType: self, viewController: self)
     }
 
-    public override func viewDidAppear(animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         self.tableViewController.registerNotifications()
     }
 
-    public override func viewDidDisappear(animated: Bool) {
+    open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.tableViewController.unRegisterNotifications()
     }
 
-    public func registerCustomForm(customForm: CustomForm) {
+    public func registerCustomForm(_ customForm: CustomForm) {
         self.tableViewController.registerCustomForm(customForm)
     }
 
     // MARK: - Table view data source
     
-    override public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return self.tableViewController.numberOfSectionsInTableView(tableView)
+    override open func numberOfSections(in tableView: UITableView) -> Int {
+        return self.tableViewController.numberOfSections(in: tableView)
     }
     
-    override public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override open func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.tableViewController.tableView(tableView, numberOfRowsInSection: section)
     }
     
-    override public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return self.tableViewController.tableView(tableView, cellForRowAtIndexPath: indexPath)
+    override open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return self.tableViewController.tableView(tableView, cellForRowAt: indexPath)
     }
     
     // MARK: tableview
     
-    public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.tableViewController.tableView(tableView, didSelectRowAtIndexPath: indexPath)
+    open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.tableViewController.tableView(tableView, didSelectRowAt: indexPath)
     }
 
-    public override func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return self.tableViewController.tableView(tableView, shouldHighlightRowAtIndexPath: indexPath)
+    open override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return self.tableViewController.tableView(tableView, shouldHighlightRowAt: indexPath)
     }
     
-    public override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    open override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return self.tableViewController.tableView(tableView, titleForHeaderInSection: section)
     }
 
