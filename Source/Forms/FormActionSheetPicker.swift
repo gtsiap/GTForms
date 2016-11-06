@@ -34,7 +34,7 @@ private class ButtonLabel: UIControl {
         didSet { self.label.text = self.text }
     }
 
-    private override func didMoveToSuperview() {
+    fileprivate override func didMoveToSuperview() {
         self.label.translatesAutoresizingMaskIntoConstraints = false
         self.label.textColor = self.tintColor
 

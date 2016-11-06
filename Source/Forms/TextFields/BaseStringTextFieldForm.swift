@@ -38,7 +38,7 @@ public class BaseStringTextFieldForm<T: UITextField, L: UILabel>: BaseTextFieldF
         self.textFieldView.didPressReturnButton = {
             
             do {
-                try self.validate()
+                let _ = try self.validate()
             } catch let error {
                 self.textFieldView.textField.text = ""
                 guard let
