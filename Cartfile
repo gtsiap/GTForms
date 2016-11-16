@@ -1,2 +1,2 @@
 github "SnapKit/SnapKit" ~> 3.0
-github "terietor/GTSegmentedControl" "swift3.0"
+github "terietor/GTSegmentedControl" ~> 0.1.6
