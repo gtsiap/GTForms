@@ -55,9 +55,9 @@ public class BaseNumberTextFieldForm<
     public weak var descriptionValueErrorDelegate: FormTextFieldValueRangeErrorDescriptionDelegate?
 
     func validationRulesForLimits() throws {
-        if let
-            maximumValue = self.maximumValue
-            , self.result > maximumValue
+        if
+            let maximumValue = self.maximumValue,
+            self.result > maximumValue
         {
             self.textFieldView.textField.text = ""
             errorDidOccur()
